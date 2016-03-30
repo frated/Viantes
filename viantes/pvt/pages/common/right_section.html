@@ -1,0 +1,60 @@
+<div id="rightDivSectionId" class="rightDivSection">
+	
+	<div class="rightDivPara">
+		<h3><?php echo $X_langArray['COMM_MENU_PROFILE'] ?></h3>		
+		<ul>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/profile/myProfile.php">
+					<p><?php echo $X_langArray['COMM_MENU_MYPROFILE'] ?></p>
+				</a>
+			</li>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/profile/setting.php"><?php echo $X_langArray['COMM_MENU_SETTINGS'] ?></a>
+			</li>						
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/profile/message.php"><?php echo $X_langArray['COMM_MENU_MESSAGES'] ?>
+				<?php 
+				if ( isset($userDO) && is_object($userDO) && $userDO->getInBoxMsgNum() > 0) {  ?>	
+					&nbsp;<?php echo $userDO->getInBoxMsgNum() ?>
+				<?php } ?>	
+				</a>
+			</li>
+			<li class="usermenu2elem">
+				<a href="/viantes/pvt/pages/exit.php?destPage=<?php echo $_SERVER['REQUEST_URI'];?>">
+					<?php echo $X_langArray['COMM_MENU_EXIT'] ?>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<br>
+	<div class="rightDivPara">
+		<h3><?php echo $X_langArray['COMM_MENU_REVIEW'] ?></h3>		
+		<ul>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/review/searchReview.php">
+					<p><?php echo $X_langArray['COMM_MENU_ADV_SEARCH'] ?></p>
+				</a>
+			</li>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/review/createReview.php">
+					<p><?php echo $X_langArray['COMM_MENU_CREATE_REVIEW'] ?></p>
+				</a>
+			</li>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/review/createCityReview.php">
+					<p><?php echo $X_langArray['COMM_MENU_CITY_REVIEW'] ?></p>
+				</a>
+			</li>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/review/createCountryReview.php">
+					<p><?php echo $X_langArray['COMM_MENU_COUNTRY_REVIEW'] ?></p>	
+				</a>
+			</li>
+			<li class="usermenu2elem">
+				<a href="/viantes/pub/pages/review/myReview.php">
+					<p><?php echo $X_langArray['COMM_MENU_MY_REVIEW'] ?></p>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

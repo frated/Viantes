@@ -1,0 +1,258 @@
+
+/* vertically center text in text input in ie   border: 0; font-size:14px;  */
+input {height: 22px; line-height: 22px;} 
+
+/* la correzione di sopra rompe tutti i testi nei pulsanti =>
+ * li aggiunsto sovrascrivendo la line-height */
+.overlay-lg-sg-submit-col2, .personalButton, .advSrchSub, .overlay-msg-submit-col2 {
+	line-height: 16px;
+}
+.addInterestRowCol1 {
+	height: 13px;
+}
+
+/* inline-block doesn't work in IE7 */
+div.reviewCoverImgBox, div.reviewImgBox, div .reviewMovBox, div.reviewDocBox ,
+.commonDIVLeft, .commonDIVRight, .tabs,
+.autocompHeaderSearchItem1, .autocompHeaderSearchItem2, .autocompMsgToItem1,
+.setting_row_div  p, .setting_row_div_alterned  p, .dspl-inln-blk,
+div .addInterestHeaderCol1, div .addInterestRowCol1 , div .addInterestHeaderCol2, 
+div .addInterestRowCol2 , div .addInterestHeaderCol3, div .addInterestRowCol3 ,
+.searchRevLftHeaderDiv, .searchRevRgtHeaderDiv, .searchRevPaginTopDiv, 
+.ovl-msg-span_col1 {
+	display: inline;
+	zoom:1;
+}
+/* +++++++++++++++++++++ */
+
+.searchRevLftHeaderDiv {
+	float:left;
+}
+
+/* Nascondo la parte di destra nella creazione di una recensione */
+.commonDIVLeft{ width: 100%;  }
+.commonDIVRight{ display:none; }
+.frecciaCartoon{ display:none; }
+
+/* Nascondo il banner della index *
+.main-banner-fade-div{ display:none; }*/
+	
+
+/* line-height correction */
+.setting_body_div, .main-overlay {
+	line-height: 1.05;
+}
+.overlay-msg{
+	line-height: 1.2;
+}
+.usermenu2elem{
+	line-height: 1.4;
+}
+/* +++++++++++++++++++++ */
+
+.searchRevPaginTopDiv {
+	float: none;
+}
+
+.body-div, .rightDivSection {
+	margin-top: 36px;
+}
+
+/* Header */
+#header-div {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+.header-msg-in-box {
+	/* behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); */
+}
+div .userMenu, div .reviewMenu {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+.top-msg {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+.profileCover {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+.header-search-input, .header-search-button, .header-review-text , .header-user-text{
+	display: inline;
+}
+.header-review-text , .header-user-text, .header-eneter-text{
+	margin-top: -16px;
+}
+.header-search-button{
+	margin-top: -4px;
+	margin-left: 33px;
+}
+.userMenu hr, .reviewMenu hr {
+	margin: 0px;
+}
+.header-msg-in-box {
+	border: none;
+}
+
+
+/* Overlay */
+.overlay-addInterest-top  {
+	/* width: 100%; 	text-align: center; 	padding-top: 25px;	box-shadow: 12px 12px 22px 12px;
+	text-align: left;	padding-top: 0px;	box-shadow: none;	*/
+	margin-top: 0px;
+}
+.del-item-main-ovly-ie7, .main-ovladd-int-ie7, .ovly-den-usr-ie7{
+	position:absolute;	
+	margin-top: 220px;
+	margin-left: 220px;
+	width: 498px;
+	height: 150px;
+	display:inline;
+	zoom:1;
+	box-shadow: 0px 0px 6px 2px;
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+.ovly-den-usr-ie7 {
+	position:relative;	
+	overflow-x: mone;
+}
+.main-ovladd-int-ie7 {
+	height: 480px;
+}
+.overlay-addInterest-left-but {
+	float:left;
+}
+.addInterestErrorP {
+	float:left; margin: 6px 0px 6px -12px; 
+}
+.overlay-common-msg-center{
+	margin-top:0px;
+}
+.overlay, .overlay-loadImg {
+	/* z-index will not work on a static element (default). They must be relative or absolute. */
+	position:absolute;
+	z-index: 50;
+}
+.overlay-lg-sg, .overlay-msg {
+	/* z-index will not work on a static element (default). They must be relative or absolute. */
+	position:relative;
+	z-index:100;
+	background-color: #fff;
+}
+.overlay-msg {
+	margin-top:0px; 
+}
+
+.ovl-msg-send{
+	position:absolute;
+}
+.overlay-den-usr{
+	position:none;
+}
+.ovrly-lg-sg-ErrDiv-i7{
+	float: right; 
+	width: 55%;
+	margin:-8px 0px;
+}
+.ovrlSubmitMarginDiv {
+	margin-top:0px;
+	margin-bottom: 36px;
+}
+.overlay-common-but{
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+div .addInterestContentDiv {
+	max-height: 370px;
+	/* overflow-x: hidden; */
+}
+.addInterestRowCol1{
+	margin-top:-20px;
+}
+.addInterestFooterDiv{
+	display: none;
+}
+.terms-ie7{
+	margin-top:16px;
+}
+
+/* IMPORTANT!!! Sovrascrivo la posizone da fixed ad absolute se no in ie non si vede */
+.ui-autocomplete{
+	position: absolute;
+}
+.inputcartoon {
+	background:transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#66AEE451', endColorstr='#66AEE451'); /* IE */
+	zoom: 1;
+}
+.hideInputButtonFile{
+	display:inline-block;
+	height: 22px;
+}
+.hideInIE{ display: none; } 
+.showInIE{ display: block;}
+
+.overlay-lg-sg-input-col22, .commonRowTxt_col2, .overlay-msg-input-col2  {
+	height: 22px;
+}
+/* avendo sovrascritto la overlay-msg-input-col2 devo sovrascrivere anche la 
+ * height-150 altrimenti la text area diventa alta 22px (vedi overlay-send-msg.html) */
+.height-150 {height:150px}
+
+.imgOriginalOverlay {
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+.setting_top_div, .profile_top_div {
+	margin-bottom: 10px; 
+}
+.top-msg {
+	font-size: 13px;
+	margin-bottom: 20px;
+	text-shadow: none;
+	background-color: none;
+	border: none;
+    position: relative;
+    border-radius: 4px;
+	margin-top: 20px;
+	width: 100%;
+	box-shadow: none;
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+.top-msg-container-div img{
+	position: relative;
+}
+.top-msg-ok {
+	background-color: #EBFFC9;
+	border-color: #BBB;
+	padding: 2px;
+	margin-top:12px;
+}
+.top-msg-ko {
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#22FF0000', endColorstr='#22FF0000'); /* IE */
+}
+.top-msg-h4{
+	margin-left: 16px;
+}
+.height-40-ie7 {
+	height:40px;
+}
+
+.tab-links li {
+	width: 24.95%;
+}
+.tab-content {
+	padding-top:36px
+}
+.setting-a1, .setting-a3 {
+	float:right; margin-top:-12px; margin-right:8px;
+}
+.setting-a2 {
+	float:right; margin-top:-12px; margin-right: 46px
+}
+.denUsrButton, .sendMsgUsr{
+	margin-top: -36px;
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+.send-msg-but-ie7{
+		margin-bottom:12px
+}
+.flt-l-ie7 {
+	float:left
+}

@@ -1,0 +1,25 @@
+<script>
+	function delItem() {
+		$('#overlay-del-item').hide();
+		
+		var name = $('#del-element-name-param').attr('value');
+		var type = $('#del-element-type-param').attr('value');
+		var pstn = $('#del-element-pstn-param').attr('value');
+		
+		delFromSess(name, type, pstn);
+	}
+</script>
+<div id="overlay-del-item" class="overlay" style="display: none;" >
+	<div class="del-item-main-ovly-ie7 main-overlay">
+		<div class="overlay-common-msg-center">
+			<h3 class="overlay-common-msg-h3"><?php echo $X_langArray['OVERLAY_DEL_ITM_TITLE']?></h3>
+			<p><?php echo $X_langArray['OVERLAY_DEL_ITM_QUESTION']?></p>
+			<button class="overlay-common-but" onclick="javascript:delItem();">
+				<?php echo $X_langArray['OVERLAY_DEL_ITM_ANSW_YES']?>
+			</button>
+			<button class="overlay-common-but" onclick="$('#overlay-del-item').hide();">
+				<?php echo $X_langArray['OVERLAY_DEL_ITM_ANSW_CANC']?>
+			</button>
+		</div>
+	</div>
+</div>

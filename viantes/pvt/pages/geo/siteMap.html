@@ -1,0 +1,216 @@
+
+<?php if ($X_GEO_loadMap) { ?> 
+	<script type="text/javascript">
+		$( window ).load(function() {
+			loadMap('<?php echo $X_GEO_site?>', '<?php echo $X_GEO_locality?>');
+		});
+	</script>
+<?php } ?>
+
+<script src="https://maps.googleapis.com/maps/api/js?&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>&key=AIzaSyCcD6XaO7EsW_bfWFKWkmBOTC8dggL9RyM&signed_in=true&callback=initMap&libraries=places" 
+	async defer></script>
+<!--script src="https://maps.googleapis.com/maps/api/js?&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>&signed_in=true&callback=initMap&libraries=places" 
+	async defer></script-->
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAEcK7KQhrETw4L9mVAup63XPlYob_G0TY&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>"></script>
+<!--script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&region=IT"></script--> 
+
+<script type="text/javascript">
+	//<![CDATA[
+	
+	function initMap() {}
+	
+	/** 
+	 * Evento che attacchiamo al click della lentina 
+	 */
+	$(document).ready(function() {
+		$("#findMap").click(function(){
+			
+			//Mostro l'immagine di loading
+			showLdMap();
+			
+			//rimuovo il flag che ignora l'onBlur sul campo con lentina
+			$('#localityIgnoreBlur').val('');
+			
+			var site = $("#site").val();
+			var locality = $("#locality").val();
+			
+			//devono essere valorizzati entrambi
+			if (site == '' || site.length < 3 || locality == '' || locality.length < 3) {
+				//invoco la chiamate x mostrare il msg di errore
+				doGet('/viantes/pvt/pages/review/create/createReview.php','site');
+				doGet('/viantes/pvt/pages/review/create/createReview.php','locality');
+				
+				showFkMap();
+				return; 
+			}
+			loadMap(site, locality);
+		});
+	});
+	
+	/**
+	 * Carica la mappa all'indirizzo in input e con lo zoom specificato
+	 */
+	function loadMap(site, locality){
+		var geocoder = new google.maps.Geocoder();
+		
+		//Cerco l'indirizzo
+		var address = site + ' ' + locality;
+		geocoder.geocode( { address: address }, function(results, status) {
+			//Se lo trovo
+			if (status == google.maps.GeocoderStatus.OK) {
+				
+				var lat = results[0].geometry.location.lat();
+				var lng = results[0].geometry.location.lng();
+				$('#lat').val(lat);
+				$('#lng').val(lng);
+				
+				//Creo la mappa 
+				var map = createMap(lat, lng);
+				//NB l'immagine loading la devo nascondere appena carico la mappa altrimenti avrei 
+				//la mappa grigia e l'immagine di loading coesistere per qualche decimo di secondo 
+				$('#loadMap').hide();
+				
+				// Istanzio la classe PlacesService
+				var service = new google.maps.places.PlacesService(map);
+				//Preparo la richiesta
+				var request = {
+					location: map.getCenter(),
+					radius: '500',
+					query: site
+				};
+				//Cerco il POI
+				service.textSearch(request, function callback(serviceResults, status) {
+					//Se trovo il POI
+					if (status == google.maps.places.PlacesServiceStatus.OK) {
+					
+						//Salvo l'id, il nome del sito e l'indirizzo
+						var placeId = serviceResults[0].place_id;
+						$('#placeId').val(placeId);
+						$('#siteName').val(serviceResults[0].name);
+						$('#frmtdAdrs').val(serviceResults[0].formatted_address);
+						
+						//N.B. questo e' un tarocco che mi serve solo nella pagaina di verifica
+						//mi setta a video i campi <p id="frmtdAdrsP"> <p id="frmtdAdrsP">
+						$('#siteNameP').text(serviceResults[0].name);
+						$('#frmtdAdrsP').text(serviceResults[0].formatted_address);
+						
+						//Ho bisogno dei dettagli
+						var service = new google.maps.places.PlacesService(map);
+						service.getDetails({ placeId: placeId}, function(place, status) {
+							if (status === google.maps.places.PlacesServiceStatus.OK) {
+								//Creo un marker
+								var marker = new google.maps.Marker({
+									map: map,
+									position: place.geometry.location
+								});
+								
+								//Changes the center of the map to the given LatLng
+								map.panTo(place.geometry.location);
+								
+								var addressComponents = place.address_components;
+								
+								//Ciclo l'attributo address_components (che e' un array)
+								$.each(addressComponents, function (i, address_component) {
+
+									if (address_component.types[0] == "country")
+										$('#country').val(address_component.long_name);
+									
+								});
+								
+								//console.log(place.address_components);
+								
+								//Mostro la mappa
+								shoMap();
+							}
+						});
+					} 
+					else {
+						//alert("<?php echo $X_GEO_ERR_MSG?>");
+						showFkMap();
+						resetGeoFields();
+						renderError('<?php echo $X_GEO_ERR_MSG?>');
+					}
+				});
+				
+			} else {
+				//alert("<?php echo $X_GEO_ERR_MSG?>");
+				showFkMap();
+				resetGeoFields();
+				renderError('<?php echo $X_GEO_ERR_MSG?>');
+			}
+		});
+	}
+
+	/**
+	 * Istanzia e ritorna una mappa 
+	 */
+    function createMap(lat, lng) {
+		var map = new google.maps.Map(document.getElementById("map"), {
+			center: new google.maps.LatLng(lat,lng),
+			zoom: <?php echo $X_GEO_zoom ?>,
+			mapTypeId: <?php echo "'" . $X_GEO_mapType ."'" ?>
+			<?php if ($X_GEO_disableUI) { ?>
+				,
+				scrollwheel: false,
+				navigationControl: false,
+				mapTypeControl: false,
+				scaleControl: false,
+				draggable: false,
+				zoomControl: false,
+				streetViewControl: false,
+				disableDoubleClickZoom: true,
+			<?php } ?>	
+			
+		});
+		return map;
+    }
+	
+	/** Mostra la mappa e nasconde il resto */
+	function shoMap(){
+		$("#map").show();
+		$('#loadMap').hide();
+		$("#fkMap").hide();
+	}
+	/** Mostra l'immagine fake e nasconde il resto */
+	function showFkMap(){
+		$("#fkMap").show();
+		$("#map").hide();
+		$('#loadMap').hide();
+	}
+	/** Mostra l'immagine di loading e nasconde il resto */
+	function showLdMap(){
+		$('#loadMap').show();
+		$("#fkMap").hide();
+		$("#map").hide();
+	}
+	
+	/** Azzera i campi della geolocalizzazione */
+	function resetGeoFields(){
+		$('#placeId').val("");
+		$('#siteName').val("");
+		$('#frmtdAdrs').val("");
+		$('#lat').val("");
+		$('#lng').val("");
+		$('#country').val("");
+	}
+	
+	/** Renderizza l'errore settando l'html dei campi */
+	function renderError(errorMsg){
+		$('#locality').addClass("errorInput");
+			
+		var msg = (decodeURIComponent(errorMsg).replace(/\+/g, " ")); //sostituisce tutte le occ di + in " "
+		$('#localityDIV').find("p").html(msg);
+		$('#localityDIV').show();
+				
+		$('#localityFldOK').hide();
+		$('#localityFldLD').hide();
+		
+		//aggiungo un flag che mi indica che non devo eseguire il metodo onBlur sul campo  con la lentina
+		$('#localityIgnoreBlur').val('true');
+		//perdo il fuoco per tutti i campi
+		$(':focus').blur();
+	}
+	
+    //]]>
+</script>

@@ -1,0 +1,154 @@
+<div id="header-div" class="header-class">
+	<div>
+		<div class="main-header-div">
+			<a href="/index.php">
+				<img id="header-welcome-img"  class="header-logo-img" src="/viantes/pvt/img/logo_23_36.png" />
+				<img id="header-welc-img-txt" class="header-logo-txt" src="/viantes/pvt/img/viantes_19_77.png" />
+			</a>
+			
+			<!-- Inut text di ricerca -->
+			<div class="header-search-input">
+				<!-- Immagine Cerca -->
+				<img style="position: absolute; margin: 10px 0px 0px 6px" src="/viantes/pvt/img/header/find_G.png"/>	
+				
+				<!-- Input text -->
+				<input id="autoComplHeaderSearchRev" class="txt-search" type="text">
+			</div>
+			<!-- Pulsante Cerca -->
+			<div class="header-search-button">
+				<input class="personalButton headerButton" style="height: 21px;" type="submit" value="<?php echo $X_langArray['COMM_SEARCH_MSG']?>"
+					   onclick="if($('#kwrds').val() == '') { $('#autoComplHeaderSearchRev').val(''); return; } $('#headerForm').submit();" >
+			</div>
+				
+			<?php if ($X_logged) { ?>
+				<script>
+					setInterval("reloadUsrMsg()", <?php  echo Conf::getInstance()->get('reloadUsrMsg'); ?>);
+				</script>
+
+				<!-- NOME UTENTE -->
+				<div class="header-user-text">
+					<a id="header-user-text-id" onclick="userMenuOnOff()" style="color: #FFFFFF;">
+						<?php  $userDO = unserialize( $_SESSION["USER_LOGGED"] ); echo substr($userDO->getName(), 0, 12);?>
+						<!-- Numero di messaggi -->
+						<?php if ($userDO->getInBoxMsgNum() > 0) {  ?>	
+							<p class= "header-msg-in-box">
+								&nbsp;<?php echo $userDO->getInBoxMsgNum() < 100 ? $userDO->getInBoxMsgNum() : "99" ?>&nbsp;
+							</p>
+						<?php } ?>
+					</a>
+					<input type="hidden" id="ONOFFSTATUS" value="OFF"/>
+				</div>
+
+				<!-- RCENSIONI-->
+				<div class="header-review-text">
+					<a id="header-review-text-id" onclick="reviewMenuOnOff()" style="color: #FFFFFF;">
+						<?php echo $X_langArray['COMM_MENU_REVIEW'] ?>
+					</a>
+					<input type="hidden" id="ONOFFSTATUS" value="OFF"/>
+				</div>
+				
+			<?php } else { ?>
+				<!-- ENTRA -->
+				
+				<div class="header-eneter-text">
+					<a onclick="reviewMenuOnOff()" href="javascript:showOvrlyLgSgMod1();" style="color: #FFFFFF;">
+						<?php echo $X_langArray['COMM_MENU_ENTER'] ?>
+					</a>
+				</div>
+			<?php } ?>
+		</div>
+
+		<!-- Menu Review -->
+		<img id="freccia-menu-user-id"  class="hidden freccia-menu" src="/viantes/pvt/img/header/menufreccia_f6f6f6.png"/>
+		<div class="reviewMenu" id="reviewMenuId">
+			<ul><li class="usermenu1elem" id="usrMenu11" onmouseover="selectElement('usrMenu11');" onmouseout ="unselectElement('usrMenu11');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/review/createRev.png" />
+					<a style="position: absolute;" href="/viantes/pub/pages/review/createReview.php">
+						<?php echo $X_langArray['COMM_MENU_CREATE_REVIEW'] ?>
+					</a>
+				</li>
+				<li class="usermenu2elem" id="usrMenu12" onmouseover="selectElement('usrMenu12');" onmouseout ="unselectElement('usrMenu12');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/review/cityRev.png" />
+					<a style="position: absolute;" href="/viantes/pub/pages/review/createCityReview.php">
+						<?php echo $X_langArray['COMM_MENU_CITY_REVIEW'] ?>
+					</a>
+				</li>
+				<li class="usermenu2elem" id="usrMenu13" onmouseover="selectElement('usrMenu13');" onmouseout ="unselectElement('usrMenu13');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/review/countryRev.png" />
+					<a style="position: absolute;" href="/viantes/pub/pages/review/createCountryReview.php">
+						<?php echo $X_langArray['COMM_MENU_COUNTRY_REVIEW'] ?>
+					</a>
+				</li>
+				<hr>
+				<li class="usermenu2elem" id="usrMenu14" onmouseover="selectElement('usrMenu14');" onmouseout ="unselectElement('usrMenu14');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/review/find.png" />
+					<a  style="position: absolute;" href="/viantes/pub/pages/review/searchReview.php">
+						<?php echo $X_langArray['COMM_MENU_ADV_SEARCH'] ?>
+					</a>
+				</li>
+				<hr>
+				<li class="usermenu2elem" id="usrMenu15" onmouseover="selectElement('usrMenu15');" onmouseout ="unselectElement('usrMenu15');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/review/myReview.png" />
+					<a  style="position: absolute;" href="/viantes/pub/pages/review/myReview.php">
+						<?php echo $X_langArray['COMM_MENU_MY_REVIEW'] ?>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- Menu Utente -->
+		<img id="freccia-menu-review-id" class="hidden freccia-menu" src="/viantes/pvt/img/header/menufreccia_f6f6f6.png"/>
+		<div class="userMenu" id="userMenuId">
+			<ul>
+				<li class="usermenu1elem" id="usrMenu21" onmouseover="selectElement('usrMenu21');" onmouseout ="unselectElement('usrMenu21');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/myProfile.png" />
+					<a  style="position: absolute;" href="/viantes/pub/pages/profile/myProfile.php">
+						<?php echo $X_langArray['COMM_MENU_MYPROFILE'] ?>
+					</a>
+				</li>
+				<li class="usermenu2elem" id="usrMenu22" onmouseover="selectElement('usrMenu22');" onmouseout ="unselectElement('usrMenu22');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/setting.png" />
+					<a style="position: absolute;" href="/viantes/pub/pages/profile/setting.php"><?php echo $X_langArray['COMM_MENU_SETTINGS'] ?></a>
+				</li>						
+				<hr>
+				<li class="usermenu2elem" id="usrMenu23" onmouseover="selectElement('usrMenu23');" onmouseout ="unselectElement('usrMenu23');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/message.png" />
+					<a  style="position: absolute;" href="/viantes/pub/pages/profile/message.php">
+						<?php echo $X_langArray['COMM_MENU_MESSAGES'] ?>
+						<?php if ($X_logged && $userDO->getInBoxMsgNum() > 0) {  ?>	
+							<div class="header-msg-in-box" style="border-color: rgb(78, 51, 51)">&nbsp;<?php echo $userDO->getInBoxMsgNum() ?>&nbsp;</div>
+						<?php } ?>	
+					</a>
+				</li>						
+				<hr>
+				<li class="usermenu2elem" id="usrMenu24" onmouseover="selectElement('usrMenu24');" onmouseout ="unselectElement('usrMenu24');">
+					<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/exit.png" />
+					<?php 
+					//se e' una apgina public, quando clicco su exit devo restare sull apgina, altrimenti vaddo alla index
+					$destPage = isset($X_is_public) ? str_replace('&', '^', $_SERVER['REQUEST_URI']) : "/index.php";?>
+					<a  style="position: absolute;" href="/viantes/pvt/pages/exit.php?destPage=<?php echo $destPage; ?>">
+						<?php echo $X_langArray['COMM_MENU_EXIT'] ?>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<form id="headerForm" action="/viantes/pvt/pages/review/search/searchReviewFromHeader.php"  method="post">
+		<input type="hidden" id="kwrds"    name="kwrds"      value="" >
+		<input type="hidden" id="type"     name="reviewType" value="" >
+		<input type="hidden" id="langCode" name="langCode"   value="<?php echo $_SESSION['langCode'];?>" >
+	</form>
+</div>
+
+<!-- Informativa sui Cookie -->
+<?php if ( $X_show_cookie ){ ?>
+	<div id="info-cook-div" style="position: fixed ! important; margin-top: 36px; background: rgb(9, 9, 9) none repeat scroll 0% 0% ! important; 
+								   margin: 0px auto; width: 100% ! important; z-index: 30 ! important; color: rgb(255, 255, 255) ! important; 
+								   opacity: 0.8; top: 36px;">
+		<a class="close" style="color: #fafafa; opacity: 1;" onclick="$('#info-cook-div').hide();">×</a>  
+		<div style="margin: 12px auto; max-width: 80%;">
+			<?php echo $X_langArray['INO_COOKIE_MSG']?>
+		</div>
+	</div>
+<?php }  ?>

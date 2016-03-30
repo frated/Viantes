@@ -1,0 +1,96 @@
+<?php
+require_once $X_root."pvt/pages/const.php";
+require_once $X_root."pvt/pages/review/reviewDAO.php";
+require_once $X_root."pvt/pages/review/reviewDO.php";
+require_once $X_root."pvt/pages/review/cityReviewDO.php";
+
+$settingDAO = New SettingDAO();
+$settingDO = $settingDAO->getSetting($userDO->getId());
+
+$pattern = getDatePatternByLangCode($settingDO->getLangCode());
+Logger::log("overlayAddInterest :: pattern per data rilevato :: ".$pattern, 3);
+
+//istanzio la classe di ReviewDAO
+$reviewDAO = New ReviewDAO();
+$reviewDOArray = $reviewDAO->getReviewList($userDO->getId(), $pattern);
+
+$bean = isset($_SESSION["CITY_REVIEWN_BEAN"]) ? unserialize($_SESSION["CITY_REVIEWN_BEAN"]) : null;
+$selectedArr = array();
+if ( $bean != null && $bean->getInterest() != null ) { 
+	$selectedArr = $bean->getInterest();
+}
+?>
+
+<div id="overlayAddInterest" class="overlay hidden">
+	<div id="overlayAddInterestTop" class="main-ovladd-int-ie7 main-overlay main-ovrl-add-interest" >
+		<div class="overlay-addInterest-top">	
+		
+			<div class="overlay-addInterest-top-div">
+				<?php if (count($reviewDOArray) > 0) { ?>
+					<h1><?php echo $X_langArray['CREATE_CITY_INTEREST_TITLE']?></h1>
+				<?php } else { ?>
+					<h1><?php echo $X_langArray['CREATE_CITY_INTEREST_NO_SITE']?></h1>
+				<?php } ?>
+			</div>
+			
+			<?php if (count($reviewDOArray) > 0) { ?>
+				<button class="overlay-common-but overlay-addInterest-left-but"
+						onclick="callSaveInterestAsy('CITY_REVIEWN_BEAN')";>
+					<?php echo $X_langArray['CREATE_CITY_INTEREST_ADD_BUT']?>
+				</button>	
+			<?php } ?>
+				
+			<button class="overlay-common-but overlay-addInterest-right-but" onclick="$('#interestErr').hide(); $('#overlayAddInterest').hide();">
+				<?php echo $X_langArray['CREATE_CITY_INTEREST_CANC_BUT']?>
+			</button>
+			
+			<p id="zeroInterestErr"class="addInterestErrorP p-error hidden"><?php echo $X_langArray['CREATE_CITY_INTEREST_ZERO_SELECT_ERROR']?></p>
+			<p id="maxInterestErr"class="addInterestErrorP p-error hidden"><?php echo $X_langArray['CREATE_CITY_INTEREST_MAX_SELECT_ERROR']?></p>
+		
+			<?php if (count($reviewDOArray) > 0) { ?>
+				<div class="userReviewHeaderDiv" style="background-color: #fff;">
+					<div class="addInterestHeaderCol1">
+						<b><p><?php echo $X_langArray['CREATE_CITY_INTEREST_SELECT']?></p></b>
+					</div>
+					<div class="addInterestHeaderCol2">
+						<b><p><?php echo $X_langArray['CREATE_CITY_INTEREST_COVER']?></p></b>
+					</div>
+					<div class="addInterestHeaderCol3">
+						<b><p><?php echo $X_langArray['CREATE_CITY_INTEREST_NAME']?></p></b>
+					</div>
+				</div>	
+			<?php } ?>
+		</div>
+
+		<div class="addInterestContentDiv">
+			<?php
+			foreach ($reviewDOArray as $key => $reviewDO) { 
+				$token = $reviewDO->getId().attributeDelim.$reviewDO->getCoverFileName().attributeDelim.$reviewDO->getSiteName(); 
+				$checked = in_array($token, $selectedArr) ? " checked " : ""; ?>
+				<div class="addInterestMainDiv">
+					<div class="addInterestRowCol1">
+						<input id="interestId" type="checkbox" <?php echo $checked?> class="addInterestRowCol1" name="interest" value="<?php echo $reviewDO->getId() ?>"/>
+					</div>
+					<div class="addInterestRowCol2">
+						<img id="interestPath<?php echo $reviewDO->getId() ?>" <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getCoverFileName() ?>" />
+					</div>
+					<div class="addInterestRowCol3">
+						<p id="interestSiteName<?php echo $reviewDO->getId() ?>"><?php echo $reviewDO->getSiteName() ?></p>
+					</div>	
+				</div>
+			<?php }
+			if (count($reviewDOArray) == 0) { ?>
+				<div>
+					<p class="mrg-lft-12 p-error mrg-top-16 mrg-bot-16">
+						<?php echo $X_langArray['CREATE_CITY_INTEREST_TO_CONTINUE']?>
+					</p>
+				</div>
+			<?php } ?>
+		</div>
+		<div class="addInterestFooterDiv"></div>
+	</div>
+	
+	<div id="overlayAddInterestLoading" class="overlay-top-loadImg hidden">
+		<img class="overlay-top-loadImg-Img" src="/viantes/pvt/img/animate/ld_32_ffffff.gif">
+	</div>
+</div>

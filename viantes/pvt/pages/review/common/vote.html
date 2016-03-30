@@ -1,0 +1,63 @@
+<?php 
+if ( !isset($_GET['vote'])) { 
+?>	
+	<!-- Mostro la visualizzazione iniziale (3 pallini) -->
+	<div class="commonRowTxt_col2_fff " style="display:inline-block">
+		<a>
+			<img id="0_5" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote5()"<?php }?> class="vote" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_5" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote5()"<?php }?> class="vote hidden" src="/viantes/pvt/img/review/vote1.png"/>
+			
+			<img id="0_4" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote4()"<?php }?> class="vote" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_4" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote4()"<?php }?> class="vote hidden" src="/viantes/pvt/img/review/vote1.png"/>
+									 
+			<img id="0_3" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote3()"<?php }?> class="vote hidden" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_3" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote3()"<?php }?> class="vote" src="/viantes/pvt/img/review/vote1.png"/>
+			
+			<img id="0_2" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote2()"<?php }?> class="vote hidden" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_2" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote2()"<?php }?> class="vote" src="/viantes/pvt/img/review/vote1.png"/>
+
+			<img id="0_1" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote1()"<?php }?> class="vote hidden" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_1" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote1()"<?php }?> class="vote" src="/viantes/pvt/img/review/vote1.png"/>
+		</a>
+	</div>
+	<input id="vote" type="hidden" name="vote" value="3"/>
+<?php 
+} else { 
+	$val = $_GET['vote'];
+	
+	$s05 = $val == 5 ? $s05 = " hidden" : "";
+	$s15 = $val == 5 ? $s15 = "" : " hidden";
+	
+	$s04 = $val >= 4 ? $s04 = " hidden" : "";
+	$s14 = $val >= 4 ? $s14 = "" : " hidden";
+	
+	$s03 = $val >= 3 ? $s03 = " hidden" : "";
+	$s13 = $val >= 3 ? $s13 = "" : " hidden";
+	
+	$s02 = $val >= 2 ? $s02 = " hidden" : "";
+	$s12 = $val >= 2 ? $s12 = "" : " hidden";
+	
+	$s01 = $val >= 1 ? $s01 = " hidden" : "";
+	$s11 = $val >= 1 ? $s11 = "" : " hidden";
+?>
+	<!-- Mostro la visualizzazione in base all'ultima scelta-->
+	<div class="commonRowTxt_col2_fff" style="display:inline-block">
+		<a>
+			<img id="0_5" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote5()"<?php }?> class="vote <?php echo $s05?>" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_5" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote5()"<?php }?> class="vote <?php echo $s15?>" src="/viantes/pvt/img/review/vote1.png"/>
+			
+			<img id="0_4" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote4()"<?php }?> class="vote <?php echo $s04?>" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_4" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote4()"<?php }?> class="vote <?php echo $s14?>" src="/viantes/pvt/img/review/vote1.png"/>
+									 
+			<img id="0_3" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote3()"<?php }?> class="vote <?php echo $s03?>" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_3" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote3()"<?php }?> class="vote <?php echo $s13?>" src="/viantes/pvt/img/review/vote1.png"/>
+			
+			<img id="0_2" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote2()"<?php }?> class="vote <?php echo $s02?>" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_2" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote2()"<?php }?> class="vote <?php echo $s12?>" src="/viantes/pvt/img/review/vote1.png"/>
+
+			<img id="0_1" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote1()"<?php }?> class="vote <?php echo $s01?>" src="/viantes/pvt/img/review/vote0.png"/>
+			<img id="1_1" <?php if (!isset($_GET['finish'])) { ?> onclick="setVote1()"<?php }?> class="vote <?php echo $s11?>" src="/viantes/pvt/img/review/vote1.png"/>
+		</a>
+	</div>
+	<input id="vote" type="hidden" name="vote" value="<?php echo $val?>"/>
+<?php } ?>

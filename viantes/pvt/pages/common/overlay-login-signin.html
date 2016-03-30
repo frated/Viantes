@@ -1,0 +1,407 @@
+<?php
+require_once $X_root."pvt/pages/auth/clientRequestDAO.php";
+
+$show = isset($_GET['showOverlayLgSg']) ? "display: block;" : "display : none;";
+$srcPage = isset($_GET['srcPage']) ? urldecode($_GET['srcPage']) : "";
+$destPage = isset($_GET['destPage']) ? urldecode($_GET['destPage']) : "";
+$destPage = str_replace('^', '&', $destPage);
+
+$clientReqDAO = NEW ClientRequestDAO();
+$showCptchLogin  = $clientReqDAO->isMaxRequest(LOGIN, Conf::getInstance()->get('loginMaxNumOfRequest'));
+$showCptchSignin = $clientReqDAO->isMaxRequest(SIGNIN, Conf::getInstance()->get('signinMaxNumOfRequest'));
+$showCptchRecPwd = $clientReqDAO->isMaxRequest(PWDRECOVER, Conf::getInstance()->get('recoverMaxNumOfRequest'));
+?>
+
+<?php //Correzione per IE8 e minori
+if (isset($_GET['showOverlayLgSg'])) { ?>
+	<script>$(function () { showOverlayIfIE(); });</script>
+<?php } ?>
+
+<div id="overlay-login-signin" class="overlay" style="<?php echo $show ?>" >
+	<div class="main-overlay" >
+	
+		<?php $display = isset($_GET['ovl-ls-mode']) && $_GET['ovl-ls-mode'] == OVL_LS_MODE_LOGIN ? ' style="display: inline" ' : ' style="display: none" ' ?>
+		<div class="overlay-lg-sg hidden" id="overlay-lg-sg-first" <?php echo $display; ?>>
+			<form action="/viantes/pvt/pages/auth/checkLogIn.php" method="post" >
+				<div>
+					<img width="12" src="/viantes/pvt/img/common/close.png" class="flt-r mrg-top-3 crs-pnt"
+						 onclick="hideOvrlyLgSg();">
+					<!-- Header link login -->
+					<div class="overlay-lg-row-header mrg-top-12">
+						<p class="mrg-bot-6">
+							<a href="#" onclick="$('#overlay-lg-sg-first').hide(); $('#overlay-lg-sg-second').show();">
+								<?php echo $X_langArray['OVERLAY_LOG_SIGN_SINGUP'] ?>
+							</a> 
+						</p>
+					</div>
+					
+					<!-- USERNAME -->
+					<div class="height-40-ie7">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1 ovl-width_40perc">
+								<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_EMAIL'] ?>:</b>
+							</span>
+							<input id="email" type="text" name="email" 
+								   class="overlay-lg-sg-input-col22<?php 
+								   if ( isset($_GET['emailErrMsg']) || isset($_GET['globalErrMsgFrm1']) ) {
+								       echo " errorInput";} ?>"
+							       value="<?php if (isset($_GET['email'])) echo urldecode($_GET['email']);?>"/>
+						</label>
+						<span class="commonRowMandatory">*</span>
+						<!-- Seconda riga - Msg Err -->
+						<div class="overlay-lg-sg-ErrorDiv ovl-width_57perc">
+							<p class="p-error">
+								<?php 
+								if ( isset($_GET['emailErrMsg']) ) { 
+									echo urldecode($_GET['emailErrMsg']);
+								} ?>
+							</p>
+						</div>
+					</div>
+					
+					<!-- PASSWORD -->
+					<div class="height-40-ie7">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1 ovl-width_40perc">
+								<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_PSWD'] ?>:</b>
+							</span>
+							<input type="password" name="password" 
+								   class="overlay-lg-sg-input-col22 <?php 
+								   if ( isset($_GET['passwordErrMsg']) || isset($_GET['globalErrMsgFrm1']) ) {
+									   echo " errorInput";} ?>"/>
+						</label>
+						<span class="commonRowMandatory">*</span>
+
+						<!-- Seconda riga - Msg Err -->
+						<div class="overlay-lg-sg-ErrorDiv ovl-width_57perc">
+							<p class="p-error">
+								<?php 
+								if ( isset($_GET['passwordErrMsg']) ) { 
+									echo urldecode($_GET['passwordErrMsg']);
+								}
+								if ( isset($_GET['globalErrMsgFrm1']) ) { 
+									echo urldecode($_GET['globalErrMsgFrm1']);
+								} ?>
+							</p>
+						</div>
+					</div>
+					
+					<!-- CAPTCHA -->
+					<?php if ($showCptchLogin) { ?>
+						<div class="height-40-ie7">
+							<!-- Prima riga - Campi -->
+							<label>
+								<span class="ovl-lg-sg-span_col1 ovl-width_40perc">
+									<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_INSERT_CAPTCHA'] ?>:</b>
+								</span>
+								<input type="text" size="6" maxlength="6" name="captcha_code" value="" style="width: 12%;" 
+									   class="overlay-lg-sg-input-col22<?php 
+									   if (isset($_GET['cptchErrMsg']) && urldecode($_GET['cptchErrMsg']) != "") {
+										   echo " errorInput";} ?>"/>
+								<!-- Captcha Start -->
+								<img id="captcha_img" src="/viantes/pvt/pages/captcha/captcha.php?reqType=<?php echo LOGIN ?>" style="position: absolute; margin: -3px 0px 0px 4px; width: 120px; height: 30px ">
+								<a href="#" onclick="refreshCaptcha(<?php echo LOGIN ?>);" style="position: absolute; margin-left: 128px; margin-top: 12px;" >
+									<?php echo $X_langArray['OVERLAY_LOG_SIGN_REFRESH_CAPTCHA'] ?>
+								</a>
+								<!-- Captcha End -->
+							</label>
+							<!-- Seconda riga - Msg Err -->
+							<div class="overlay-lg-sg-ErrorDiv ovl-width_57perc">
+								<p class="p-error">
+									<?php 
+									if ( isset($_GET['cptchErrMsg']) ) { 
+										echo urldecode($_GET['cptchErrMsg']);
+									}?>
+								</p>
+							</div>
+						</div>
+					<?php } ?>
+
+
+					<!-- RESTA COLLEGATO -->
+					<div class="ovrlSubmitMarginDiv">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1">
+								<input id="rememberMe" type="checkbox" name="rememberMe" />
+								<?php echo $X_langArray['OVERLAY_LOG_SIGN_REMEMBER']; ?>
+							</span>
+						</label>
+						<input type="submit" class="overlay-lg-sg-submit-col2" name="invia" value="<?php echo $X_langArray['OVERLAY_LOG_SIGN_LOGIN'] ?>"/>
+						<a href="#" style="margin:5px 12px 0px 0px; float:right" onclick="$('#overlay-lg-sg-first').hide(); $('#overlay-lg-sg-third').show()">
+							<?php echo $X_langArray['OVERLAY_LOG_SIGN_PWD_FORGOT'] ?>
+						</a>
+					</div>
+					
+					<input id="overlay-srcPage-lg" type="hidden" name="srcPage" value="<?php echo $srcPage ?>"/>
+					<input id="overlay-destPage-lg" type="hidden" name="destPage" value="<?php echo $destPage ?>"/>
+					
+				</div>
+			</form>	
+		</div>
+		
+		<?php $display = !isset($_GET['ovl-ls-mode']) || (isset($_GET['ovl-ls-mode']) && $_GET['ovl-ls-mode'] == OVL_LS_MODE_SININ) ? ' style="display: inline" ' : ' style="display: none" ' ?>
+		<div class="overlay-lg-sg2" id="overlay-lg-sg-second" <?php echo $display?> >
+			<form action="/viantes/pvt/pages/auth/signUp.php" method="post" >
+				<div>
+					<img width="12" src="/viantes/pvt/img/common/close.png" class="flt-r mrg-top-3 crs-pnt"
+						 onclick="hideOvrlyLgSg();">
+					<!-- Header link login -->
+					<div class="overlay-lg-row-header mrg-top-12">
+						<p class="mrg-bot-6">
+							<a href="#" onclick="$('#overlay-lg-sg-first').show();$('#overlay-lg-sg-second').hide();">
+								<?php echo $X_langArray['OVERLAY_LOG_SIGN_LOGIN'] ?>
+							</a> 
+						</p>
+					</div>
+					
+					<!-- EMAIL -->					
+					<div class="height-40-ie7">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1">
+								<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_EMAIL'] ?>:</b>
+							</span>
+							<input id="newemail" type="text" name="newemail" 
+								class="overlay-lg-sg-input-col22 <?php 
+								if (isset($_GET['newEmailErrMsg']) && urldecode($_GET['newEmailErrMsg']) != "") { 
+									echo " errorInput";} ?>"
+						   		value="<?php if (isset($_GET['newemail'])) echo urldecode($_GET['newemail']);?>"
+					   			onkeyup="doFieldAsyncGetMinLen('/viantes/pvt/pages/auth/signUp.php','newemail', 4);"
+								onblur="doFieldAsyncGet('/viantes/pvt/pages/auth/signUp.php','newemail');"
+							/>
+							<span class="commonRowMandatory">*</span>
+							<img id="newemailFldLD" class="commonRowImg" src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
+							<img id="newemailFldOK" class="commonRowImg" src="/viantes/pvt/img/common/ok_32_22.png">
+
+							<!-- Seconda riga - Msg Err -->
+							<div id="newemailDIV" class="overlay-lg-sg-ErrorDiv">
+								<p class="p-error">
+									<?php if ( isset($_GET['newEmailErrMsg']) ) { echo urldecode($_GET['newEmailErrMsg']);} ?>
+								</p>
+							</div>
+						</label>
+					</div>
+
+					<!-- PASSWORD -->
+					<div class="height-40-ie7">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1">
+								<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_PSWD'] ?>:</b>
+							</span>
+							<input id="newpassword" type="password" name="newpassword" 
+								class="overlay-lg-sg-input-col22 <?php 
+								if (isset($_GET['newPasswordErrMsg']) && urldecode($_GET['newPasswordErrMsg']) != "") { 
+									echo " errorInput";} ?>"
+					   			onkeyup="doFieldAsyncGetMinLen('/viantes/pvt/pages/auth/signUp.php','newpassword', 4);"
+								onblur="doFieldAsyncGet('/viantes/pvt/pages/auth/signUp.php','newpassword');"
+							/>
+							<span class="commonRowMandatory">*</span>
+							<img id="newpasswordFldLD" class="commonRowImg" src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
+							<img id="newpasswordFldOK" class="commonRowImg" src="/viantes/pvt/img/common/ok_32_22.png">
+
+							<!-- Seconda riga - Msg Err -->
+							<div id="newpasswordDIV" class="overlay-lg-sg-ErrorDiv">
+								<p class="p-error">
+									<?php 
+									if ( isset($_GET['newPasswordErrMsg']) ) { 
+										echo urldecode($_GET['newPasswordErrMsg']);} 
+									?>
+								</p>
+							</div>
+						</label>
+					</div>
+
+					<!-- NOME -->
+					<div class="height-40-ie7">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1">
+								<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_NAME'] ?>:</b>
+							</span>
+							<input id="name" type="text" name="name" 
+								class="overlay-lg-sg-input-col22<?php 
+								if (isset($_GET['nameErrMsg']) && urldecode($_GET['nameErrMsg']) != "") {
+									echo " errorInput";} ?>"
+								value="<?php if (isset($_GET['name'])) echo urldecode($_GET['name']);?>"
+					   			onkeyup="doFieldAsyncGetMinLen('/viantes/pvt/pages/auth/signUp.php','name', 4);"
+								onblur="doFieldAsyncGet('/viantes/pvt/pages/auth/signUp.php','name');"
+							/>
+							<span class="commonRowMandatory">*</span>
+							<img id="nameFldLD" class="commonRowImg" src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
+							<img id="nameFldOK" class="commonRowImg" src="/viantes/pvt/img/common/ok_32_22.png">
+
+							<!-- Seconda riga - Msg Err -->
+							<div id="nameDIV" class="overlay-lg-sg-ErrorDiv">
+								<p class="p-error">
+									<?php 
+									if ( isset($_GET['nameErrMsg']) ) { 
+										echo urldecode($_GET['nameErrMsg']);
+									} ?>
+								</p>
+							</div>
+						</label>
+					</div>
+
+					<!-- CAPTCHA -->
+					<?php if ($showCptchSignin) { ?>
+						<div class="eight-40-ie7">
+							<!-- Prima riga - Campi -->
+							<label>
+								<span class="ovl-lg-sg-span_col1 ovl-width_40perc">
+									<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_INSERT_CAPTCHA'] ?>:</b>
+								</span>
+								<input type="text" size="6" maxlength="6" name="captcha_code" value="" style="width: 12%;" 
+									   class="overlay-lg-sg-input-col22<?php 
+									   if (isset($_GET['cptchErrMsg']) && urldecode($_GET['cptchErrMsg']) != "") {
+										   echo " errorInput";} ?>"/>
+								<!-- Captcha Start -->
+								<img id="captcha_img" src="/viantes/pvt/pages/captcha/captcha.php?reqType=<?php echo SIGNIN ?>" style="position: absolute; margin: -3px 0px 0px 4px; width: 120px; height: 30px ">
+								<a href="#" onclick="refreshCaptcha(<?php echo SIGNIN ?>);" style="position: absolute; margin-left: 128px; margin-top: 12px;" >
+									<?php echo $X_langArray['OVERLAY_LOG_SIGN_REFRESH_CAPTCHA'] ?>
+								</a>
+								<!-- Captcha End -->
+							</label>
+							<!-- Seconda riga - Msg Err -->
+							<div class="ovrly-lg-sg-ErrDiv-i7  overlay-lg-sg-ErrorDiv ovl-width_57perc">
+								<p class="p-error">
+									<?php 
+									if ( isset($_GET['cptchErrMsg']) ) { 
+										echo urldecode($_GET['cptchErrMsg']);
+									}?>
+								</p>
+							</div>
+						</div>
+					<?php } ?>
+					
+					<!-- CONDIZIONI -->
+					<div class="terms-ie7 mrg-top-24">
+						<?php if ( isset($_GET['termsErrMsg']) ): ?>
+							<input id="terms" class="errorCheck" type="checkbox" name="terms" />
+						<?php else: ?>
+							<input id="terms" type="checkbox" name="terms" 
+								<?php if (isset($_GET['terms'])) echo "checked"; ?> class="selectedCheck"  />
+						<?php endif ?>	
+		
+						<?php echo $X_langArray['OVERLAY_LOG_SIGN_CONF_TERMS']; ?>
+						<a target="_blank" href="/viantes/pub/pages/terms.php">
+							<?php echo $X_langArray['OVERLAY_LOG_SIGN_LINK_TERMS'] ?>
+						</a>
+						<div class="ovrly-lg-sg-ErrDiv-i7 overlay-lg-sg-ErrorDiv">
+							<p class="p-error">
+								<?php 
+								if ( isset($_GET['termsErrMsg']) ) { 
+									echo urldecode($_GET['termsErrMsg']);
+								} ?>
+							</p>
+						</div>
+					</div>
+
+					<!-- REGISTRATI -->
+					<div class="ovrlSubmitMarginDiv">
+						<label>
+							<span class="ovl-lg-sg-span_col1"></span>
+						</label>
+						<input type="submit" class="overlay-lg-sg-submit-col2" name="invia" value="<?php echo $X_langArray['OVERLAY_LOG_SIGN_SIGNIN'] ?>"/>
+						<input id="overlay-srcPage-sg" type="hidden" name="srcPage" value="<?php echo $srcPage ?>"/>
+						<input id="overlay-destPage-sg" type="hidden" name="destPage" value="<?php echo $destPage ?>"/>
+					</div>	
+					
+				</div>
+			</form>	
+		</div>	
+		
+		<?php $display = isset($_GET['ovl-ls-mode']) && $_GET['ovl-ls-mode'] == OVL_LS_MODE_RECOVER ? ' style="display: inline" ' : ' style="display: none" ' ?>
+		<div class="overlay-lg-sg hidden" id="overlay-lg-sg-third" <?php echo $display?> >
+			<form action="/viantes/pvt/pages/auth/recoverPwd.php" method="post" >
+				<div>
+					<img width="12" src="/viantes/pvt/img/common/close.png" class="flt-r mrg-top-3 crs-pnt"
+						 onclick="hideOvrlyLgSg();">
+					<!-- Header link login -->
+					<div class="overlay-lg-row-header mrg-top-12">
+						<p class="mrg-bot-6">
+							<a href="#" onclick="$('#overlay-lg-sg-first').show();$('#overlay-lg-sg-second').hide();
+							                     $('#overlay-lg-sg-third').hide();">
+								<?php echo $X_langArray['OVERLAY_LOG_SIGN_LOGIN'] ?>
+							</a> 
+						</p>
+					</div>
+					
+					<!-- EMAIL -->					
+					<div class="eight-40-ie7">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1">
+								<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_EMAIL'] ?>:</b>
+							</span>
+							<input id="recemail" type="text" name="recemail" 
+								class="overlay-lg-sg-input-col22<?php 
+								if (isset($_GET['recPwdEmailErrMsg']) && urldecode($_GET['recPwdEmailErrMsg']) != "") { 
+									echo " errorInput";} ?>"
+						   		value="<?php if (isset($_GET['recemail'])) echo urldecode($_GET['recemail']);?>"
+							/>
+							<span class="commonRowMandatory">*</span>
+
+							<!-- Seconda riga - Msg Err -->
+							<div id="emailDIV" class="ovrly-lg-sg-ErrDiv-i7 overlay-lg-sg-ErrorDiv">
+								<p class="p-error">
+									<?php if ( isset($_GET['recPwdEmailErrMsg']) ) { echo urldecode($_GET['recPwdEmailErrMsg']);} ?>
+								</p>
+							</div>
+						</label>
+					</div>
+					
+					<!-- CAPTCHA -->
+					<?php if ($showCptchRecPwd) { ?>
+						<div class="eight-40-ie7">
+							<!-- Prima riga - Campi -->
+							<label>
+								<span class="ovl-lg-sg-span_col1 ovl-width_40perc">
+									<b><?php echo $X_langArray['OVERLAY_LOG_SIGN_INSERT_CAPTCHA'] ?>:</b>
+								</span>
+								<input type="text" size="6" maxlength="6" name="captcha_code" value="" style="width: 12%;" 
+									   class="overlay-lg-sg-input-col22<?php 
+									   if (isset($_GET['cptchErrMsg']) && urldecode($_GET['cptchErrMsg']) != "") {
+										   echo " errorInput";} ?>"/>
+								<!-- Captcha Start -->
+								<img id="captcha_img" src="/viantes/pvt/pages/captcha/captcha.php?reqType=<?php echo PWDRECOVER ?>" style="position: absolute; width: 120px; height: 30px ">
+								<a href="#" onclick="refreshCaptcha(<?php echo PWDRECOVER ?>);" style="position: absolute; margin-left: 118px; margin-top: 12px;" >
+									<?php echo $X_langArray['OVERLAY_LOG_SIGN_REFRESH_CAPTCHA'] ?>
+								</a>
+								<!-- Captcha End -->
+							</label>
+							<!-- Seconda riga - Msg Err -->
+							<div class="ovrly-lg-sg-ErrDiv-i7 overlay-lg-sg-ErrorDiv ovl-width_57perc">
+								<p class="p-error">
+									<?php 
+									if ( isset($_GET['cptchErrMsg']) ) { 
+										echo urldecode($_GET['cptchErrMsg']);
+									}?>
+								</p>
+							</div>
+						</div>
+					<?php } ?>
+
+					<!-- RECOVER -->
+					<div class="ovrlSubmitMarginDiv">
+						<!-- Prima riga - Campi -->
+						<label>
+							<span class="ovl-lg-sg-span_col1"></span>
+						</label>
+						<input type="submit" class="overlay-lg-sg-submit-col2" name="invia" value="<?php echo $X_langArray['OVERLAY_LOG_SIGN_RECOVER'] ?>"/>
+					</div>
+					
+					<input id="overlay-srcPage-rc" type="hidden" name="srcPage" value="<?php echo $srcPage ?>"/>
+					<input id="overlay-destPage-rc" type="hidden" name="destPage" value="<?php echo $destPage ?>"/>
+					
+				</div>
+			</form>	
+		</div>
+		
+	</div>
+	
+</div>
+

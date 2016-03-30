@@ -1,0 +1,11 @@
+
+primi due caratteri il tipo di img <ld> = loading
+un carattere "_"
+sei caratteri per lo sfondo o "transp" se nonc'è 
+
+un eventuale carattere "_" ed un indice 1,2,3  se esisteno altre versioni con altri colori dell'immagine e stesso colore di sfondo
+
+es. la ld_32_ffffff.gif esiste in due colori (ovviemente il colore lo si deduce facilemente)
+
+Generate da
+http://www.ajaxload.info/

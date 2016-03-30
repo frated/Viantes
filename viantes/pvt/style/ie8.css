@@ -1,0 +1,133 @@
+
+/* vertically center text in text input in ie   border: 0; font-size:14px;  */
+input {height: 22px; line-height: 22px;} 
+
+/* la correzione di sopra rompe tutti i testi nei pulsanti =>
+ * li aggiunsto sovrascrivendo la line-height */
+.overlay-lg-sg-submit-col2, .personalButton {
+	line-height: 16px;
+}
+.addInterestRowCol1 {
+	height: 13px;
+	margin-top:-12px
+}
+
+/* Nascondo la parte di destra nella creazione di una recensione */
+.commonDIVLeft{	width: 100%;}
+.commonDIVRight{display:none;}
+.frecciaCartoon{ display:none; }
+
+#header-div {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+
+.header-msg-in-box {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+div .userMenu, div .reviewMenu {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+
+.top-msg {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+.profileCover {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+
+/* Overlay */
+.overlay-lg-sg, .overlay-lg-sg2, .overlay-msg {
+	/* z-index will not work on a static element (default). They must be relative or absolute. */
+	position:relative;
+	z-index:100;
+	background-color: #fff;
+}
+.main-overlay {
+	box-shadow: 0px 0px 10px 0px #2A2A2A; 
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+.overlay, .overlay-loadImg {
+	/* z-index will not work on a static element (default). They must be relative or absolute. */
+	position:absolute;
+	z-index: 50;
+}
+.ovl-msg-send{
+	position:absolute;	
+}
+.overlay-common-but{
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc); 
+}
+
+/* IMPORTANT!!! Sovrascrivo la posizone da fixed ad absolute se no in ie non si vede */
+.ui-autocomplete{
+	position: absolute;
+}
+
+.personalButton {
+	border-radius: 4px;
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+.inputcartoon {
+	background:transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#66AEE451', endColorstr='#66AEE451'); /* IE */
+	zoom: 1;
+}
+.hideInputButtonFile{
+	display:inline-block;
+	height: 22px;
+}
+/*
+.upload-file-container{
+	display:inline-block;
+	background: url('/viantes/pvt/img/profile/uploadImg.png') no-repeat;
+	position: absolute; 
+	top: -50px;
+	left: 125px;
+	height: 25px;
+	width: 22px;
+	cursor:pointer;
+}*/
+/*.upload-file-container input {
+   filter: alpha(opacity=0);
+   opacity: 0;
+}*/
+.hideInIE{ display: none; } 
+.showInIE{ display: block;}
+
+.overlay-lg-sg-input-col22, .commonRowTxt_col2, .overlay-msg-input-col2  {
+	height: 22px;
+}
+/* avendo sovrascritto la overlay-msg-input-col2 devo sovrascrivere anche la 
+ * height-150 altrimenti la text area diventa alta 22px (vedi overlay-send-msg.html) */
+.height-150 {height:150px}
+
+.imgOriginalOverlay {
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+.setting_top_div, .profile_top_div {
+	margin-bottom: 10px; 
+}
+.top-msg {
+	font-size: 13px;
+	margin-bottom: 20px;
+	text-shadow: none;
+	background-color: none;
+	border: none;
+    position: relative;
+    border-radius: 4px;
+	margin-top: 20px;
+	box-shadow: none;
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}
+.top-msg-ok {
+	background-color: #EBFFC9;
+	border-color: #BBB;
+	padding: 2px;
+}
+.top-msg-ko {
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#22FF0000', endColorstr='#22FF0000'); /* IE */
+}
+.personalButton {
+	behavior: url(/viantes/pvt/style/PIE-1.0.0/PIE.htc);
+}

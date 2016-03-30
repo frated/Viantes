@@ -1,0 +1,35 @@
+<?php
+ini_set('display_errors', 1);
+require_once $X_root."pvt/pages/setting/settingDAO.php";
+require_once $X_root."pvt/pages/auth/userDO.php";
+require_once $X_root."pvt/pages/lang/language.php";
+
+//Se ho una richiesta esplicita di lingua
+if( isset($_GET['langCode']) ) {
+	setLangArray($_GET['langCode']);
+}
+//altrimenti, se non e' gia' stata settata
+else if (!isset($_SESSION['langArray'])) {
+	//Cerco la lingua dell'Utente loggato
+	if (isset($_SESSION["USER_LOGGED"])) {
+		$userDO = unserialize($_SESSION["USER_LOGGED"]);
+		$settingDAO = New SettingDAO();
+		$settingDO = $settingDAO->getSetting($userDO->getId());
+		setLangArray($settingDO->getLangCode(), $X_root);
+	}
+	else {
+		//Detecting Default Browser language
+		$X_langCode = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+		setLangArray($X_langCode, $X_root);
+	}
+}
+$X_langArray = $_SESSION['langArray'];
+?>
+
+<?php
+function setLangArray($langCode) {
+	$_SESSION['langCode'] = $langCode; 
+	$language = New Language($_SESSION['langCode']);
+	$_SESSION['langArray'] = $language->getLanguageArray();
+}
+?>
