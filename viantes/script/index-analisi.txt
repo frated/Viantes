@@ -1,0 +1,120 @@
+N.B.
+Le pk NON necessitano di indici
+Le uniq IDEM
+Le fk generano un index SOLO per INOODB; quindi bisogna lanciare SHOW INDEX FROM table_name; il nome dell'indice e' indicato nella colonna key_name
+
+ALTER TABLE COUNTRY DROP INDEX ID
+
+#################	
+##### Review 
+#################
+SITE 
+	ID 			pk
+	GEOSITEID	uniq
+	LANGCODE	uniq
+	
+REVIEW
+	ID			pk
+	SITEID		si	fk
+	USRID		si	fk
+	LANGCODE	si	fk
+	
+REVIEW_ATTACH 
+	REVIEWID	si	fk
+	USRID		si	fk	
+
+REVIEW_STAR
+	REVID	uniq
+	USRID	uniq
+	STAR	ni   
+	SEE   	ni
+	POST 	ni
+
+#################
+##### City Review
+#################
+CITY
+	ID			pk
+	COUNTRYID	si			fk
+	CITYNAME	uniq
+	LANGCODE	uniq		fk
+
+CITY_REVIEW
+	ID			pk
+	CITYID		si	fk
+	USRID		si	fk
+	LANGCODE	si	fk
+
+CITY_REV_ATT
+	CITYREVID	si	fk
+	USRID		si	fk	
+
+CITY_REV_STAR
+	REVID	uniq
+	USRID	uniq
+	STAR	ni   
+	SEE   	ni
+	POST 	ni
+
+REVIEW_CITY_REVIEW
+	REVIEWID	si	fk
+	CITYREVID	si	fk
+
+####################
+##### Country Review
+####################
+COUNTRY 
+	ID			pk
+	LANGCODE 	uniq
+	COUNTRY 	uniq
+	
+COUNTRY_REVIEW
+	COUNTRYID	si	fk
+	USRID		si	fk
+	LANGCODE	si	fk
+	
+COUNTRY_REV_ATT
+	COUNTRYREVID	si	fk
+	USRID			si	fk
+
+COUNTRY_REV_STAR
+	REVID	uniq
+	USRID	uniq
+	STAR	ni   
+	SEE   	ni
+	POST 	ni
+
+CITY_REV_COUNTRY_REV 
+	CITYREVID 		si	fk
+	COUNTRYREVID	si	fk
+
+###############
+##### Others
+###############
+REQUEST	
+	IP		si
+	REQTP	si
+	DTINS	si
+
+MESSAGE
+	ID 					pk
+	FROMUSRID			si	fk
+	TOUSRID				si	fk
+	RECIPIENTSTATUS		ni
+	SENDERSTATUS		ni
+
+SETTING_USER
+	USRID	si	fk
+
+GEO_SITE
+	ID 			pk
+	PLACEID		uniq	fk
+	LANGCODE	uniq
+
+USER
+	ID		pk
+	email	si
+	pwd		si
+	
+USER_REGISTRY 
+	USRID	si	fk

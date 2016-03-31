@@ -26,8 +26,10 @@ class SiteDAO  extends CommonDAO {
 		//=========================================================
 		// 1.  Get if exists
 		$sql = sprintf("SELECT S.ID, S.SITENAME, S.COUNTRYID, S.LOCALITY, S.GEOSITEID, G.PLACEID, G.LAT, G.LNG
-						FROM SITE S JOIN GEO_SITE G ON S.GEOSITEID = G.ID 
-						WHERE G.PLACEID = '%s' AND S.LANGCODE = '%s' 
+						FROM SITE S 
+							 JOIN GEO_SITE G ON S.GEOSITEID = G.ID 
+						WHERE G.PLACEID = '%s' 
+						AND G.LANGCODE = '%s' 
 						AND S.LANGCODE = '%s' ", $placeId, $langCode, $langCode);
 						
 		Logger::log("SiteDAO :: createSiteIFNotEx :: select query: ".$sql, 3);

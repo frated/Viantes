@@ -885,6 +885,9 @@ function renderSSP(revId, revTp){
 			//cancello il vecchio contenuto
 			$('#sspContentDiv').remove();
 			
+			//count number of element
+			var cnt = 0;
+			
 			//div esterno
 			var content = "<div id=\"sspContentDiv\" class=\"sspContentDiv\">";
 			
@@ -928,14 +931,23 @@ function renderSSP(revId, revTp){
 						"</div>" +
 					"</div>";
 				}
+				
+				//Potrei avere elementi see = 0 o dei post = ''
+				if (item.star == 1 || item.see == 1 || item.post != '')
+					cnt++;
 			});
 			
 			//chiudo il div esterno
 			content = content + "</div>";
 			
-			//inserisco dopo il tag sspTopDiv
-			$('#sspTopDiv').after(content);
-			
+			if (cnt > 0) {
+				//inserisco dopo il tag sspTopDiv
+				$('#sspTopDiv').after(content);
+			} else {
+				//mostro il emssaggio di lista vuota
+				$('#sspEmptyContentDiv').show();
+			}			
+		
 			//mostro
 			$('#overlaySSPList').show();
 		},

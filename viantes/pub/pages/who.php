@@ -48,10 +48,10 @@ cleanSesison($X_page);
 				
 				<div>
 					<p class="info-general"><?php echo //$X_langArray['TERMS_DISCL']
-					'Viantes &egrave; un progetto realizzato da un ingegnere informatico Francesco Tedesco.<br>'.
-					'L\'ideatore vuole inserire il progetto all\'interno di un pensiero pi&ugrave; ampio; una filosofia basata sulla <i>libera condivisione dell&rsquo;informazione</i>.<br><br>'.
-					'L\'ideatore &egrave; convinto che oggi ci si tanta informazione superflua, e spesso inutile o addirittura fuorviante; quindi la filosofia di condividere informazione non pu&ograve; prescindere dalla necessit&agrave; di organizzarla e renderla accessibile in modo semplice, efficace e completo.<br><br>'.
-					'L\'ideatore spera di aver messo a disposizione della comunit&agrave; non solo un mezzo ma anche una nuova idea di pensiero.'?></p>
+					'Viantes &egrave; un progetto realizzato da Francesco Tedesco, un ingegnere informatico esperto in programmazione <i>web-oriented</i>.<br>'.
+					'Francesco vuole inserire il progetto all\'interno di un pensiero pi&ugrave; ampio; una filosofia basata sulla <i>libera condivisione dell&rsquo;informazione</i>.<br><br>'.
+					'Francesco &egrave; convinto che oggi ci si tanta informazione superflua, e spesso inutile o addirittura fuorviante; quindi la filosofia di condividere informazione non pu&ograve; prescindere dalla necessit&agrave; di organizzarla e renderla accessibile in modo semplice, efficace e completo.<br><br>'.
+					'Francesco spera di aver messo a disposizione della comunit&agrave; non solo un mezzo ma anche una nuova idea di pensiero.'?></p>
 				</div>
 			</div>
 			

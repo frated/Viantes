@@ -601,6 +601,7 @@ class Language {
 		$lang['GEN_PAUSE'] = 'Pausa';
 		$lang['GEN_CLOSE'] = 'Chiudi';
 		$lang['GEN_GALLERY'] = 'Galleria';
+		$lang['GEN_NO_RESULT'] = 'la lista &egrave; vuota';
 
 		//FILE UPLOAD
 		$lang['UPLOAD_IMG_ERR_TYPE']='Il file che stai caricando non &egrave;  un\'immagine! E\' possibile caricare solo file di tipo immagine';
@@ -611,7 +612,7 @@ class Language {
 		$lang['UPLOAD_ERR_INI_SIZE']='Il file che stai caricando supera la dimensione masisma consentita! Riprova con un file più piccolo di 100 M byte';
 		$lang['UPLOAD_ERR_PARTIAL']='Il file &egrave;  scato caricato solo parzialmente. Rirpovare a caricare nuovamente il file.';
 		$lang['UPLOAD_ERR_NO_FILE'] = 'Il file non &egrave;  stato caricato! Riprovare nuovamente';
-		$lang['UPLOAD_ERR_NO_TMP_DIR'] = 'Si &egrave;  verificato un errore duranto l\'aquisizione del file! Riprovare nuovamente';
+		$lang['UPLOAD_ERR_NO_TMP_DIR'] = 'Si &egrave; verificato un errore duranto l\'aquisizione del file! Riprovare nuovamente';
 		$lang['UPLOAD_ERR_CANT_WRITE'] = 'Impossibile acquisire il file! Riprovare nuovamente';
 		$lang['UPLOAD_ERR_EXTENSION'] = 'L\'acquisizione file &egrave;  stata bloccata! Riprovare nuovamente, se il problema permane scegliere un altro file';
 		$lang['UPLOAD_ERR_PART_UPLOADED'] = 'Il file &egrave;  stato caricato solo in parte! Riprovare nuovamente, se il problema permane scegliere un altro file';
@@ -1235,6 +1236,7 @@ class Language {
 		$lang['GEN_PAUSE'] = 'Pause';
 		$lang['GEN_CLOSE'] = 'Close';
 		$lang['GEN_GALLERY'] = 'Gallery';
+		$lang['GEN_NO_RESULT'] = 'The list is empty';
 		
 		//FILE UPLOAD
 		$lang['UPLOAD_IMG_ERR_TYPE']='The file you are uploading is not an image! Please load only image file type';
