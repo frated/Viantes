@@ -25,26 +25,4 @@ $comment = $attachDO->getComment() != '' ?
 				$X_langArray['SHOW_REVIEW_MOV_NO_COMMENT'];
 
 echo $fullFileName ."@#@". $comment ."@#@". $attachDO->getXDim() ."@#@". $attachDO->getYDim();
-
-//Save or update an arry in session for a viewver new features
-/*
-if( isset($_SESSION['showRevMovResult']) ) {
-	$showRevMovResult = $_SESSION['showRevMovResult'];
-} else {
-	$showRevMovResult = array();
-}
-$showRevMovResult[count($showRevMovResult)] = $fullFileName ."@#@". $comment ."@#@". $attachDO->getXDim() ."@#@". $attachDO->getYDim();
-
-$_SESSION['showRevMovResult'] = $showRevMovResult;
-* */
-
-/*** GESTIONE CON BLOB
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-$relativeFileName = '/viantes/pvt/zz/'.$attachDO->getId().'_'.$attachDO->getFileName();
-$fullFileName = $root.$relativeFileName;
-
-file_put_contents($fullFileName, $attachDO->getDataFile());
-
-echo $relativeFileName; 
-################ */
 ?>

@@ -7,6 +7,7 @@
  */
 $X_root = '../../../../';
 session_start();
+require_once $X_root."pvt/pages/checkSession4Script.php";
 require_once $X_root."pvt/pages/review/cityReviewBean.php";
 require_once $X_root."pvt/pages/review/countryReviewBean.php";
 require_once $X_root."pvt/pages/review/reviewBean.php";

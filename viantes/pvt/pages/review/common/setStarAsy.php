@@ -1,24 +1,18 @@
 <?php
-ini_set('display_errors', 1);
 $X_root = "../../../../";
 session_start();
 require_once $X_root."pvt/pages/const.php";
+require_once $X_root."pvt/pages/checkSession4Script.php";
 require_once $X_root."pvt/pages/auth/userDO.php";
 require_once $X_root."pvt/pages/auth/userDAO.php";
 require_once $X_root."pvt/pages/review/reviewDAO.php";
 require_once $X_root."pvt/pages/review/cityReviewDAO.php";
 require_once $X_root."pvt/pages/review/countryReviewDAO.php";
 
-
-if (!isset($_SESSION["USER_LOGGED"])) {
-	echo "01 - Utente non loggato";
-	exit;
-}
-
 $userDO = unserialize($_SESSION["USER_LOGGED"]);
 
 if ( !isset($_GET['mode']) || !isset($_GET['reviewId']) || !isset($_GET['revType']) || !isset($_GET['star']) ) {
-	echo "02 -  Parametri mancanti";
+	echo "01 -  Parametri mancanti";
 	exit;
 }
 
@@ -28,12 +22,12 @@ $revType  = $_GET['revType'];		// 1, 2 o 3
 $star     = $_GET['star']; 			// 1 per una star, 2 per un see
 
 if ($star != 1 && $star != 2 ) {
-	echo "03 - Parametri errati [star]"; 
+	echo "02 - Parametri errati [star]"; 
 	exit;
 }
 
 if ($mode != 'do' && $mode != 'undo') {
-	echo "03 - Parametri errati [mode]"; 
+	echo "02 - Parametri errati [mode]"; 
 	exit;
 }
 

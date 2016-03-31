@@ -28,7 +28,7 @@ $result = "";
 
 Logger::log("showRevListAsy :: main :: parameters: reviewId:" .$reviewId. "cityRevId:" .$cityRevId. "countryRevId:" .$countryRevId. " numOfBox:" .$numOfBox. " mode:" .$mode, 3);
 $reviewDOArray = $reviewDAO->getReviews($reviewId, $cityRevId, $countryRevId, $numOfBox, $mode);
-//echo $reviewDAO->getReviews($reviewId, $cityRevId, $countryRevId, $numOfBox, $mode);exit;
+
 foreach($reviewDOArray as $reviewDO) {
 	//get initial dimension
 	list($widthIn, $heightIn) = getimagesize(HT_ROOT.$reviewDO->getCoverFileName());

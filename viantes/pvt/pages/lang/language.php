@@ -347,6 +347,7 @@ class Language {
 		$lang['SEARCH_REVIEW_RESULT_H1'] = 'Risultati della ricerca';
 		$lang['SEARCH_REVIEW_RESULT_NO_RESULT'] = 'Nessun risultato per i criteri di ricerca impostati';
 		$lang['SEARCH_REVIEW_RESULT_OVER_EVAL'] = 'Valutazione Complessiva';
+		$lang['SEARCH_REVIEW_SEE_ALL'] = 'vedi tutti...';
 		$lang['SEARCH_REVIEW_RESULT_AUTHOR'] = 'Autore';
 		$lang['SEARCH_REVIEW_RESULT_REVIEW'] = 'Recensione:';
 		$lang['SEARCH_REVIEW_RESULT_HOW_ARRIVE'] = 'Come arrivare:';
@@ -979,6 +980,7 @@ class Language {
 		$lang['SEARCH_REVIEW_RESULT_H1'] = 'Search results';
 		$lang['SEARCH_REVIEW_RESULT_NO_RESULT'] = 'No results for the setted search criteria';
 		$lang['SEARCH_REVIEW_RESULT_OVER_EVAL'] = 'Overall evaluation';
+		$lang['SEARCH_REVIEW_SEE_ALL'] = 'see all...';
 		$lang['SEARCH_REVIEW_RESULT_AUTHOR'] = 'Author';
 		$lang['SEARCH_REVIEW_RESULT_REVIEW'] = 'Review:';
 		$lang['SEARCH_REVIEW_RESULT_HOW_ARRIVE'] = 'How to arrive:';

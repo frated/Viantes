@@ -77,6 +77,21 @@ function getURI(){
 	return ((!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
 }
 
+/*
+ * Verifica se la sessione dell'utente e' ancora valida
+ */
+function isLogged($delayFromLastActivity) {
+	if (isset($_SESSION["USER_LOGGED"]) && isset($_SESSION['LAST_ACTIVITY']) && time() - $_SESSION['LAST_ACTIVITY'] < $delayFromLastActivity ) {
+		return true;
+	}
+	else if ( isset($_COOKIE["LOGGED_IN"]) && isset($_SESSION["USER_LOGGED"]) ) {
+		$_SESSION['LAST_ACTIVITY'] = time();
+		return true;
+	}
+	//echo "===============[" . $_SESSION["USER_LOGGED"] . "][" . $_COOKIE['LOGGED_IN']. "][" . $_SESSION['LAST_ACTIVITY'] ."][". time(). "]";
+	return false;
+}
+
 /* 
  * Ritorna il Sistema Operativo in uso
  */

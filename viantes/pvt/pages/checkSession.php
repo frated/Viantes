@@ -19,17 +19,3 @@ if ( !$X_logged )  {
 	header('Location: '.$uri.'/index.php?showOverlayLgSg=val&srcPage=index.php&destPage='.$destPage);
 }
 ?>
-
-<?php
-function isLogged($delayFromLastActivity) {
-	if (isset($_SESSION["USER_LOGGED"]) && isset($_SESSION['LAST_ACTIVITY']) && time() - $_SESSION['LAST_ACTIVITY'] < $delayFromLastActivity ) {
-		return true;
-	}
-	else if ( isset($_COOKIE["LOGGED_IN"]) && isset($_SESSION["USER_LOGGED"]) ) {
-		$_SESSION['LAST_ACTIVITY'] = time();
-		return true;
-	}
-	//echo "===============[" . $_SESSION["USER_LOGGED"] . "][" . $_COOKIE['LOGGED_IN']. "][" . $_SESSION['LAST_ACTIVITY'] ."][". time(). "]";
-	return false;
-}
-?>

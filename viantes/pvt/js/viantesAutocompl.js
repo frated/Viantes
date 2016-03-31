@@ -1,6 +1,5 @@
 /**
- * Autocompletamento che carica le nazioni in base alla lingua
- * url: "/viantes/pvt/pages/lang/getJesonCountry.php",
+ * Funzioni di Autocompletamento
  */	
 $(function() {
 	

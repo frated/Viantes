@@ -48,8 +48,8 @@ cleanSesison($X_page);
 				
 				<div>
 					<p class="info-general"><?php echo //$X_langArray['TERMS_DISCL']
-					'Viantes &egrave; un\'applicazione Web, un progetto, una filosofia basata sull\'idea che ha per presupposto la condivisone della conoscenza.<br><br>'.
-					//Fa pa parte di un progetto amcora piu\' ampio denominato ShaKno il cui acronino deriva dalle due parole Share e Know rispettivamente condividere conoscenza.<br>
+					'Viantes &egrave; un\'applicazione Web, un progetto, una filosofia basata sull\'idea che ha per presupposto la <i>libera condivisione dell&rsquo;informazione</i>.<br><br>'.
+					//Fa pa parte di un progetto amcora piu\' ampio denominato ShaKno il cui acronino deriva dalle due parole Share e Know rispettivamente condividere conoscenza www.infoshareproject.com .<br> 
 					'Condividere la conoscenza significa rendere le informazioni accessibili alla maggior parte di utenti possibili (idealmente tutti), in modo semplice e veloce, organizzate cio&egrave; in modo da reperire le informazioni nel minor tempo possibile.<br><br>'.
 					'Per far ci&ograve; &egrave; necessario anche il vostro impegno, affinch&eacute; i vostri contenuti siano pi&ugrave; esaustivi e dettagliati possibile, ed allo stesso tempo concisi poich&eacute; crediamo che l\'abbondanza di informazione, se superflua sia solo una difficolt&agrave; aggiuntiva per chi le informazioni le cerca.'?></p>
 				</div>

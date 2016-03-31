@@ -9,5 +9,8 @@ $delayFromLastActivity = intval(Conf::getInstance()->get('delayFromLastActivity'
 
 $X_logged = isLogged($delayFromLastActivity);
 
-$X_is_public = true; //questa variabile e' usata nell'header.html
+if (!$X_logged) {
+	echo "99";
+	exit;
+}
 ?>

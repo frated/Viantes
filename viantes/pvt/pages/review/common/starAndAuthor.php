@@ -56,7 +56,7 @@
 			
 			<!-- SSP link -->
 			<div id="postDivId" style="margin-left: 140px; margin-top: -6px;">
-				<a href="#"	onclick="renderSSP(<?php echo "'".X_code($reviewDO->getId())."','".$reviewType."','".X_code($userDO->getId())."'"?>);">vedi tutti...</a>
+				<a href="#"	onclick="renderSSP(<?php echo "'".X_code($reviewDO->getId())."','".$reviewType."'"?>);"><?php echo $X_langArray['SEARCH_REVIEW_SEE_ALL'] ?></a>
 			</div>
 				
 		<!-- NO Logged User -->		
@@ -87,9 +87,9 @@
 		</p></b>
 		
 		<?php 
-		if (isset($userDO)){  
+		if ($X_logged){  
 			$userDO = unserialize($_SESSION["USER_LOGGED"]); ?>
-			<a class="dspl-inln-blk" href="/viantes/pub/pages/profile/<?php echo getProfileLink($userDO->getId(), $reviewDO->getUsrId()); ?>" >
+			<a class="dspl-inln-blk" href="/viantes/pub/pages/profile/showProfile.php?usrId=<?php echo X_code($reviewDO->getUsrId()); ?>" >
 				<?php echo $reviewDO->getUsrName() ?>
 				<img <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getUserCoverFileName() ?>" />
 			</a>

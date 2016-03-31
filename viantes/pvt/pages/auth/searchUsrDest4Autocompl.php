@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors',1);
 $X_root = "../../../";
+require_once $X_root."pvt/pages/checkSession4Script.php";
 require_once $X_root."pvt/pages/auth/userDAO.php";
 require_once $X_root."pvt/pages/review/reviewDAO.php";
 

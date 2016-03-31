@@ -1,8 +1,8 @@
 <?php
-ini_set('display_errors', 1);
 $X_root = "../../../../";
 session_start();
 require_once $X_root."pvt/pages/const.php";
+require_once $X_root."pvt/pages/checkSession4Script.php";
 require_once $X_root."pvt/pages/auth/userDO.php";
 require_once $X_root."pvt/pages/auth/userDAO.php";
 require_once $X_root."pvt/pages/review/reviewDAO.php";
@@ -10,15 +10,10 @@ require_once $X_root."pvt/pages/review/cityReviewDAO.php";
 require_once $X_root."pvt/pages/review/countryReviewDAO.php";
 
 
-if (!isset($_SESSION["USER_LOGGED"])) {
-	echo "01 - Utente non loggato";
-	exit;
-}
-
 $userDO = unserialize($_SESSION["USER_LOGGED"]);
 
 if ( !isset($_GET['reviewId']) || !isset($_GET['revType']) || !isset($_GET['post']) ) {
-	echo "02 -  Parametri mancanti";
+	echo "01 -  Parametri mancanti";
 	exit;
 }
 
@@ -27,7 +22,7 @@ $revType  = $_GET['revType'];		// 1, 2 o 3
 $post     = $_GET['post']; 			// 1 per una star, 2 per un see
 
 if (strlen($post) > 140) {
-	echo "00";	
+	echo "02";	
 	exit;
 }
 

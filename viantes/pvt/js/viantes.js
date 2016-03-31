@@ -873,7 +873,7 @@ function cangePostVal(addVal){
 /**
  * Renderizza la popup che mostra tutti gli str/see/post
  */
-function renderSSP(revId, revTp, loggeUsrId){
+function renderSSP(revId, revTp){
 	dataString = "revId=" + revId + "&revTp=" + revTp;
 	$.ajax({
 		type: "GET",
@@ -890,7 +890,7 @@ function renderSSP(revId, revTp, loggeUsrId){
 			
 			$.map(resp, function (item) {
 				
-				var link = "https://www.viantes.com/viantes/pub/pages/profile/" + ( loggeUsrId == item.usrId ? "myProfile.php" : "showProfile.php?usrId=" + item.usrId );
+				var link = "/viantes/pub/pages/profile/showProfile.php?usrId=" + item.usrId;
 				
 				if (item.star == 1) {
 					content = content +
