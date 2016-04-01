@@ -62,7 +62,7 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 						<!-- Visibile sui browser -->
 						<img class="hideInIE"  src="<?php echo $userDO->getBckCoverFileName(); ?>" <?php echo IMG_748_290 ?>
 								 onclick="$('#attachImgInput2').click();">
-						<!-- Visibili in ie -->
+						<!-- Visibili in ie7/8 -->
 						<img class="showInIE" src="<?php echo $userDO->getBckCoverFileName(); ?>" <?php echo IMG_748_290 ?> >
 
 						<!-- Pulsante type=file nascosto per i browser visibile in ie -->

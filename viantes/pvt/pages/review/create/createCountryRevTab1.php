@@ -58,11 +58,11 @@ require_once $X_root."pvt/pages/geo/countryMap.html";
 					   doFieldAsyncGet('/viantes/pvt/pages/review/create/createCountryRev.php?langCode=<?php echo $langCode; ?>','country');"
 				/>
 				<span class="commonRowMandatory">*</span>
-				<img id="findMap"	  	 style="width: 3%" 	 	src="/viantes/pvt/img/common/find_G.png">
-				<img id="countryFldLD"   class="commonRowImg"   src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
-				<img id="countryFldOK"   class="commonRowImg"   src="/viantes/pvt/img/common/ok_32_22.png">
-				<img id="countryFrcCart" class="frecciaCartoon" src="/viantes/pvt/img/review/fumettoFreccia.png">
-				<input type="hidden"     id="countryIgnoreBlur" value="" />
+				<img id="findMap"	  	 style="width: 3%; cursor:pointer" 	src="/viantes/pvt/img/common/find_G.png">
+				<img id="countryFldLD"   class="commonRowImg"   			src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
+				<img id="countryFldOK"   class="commonRowImg"   			src="/viantes/pvt/img/common/ok_32_22.png">
+				<img id="countryFrcCart" class="frecciaCartoon" 			src="/viantes/pvt/img/review/fumettoFreccia.png">
+				<input type="hidden"     id="countryIgnoreBlur" 			value="" />
 				
 				<!-- Seconda riga - Msg Err -->
 				<div id="countryDIV" class="commonRowInnerDivError">
@@ -77,9 +77,6 @@ require_once $X_root."pvt/pages/geo/countryMap.html";
 		<!-- Le prime due (id="map" e id="loadMap" ) sono alternative alla terza (id="fkMap"). A loro volte le prime due sono 
 			 sono gestite dal javascript che all'inizio mostra la id="loadMap" poi la  id="map" -->
 		<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>"></div>
-		<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>">
-			<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />
-		</div>	
 		<img id="fkMap"   class="<?php if ($X_GEO_loadMap)  echo " hidden ";?>" style="width: 90%; height: 300px;" src="/viantes/pvt/img/common/iniMap.png">
 		<input type="hidden" id="countryName" name="countryName" value=""/><!-- Nome letto dalle api di google maps -->
 		

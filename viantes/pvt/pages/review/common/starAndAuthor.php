@@ -1,6 +1,6 @@
 <?php 
 /**
- * Pagina comune che renderizza e gestisce la riga contenente l'immagine star, 'immagine see e l'autore
+ * Pagina comune che renderizza e gestisce la riga contenente l'immagine star, l'immagine see e l'autore
  * 
  * @see in /viantes/pub/pages/review/searchReviewResult.php
  * @see in /viantes/pub/pages/review/showReview.php
@@ -55,7 +55,7 @@
 			</div>
 			
 			<!-- SSP link -->
-			<div id="postDivId" style="margin-left: 140px; margin-top: -6px;">
+			<div id="postDivId" class="sspDiv">
 				<a href="#"	onclick="renderSSP(<?php echo "'".X_code($reviewDO->getId())."','".$reviewType."'"?>);"><?php echo $X_langArray['SEARCH_REVIEW_SEE_ALL'] ?></a>
 			</div>
 				

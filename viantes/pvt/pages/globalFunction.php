@@ -217,8 +217,8 @@ function ratioImagDimensionFixWidth($widthIn, $heightIn, $widthFixed = 520){
 function destroyUserSession(){
 	//cancello l'oggetto dalla sessione
 	unset($_SESSION['USER_LOGGED']);
-	//session_unset();     // unset $_SESSION variable for the run-time 
-	//session_destroy();   // destroy session data in storage
+	session_unset();     // unset $_SESSION variable for the run-time 
+	session_destroy();   // destroy session data in storage
 
 	//cancello il cookie
 	unset($_COOKIE["LOGGED_IN"]);

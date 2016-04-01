@@ -1,5 +1,6 @@
 <?php
 $X_root = "../../../";
+session_start();
 require_once $X_root."pvt/pages/checkSession4Script.php";
 require_once $X_root."pvt/pages/auth/userDAO.php";
 require_once $X_root."pvt/pages/review/reviewDAO.php";

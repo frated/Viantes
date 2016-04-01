@@ -52,6 +52,7 @@ if (isset($_SESSION["USER_LOGGED"]) && isset($_SESSION["USER_LOGGED"])) {
 				<li><img src="/viantes/pvt/img/slider/index-back-3.jpg" class="bjqs-ie7"></li>
 				<li><img src="/viantes/pvt/img/slider/index-back-4.jpg" class="bjqs-ie7"></li>
 				<li><img src="/viantes/pvt/img/slider/index-back-5.jpg" class="bjqs-ie7"></li>
+				<!--li><img src="/viantes/pvt/img/slider/index-back-6.jpg" class="bjqs-ie7"></li-->
 			</ul>
 		</div>	
 	</div>	

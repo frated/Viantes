@@ -6,7 +6,7 @@ class Conf {
 	protected static $instance = null;
 
 	private static $config = array(
-		'logName' 				=> 'viantes.log',		//nome del file di log
+		'logName' 				=> 'vnts.log',			//nome del file di log
 		'logLevel' 				=> '3',   	            //livello di log = DEBBUG
 		'useCache' 				=> '0',					//se 1 usa la cache
 		'doCaptcha'				=> '0',					//se e' 1 esegue il controllo del captcha (0 => no captcha)
@@ -38,24 +38,15 @@ class Conf {
         if (!isset(static::$instance)) {
             static::$instance = new Conf();
 			
-			//no public info
-			if ( isUnix() ) {
-				$ini_array = parse_ini_file('/usr/local/etc/user.ini');
-			} else {	
-				$ini_array = parse_ini_file('C:\\temp\\user.ini');
-			}
+			//app user
+			$ini_array = parse_ini_file( (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? 'C:\\temp\\user.ini' : '/usr/local/etc/user.ini') );
 			self::$config['usr'] = $ini_array['usr'];
 			self::$config['pwd'] = $ini_array['pwd'];
 			self::$config['mailUsr'] = $ini_array['mailUsr'];
 			self::$config['mailPwd'] = $ini_array['mailPwd'];
 			
-			//log dir
-			if ( isUnix() ) {
-				self::$config['logDir'] = '/var/log/viantes/';
-			} else {
-				self::$config['logDir'] = 'C:\temp\a\\';
-			}
-			
+			//log dir 
+			self::$config['logDir'] = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? 'C:\temp\a\\' : '/var/log/viantes/';
         }
         return static::$instance;
     }

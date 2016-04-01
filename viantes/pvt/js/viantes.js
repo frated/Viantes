@@ -66,24 +66,22 @@ function showOverlayIfIE(bgColor){
 	//default (potrebbe non arrivarmi in tal caso)
 	if (bgColor == null) { bgColor = '#eaeaea';}
 	
-	/*
 	if ( $.browser.msie && isIE7OrIE8() ) {
 		$('#main-banner-fade-id').hide();
 		$('#main-div').hide();
 		$('#footer-div').hide();
 		$('html').css('background-color', bgColor);
-	}*/
+	}
 }
 
 /* Nasconde l'overlay se il browser e' IE7/8 !!!*/
 function hideOverlayIfIE(){
-	/*
 	if ( $.browser.msie && isIE7OrIE8() ) {
 		$('#main-banner-fade-id').show();
 		$('#main-div').show();
 		$('#footer-div').show();
 		$('html').css('background-color', '#bcbcbc');//Attenzione: questo e' quello del body
-	}*/
+	}
 }
 /* Torna true se la versione di ie e' un 7.x o una 8.x*/
 function isIE7OrIE8(){

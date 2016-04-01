@@ -26,9 +26,6 @@
 	$(document).ready(function() {
 		$("#findMap").click(function(){
 			
-			//Mostro l'immagine di loading
-			showLdMap();
-			
 			//rimuovo il flag che ignora l'onBlur sul campo con lentina
 			$('#localityIgnoreBlur').val('');
 			
@@ -169,19 +166,11 @@
 	/** Mostra la mappa e nasconde il resto */
 	function shoMap(){
 		$("#map").show();
-		$('#loadMap').hide();
 		$("#fkMap").hide();
 	}
 	/** Mostra l'immagine fake e nasconde il resto */
 	function showFkMap(){
 		$("#fkMap").show();
-		$("#map").hide();
-		$('#loadMap').hide();
-	}
-	/** Mostra l'immagine di loading e nasconde il resto */
-	function showLdMap(){
-		$('#loadMap').show();
-		$("#fkMap").hide();
 		$("#map").hide();
 	}
 	

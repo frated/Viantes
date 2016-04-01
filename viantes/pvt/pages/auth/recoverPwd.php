@@ -54,7 +54,8 @@ if ($errorField != "") {
 	if ($fwdCode) {
 		//invio mail
 		$se = sendMailForRecover($email, $fwdCode, $X_langArray);
-		if ( Conf::getInstance()->get('doMail') == 0) {
+		//se non invio la mail => la stampo
+		if ( Conf::getInstance()->get('doMail') == 0) { 
 			echo $se; exit;
 		}
 	}

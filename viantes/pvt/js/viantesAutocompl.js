@@ -16,25 +16,27 @@ $(function() {
 					data: dataString,
 					contentType: "json",
 					success: function(resp){
-						response($.map(resp, function (item) {
-							return { label: item.type, value: item.name.split(elementDelimiter)[0]};
-						}));
+						response(resp);
+						/*response($.map(resp, function (item) {
+							return { label: item.type, value: item.name};
+						}));*/
 					}
 				});
 			},
 			select:function (event, ui) {
 				event.preventDefault();
-				var arr = ui.item.value.split(elementDelimiter);
+				var arr = ui.item.name.split(elementDelimiter);
 				$('#kwrds').val(arr[0]);
-				$('#type').val(ui.item.value);
+				$('#type').val(ui.item.type);
 				$('#autoComplHeaderSearchRev').val(arr[0]);
 			}
 		})
 		.data("ui-autocomplete")._renderItem = function (ul, item) {
-			var arr = item.value.split(elementDelimiter);
+			//console.log(item);
+			var arr = item.name.split(elementDelimiter);
 
 			//formatto il risultato dell'autocomplete 
-			var myTag = '<div class="autocompHeaderSearchItem1" style="background-image: url(\'/viantes/pvt/img/common/autocomplIco' + item.label + '.png\');"></div>' +
+			var myTag = '<div class="autocompHeaderSearchItem1" style="background-image: url(\'/viantes/pvt/img/common/autocomplIco' + item.type + '.png\');"></div>' +
 						'<div class="autocompHeaderSearchItem2">' +
 							'<div style="left: 44px; top: 8px; color: #fa0; font-weight: bold;">' + arr[0] + '</div>'+
 							'<div style="left: 44px; top: 23px; color: #555; font-size:11px;">' + arr[1] + '</div>' +
@@ -70,7 +72,7 @@ $(function() {
 			}
 		})
 		.data("ui-autocomplete")._renderItem = function (ul, item) {
-			console.log(item);
+			//console.log(item);
 			var arr = item.label.split(elementDelimiter);
 
 			//formatto il risultato dell'autocomplete 

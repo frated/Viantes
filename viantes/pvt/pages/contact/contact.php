@@ -31,6 +31,7 @@ if ($errorField == "") {
 	
 	//invio mail a me stesso
 	$se = sendMailForComment($name, $email, $descr);
+	//se non invio la mail => la stampo
 	if ( Conf::getInstance()->get('doMail') == 0) {
 		echo $se; exit;
 	}

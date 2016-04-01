@@ -67,7 +67,6 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 					   onblur="doFieldAsyncGet('/viantes/pvt/pages/review/create/createReview.php','site'); hideCartoon('site');"
 				/>
 				<span class="commonRowMandatory">*</span>
-				<img id="siteFldLD"   class="commonRowImg"   src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
 				<img id="siteFldOK"   class="commonRowImg"   src="/viantes/pvt/img/common/ok_32_22.png">
 				<img id="siteFrcCart" class="frecciaCartoon" src="/viantes/pvt/img/review/fumettoFreccia.png">
 				
@@ -98,11 +97,11 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 					   doFieldAsyncGet('/viantes/pvt/pages/review/create/createReview.php','locality');"
 				/>
 				<span class="commonRowMandatory">*</span>
-				<img id="findMap"	  	  style="width: 3%" 	 src="/viantes/pvt/img/common/find_G.png">
-				<img id="localityFldLD"   class="commonRowImg"   src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
-				<img id="localityFldOK"   class="commonRowImg"   src="/viantes/pvt/img/common/ok_32_22.png">
-				<img id="localityFrcCart" class="frecciaCartoon" src="/viantes/pvt/img/review/fumettoFreccia.png">
-				<input type="hidden" 	  id="localityIgnoreBlur" value="" />
+				<img id="findMap"	  	  style="width: 3%; cursor:pointer" src="/viantes/pvt/img/common/find_G.png">
+				<img id="localityFldLD"   class="commonRowImg"   			src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
+				<img id="localityFldOK"   class="commonRowImg"   			src="/viantes/pvt/img/common/ok_32_22.png">
+				<img id="localityFrcCart" class="frecciaCartoon" 			src="/viantes/pvt/img/review/fumettoFreccia.png">
+				<input type="hidden" 	  id="localityIgnoreBlur" 			value="" />
 				
 				<!-- Seconda riga - Msg Err -->
 				<div id="localityDIV" class="commonRowInnerDivError">
@@ -116,11 +115,8 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 		<!-- THE MAP -->
 		<!-- Le prime due (id="map" e id="loadMap" ) sono alternative alla terza (id="fkMap"). A loro volte le prime due sono 
 			 sono gestite dal javascript che all'inizio mostra la id="loadMap" poi la  id="map" -->
-		<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="width: 95%"></div>
-		<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>">
-			<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />
-		</div>	
-		<img id="fkMap"   class="<?php if ($X_GEO_loadMap)  echo " hidden ";?>" src="/viantes/pvt/img/common/iniMap.png">
+		<div id="map"   class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="width: 95%"></div>
+		<img id="fkMap" class="<?php if ($X_GEO_loadMap)  echo " hidden ";?>" src="/viantes/pvt/img/common/iniMap.png">
 		
 		<input type="hidden" id="siteName"    	name="siteName" 	 value=""/><!-- Nome letto dalle api di google maps -->
 		<input type="hidden" id="frmtdAdrs"    	name="frmtdAdrs" 	 value=""/><!-- Nome letto dalle api di google maps -->

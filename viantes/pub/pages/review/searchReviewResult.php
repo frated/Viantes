@@ -37,7 +37,7 @@ if (isset($reviewDO)) {
 		$placeName = $reviewDO->getSiteName();
 		$X_GEO_site = $placeName;
 		$X_GEO_locality = $reviewDO->getLocality();
-		$X_GEO_zoom = 15;
+		$X_GEO_zoom = 17;
 		$X_GEO_ERR_MSG = $X_langArray['CREATE_REVIEW_ADDRS_NOT_VALID'];
 		$requiredJSMap = "pvt/pages/geo/siteMap.html";
 	}
@@ -93,7 +93,7 @@ $X_post_cnt = isset($reviewDO) ? $reviewDO->getCntPost() : 0;
 
 //===================== GEO ===========================
 //Vince su du tutti, se true non ci sono mappe
-$X_GEO_disableMAP = true;
+$X_GEO_disableMAP = false;
 //Se true mostra la mappa se false no (nota la mappa viene sempre caricata e' solo nascosta o meno)
 $X_GEO_loadMap = isset($reviewDO) ? true : false;
 //Se true disabilita i comandi utente sulla mappa
@@ -203,7 +203,7 @@ include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 				
 				<!-- THE MAP -->
 				<?php if (!$X_GEO_disableMAP) { ?>
-					<div class="showRevMapDiv mrg-bot-24">
+					<div class="showRevMapDiv">
 						<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="height: 200px;"></div>
 						<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="height: 200px;">
 							<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />

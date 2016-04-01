@@ -1089,7 +1089,7 @@ div.userReviewHeaderDiv{
 	color:rgb(83, 83, 83); font-size: 16px;
 }
 .showRevMapDiv {
-	display:inline-block; width: 100%; margin-bottom:36px;
+	display:inline-block; width: 100%; margin-bottom:36px;margin-top:24px;
 }
 .showRevRow  {
 	margin-top: 36px;
@@ -1165,6 +1165,9 @@ div.userReviewHeaderDiv{
 }
 .seeP{
 	font-size: 11px; margin:-21px 0px 0px 36px
+}
+.sspDiv{
+	margin-left: 140px; margin-top: -6px;
 }
 .postP{
 	font-size: 11px; margin:-21px 0px 0px 32px

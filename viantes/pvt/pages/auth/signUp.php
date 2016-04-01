@@ -63,6 +63,7 @@ if ($errorField == "") {
 	
 	//invio mail
 	$se = sendMail($email, $fwdCode, $name, $X_langArray);
+	//se non invio la mail => la stampo
 	if ( Conf::getInstance()->get('doMail') == 0) {
 		echo $se; exit;
 	}
