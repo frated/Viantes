@@ -1,22 +1,18 @@
 <?php
 ini_set('display_errors',1);
 
-// Pear Mail Library
-require_once "Mail.php";
 require_once $X_root."pvt/pages/cfg/conf.php";
 require_once $X_root."/pvt/pages/globalFunction.php";
 
-$from = ''; //CHANGE ME
-$mailUsr = Conf::getInstance()->get('mailUsr');
-$mailPwd = Conf::getInstance()->get('mailPwd');
-
-function sendMail($to, $fwdCode, $name, $X_langArray) { 
+function sendMail($to, $fwdCode, $name, $X_langArray) {
+	$header= "From: info@viantes.com\r\n";
+	$header.= "Content-Type: text/html; charset=ISO-8859-1". "\r\n";
 	$head = '<head><title>'.$X_langArray['SEND_MAIL_SIGNIN_SBJ'].$name.'</title></head>';
 	$subject = $X_langArray['SEND_MAIL_SIGNIN_SBJ'].$name;
 	$link = '<a href="' .getURI(). '/viantes/pub/pages/confirmSignUp.php?email='. $to .'&fwdCode='. urlencode($fwdCode) .'">qui</a>';
 	$body = '<html>'.$head.
 				'<body style="background-color: rgb(247, 247, 247);">
-					<div style="margin: 0px auto; max-width: 550px">
+					<div style="margin: 0px auto;"> 
 						<div style="background-color: rgb(255, 170, 0); height: 28px; color: rgb(255, 255, 255);
 									box-shadow: 3px 6px 9px #A2A2A2;">
 							<a href="'.getURI().'" style="text-decoration: none;">
@@ -45,16 +41,17 @@ function sendMail($to, $fwdCode, $name, $X_langArray) {
 	if ( Conf::getInstance()->get('doMail') == 0) 
 		return $body;
 	
-	$this->send($from, $to, $subject, $body);
+	mail($to, $subject, $body, $header);
 }
 
 function sendMailForRecover($to, $fwdCode, $X_langArray) {
+	$header = "From: info@viantes.com";
 	$subject = $X_langArray['SEND_MAIL_RECOVER_PWD_SBJ'];
 	$link = '<a href="' .getURI(). '/viantes/pub/pages/recoverPwd.php?email='. $to .'&fwdCode='. urlencode($fwdCode) .'">qui</a>';
 	$body = '<html>
 				<head><title>' .$X_langArray['SEND_MAIL_RECOVER_PWD_TITLE']. '</title></head>
 				<body style="background-color: rgb(247, 247, 247);">
-					<div style="margin: 0px auto; max-width: 550px">
+					<div style="margin: 0px auto;">
 						<div style="background-color: rgb(255, 170, 0); height: 28px; color: rgb(255, 255, 255);
 									box-shadow: 3px 6px 9px #A2A2A2;">
 							<a href="'.getURI().'" style="text-decoration: none;">
@@ -85,43 +82,18 @@ function sendMailForRecover($to, $fwdCode, $X_langArray) {
 	if ( Conf::getInstance()->get('doMail') == 0) 
 		return $body;
 	
-	$this->send($from, $to, $subject, $body);
+	mail($to, $subject, $body, $header);
 }
 
 function sendMailForComment($name, $mail, $comment) { 
+	$from = "From: ".$mail;
 	$subject = "Contatto da ".$name;
 	$body = 'E\' arrivata una mail da '.$name.' email=['.$mail.'] e dice:<br>'.$comment;
 
 	if ( Conf::getInstance()->get('doMail') == 0) 
 		return $body;
 	
-	$this->send($from, $from, $subject, $body);
+	mail("comment@viantes.com", $subject, $body, $from);
 }
 
-/* Send mail using php Mail */
-function send($from, $to, $subject, $body) { 
-	
-	$headers = array(
-	    'From' => $from,
-	    'To' => $to,
-	    'Subject' => $subject,
-	    'MIME-Version' => '1.0',
-	    'Content-Type' => 'text/html; charset=ISO-8859-1' 
-	);
-
-	$smtp = Mail::factory('smtp', array(
-		'host' => 'ssl://smtp.gmail.com',
-		'port' => '465',
-		'auth' => true,
-		'username' => $mailUsr,
-		'password' => $mailPwd
-	));
-
-	$mail = $smtp->send($to, $headers, $body);
-
-	if (PEAR::isError($mail)) {
-	    return false;
-	} 
-	return true;
-}
 ?>

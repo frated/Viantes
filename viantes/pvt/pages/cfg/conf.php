@@ -10,7 +10,7 @@ class Conf {
 		'logLevel' 				=> '3',   	            //livello di log = DEBBUG
 		'useCache' 				=> '0',					//se 1 usa la cache
 		'doCaptcha'				=> '0',					//se e' 1 esegue il controllo del captcha (0 => no captcha)
-		'doMail'				=> '0',					//se e' 1 invia le mail altrimenti e' cortocircuitata
+		'doMail'				=> '1',					//se e' 1 invia le mail altrimenti e' cortocircuitata
 		'sessionTimeOut' 		=> '1800', 				//time out della sessione (in secondi)
 		'delayFromLastActivity'	=> '1800', 				//ogni nuova attivita' il time out di estende di x (in secondi)
 		'reloadItemEvery' 		=> '60000', 			//ricarica gli item della welcome page ogni (millisecondi)

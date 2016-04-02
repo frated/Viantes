@@ -1,4 +1,4 @@
-CREATE USER 'appusr'@'localhost' IDENTIFIED BY 'xxxxxxxx';
+CREATE USER 'appusr'@'localhost' IDENTIFIED BY '';
 GRANT INSERT,SELECT,UPDATE ON viantes.USER					TO 'appusr'@'localhost';
 GRANT INSERT,SELECT,UPDATE ON viantes.USER_REGISTRY 		TO 'appusr'@'localhost';
 GRANT INSERT,SELECT,UPDATE ON viantes.USR_ATTACH 			TO 'appusr'@'localhost';
