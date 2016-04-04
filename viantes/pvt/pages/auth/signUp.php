@@ -49,29 +49,34 @@ if ($errorField == "") {
 	$clientReqDAO = NEW ClientRequestDAO();
 	$clientReqDAO->logRequest(SIGNIN);
 
-	//inserisco l'utente
-	$result = $usr->createUser($email, sha1($pwd), $name);
-	
-	//parso il risultato (pezza necessaria conj l'introduz del setting)
-	$resultArray = explode("##", $result);
-	$usrId = $resultArray[0];
-	$fwdCode = $resultArray[1];
-	
-	//salvo le impostazioni di default
-	$langCode = $_SESSION['langCode'];
-	$settingDAO->saveDefaultSetting($usrId, $langCode);
-	
-	//invio mail
-	$se = sendMail($email, $fwdCode, $name, $X_langArray);
-	//se non invio la mail => la stampo
-	if ( Conf::getInstance()->get('doMail') == 0) {
-		echo $se; exit;
+	//l'eistenza della mil la verifico dopo aver fatto una insert nella request
+	//in questo modo posso evitare che un macchina verifichi le mail presenti nella base dati
+	checkEmailAlreadyExists($email, $X_langArray);
+	if ($errorField == "") {
+		//inserisco l'utente
+		$result = $usr->createUser($email, sha1($pwd), $name);
+		
+		//parso il risultato (pezza necessaria conj l'introduz del setting)
+		$resultArray = explode("##", $result);
+		$usrId = $resultArray[0];
+		$fwdCode = $resultArray[1];
+		
+		//salvo le impostazioni di default
+		$langCode = $_SESSION['langCode'];
+		$settingDAO->saveDefaultSetting($usrId, $langCode);
+		
+		//invio mail
+		$se = sendMail($email, $fwdCode, $name, $X_langArray);
+		//se non invio la mail => la stampo
+		if ( Conf::getInstance()->get('doMail') == 0) {
+			echo $se; exit;
+		}
+		
+		$_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['OVERLAY_LOG_SIGN_SEND_MAIL_OK'];
+		
+		header('Location: '.getURI().$destPage);
+		exit;
 	}
-	
-	$_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['OVERLAY_LOG_SIGN_SEND_MAIL_OK'];
-	
-	header('Location: '.getURI().$destPage);
-	exit;
 }
 
 //old params
@@ -123,7 +128,9 @@ function doAsyncGet($X_langArray){
 	}
 }
 
-/* Controlla la validita' del campo email: setta l'errore in una variabile globale */
+/* Controlla la validita' del campo email: setta l'errore in una variabile globale 
+ * N.B Non verifica se la mail esiste nella base dati (per motivi di informaizoni verso l'esterno)
+ */
 function checkEmail($email, $X_langArray) {
 	global $errorField, $usr;
 	
@@ -131,16 +138,22 @@ function checkEmail($email, $X_langArray) {
 	if (!isset($email) || $email == ''){
 		$errorField .= "&newEmailErrMsg=".urlencode($X_langArray['OVERLAY_LOG_SIGN_EMPTY_EMAIL_ERR']);
 	}
-	else{
-		//se l'email non e' una email
-		if ( !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/", $email) ) {
-			$errorField .= "&newEmailErrMsg=".urlencode($X_langArray['GEN_IS_NOT_EMAIL_REG']);
-		}
-		//se l'email e' gia' presente
-		$exists = $usr->checkEmailAlreadyExists($email);
-		if ($exists) {
-			$errorField .= "&newEmailErrMsg=".urlencode($X_langArray['OVERLAY_LOG_SIGN_EMAIL_EXISTS_ERR']);
-		}
+	//se l'email non ha un formato corretto 
+	else if ( !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/", $email) ) {
+		$errorField .= "&newEmailErrMsg=".urlencode($X_langArray['GEN_IS_NOT_EMAIL_REG']);
+	}
+}
+
+/* Controlla se la mail esiste 
+ * N.B Non richiamare questo metodo nel doAsyncGet.
+ */
+function checkEmailAlreadyExists($email, $X_langArray) {
+	global $errorField, $usr;
+	
+	//se l'email e' gia' presente
+	$exists = $usr->checkEmailAlreadyExists($email);
+	if ($exists) {
+		$errorField .= "&newEmailErrMsg=".urlencode($X_langArray['OVERLAY_LOG_SIGN_EMAIL_EXISTS_ERR']);
 	}
 }
 

@@ -227,16 +227,17 @@ class UserDAO extends CommonDAO {
 	public function checkConfirmSingIn($email, $pwd, $fwdCode){
 		$mysqli = $this->getConn();
 		
-		$sql = sprintf("SELECT ID, EMAIL, NAME, COVERFILENAME FROM USER WHERE EMAIL = '%s' AND PWD = '%s' AND FWDCODE = '%s' AND STATUS = 0
+		$sql = sprintf("SELECT ID, EMAIL, NAME, COVERFILENAME, BCKCOVERFILENAME FROM USER WHERE EMAIL = '%s' AND PWD = '%s' AND FWDCODE = '%s' AND STATUS = 0
 						AND DTINS > DATE_SUB(SYSDATE(), Interval 7 Day)", $email, $pwd, $fwdCode);
 		Logger::log("UserDAO :: checkConfirmSingIn :: query: ".$sql, 3);
 		
 		if ($stmt = $mysqli->prepare($sql)) {
 			$stmt->execute();
-			$stmt->bind_result($userId, $email, $name, $cover);			
+			$stmt->bind_result($userId, $email, $name, $cover, $bckCoverFileName);
 			if ($stmt->fetch()) {
 				$userDO = New UserDO($userId, $email, $name);
 				$userDO->setcoverFileName($cover);
+				$userDO->setBckCoverFileName($bckCoverFileName);
 				$stmt->free_result();
 				$mysqli->close();
 				return $userDO;
@@ -345,13 +346,15 @@ class UserDAO extends CommonDAO {
 		return TRUE;
     }
 	
-	/** Resetta lo stato dell'utente a 0 */
+	/** Resetta il fwdCode dell'utente e lo restituisce al chiamato
+	 *  @see /viantes/pvt/pages/auth/recoverPwd.php
+	 */
 	public function recoverPwd($email){
 		$fwdCode = $this->createFwdCode(60);
 	
 		$mysqli = $this->getConn();
 
-		$sql = sprintf("UPDATE USER SET FWDCODE = '%s', DTLASTMOD=NOW() WHERE EMAIL = '%s' AND STATUS = 1", $fwdCode, $email);
+		$sql = sprintf("UPDATE USER SET FWDCODE = '%s', DTLASTMOD=NOW() WHERE EMAIL = '%s' AND STATUS in (0, 1)", $fwdCode, $email);
 		Logger::log("UserDAO ::recoverPwd :: query: ".$sql, 3);
 
 		$mysqli->query($sql);
@@ -368,7 +371,7 @@ class UserDAO extends CommonDAO {
 	public function checkRecoverPwd($email, $fwdCode){
 		$mysqli = $this->getConn();
 		
-		$sql = sprintf("SELECT ID, EMAIL, NAME, COVERFILENAME FROM USER WHERE EMAIL = '%s' AND FWDCODE = '%s' AND STATUS = 1
+		$sql = sprintf("SELECT ID, EMAIL, NAME, COVERFILENAME FROM USER WHERE EMAIL = '%s' AND FWDCODE = '%s' AND STATUS in (0, 1)
 						AND DTLASTMOD > DATE_SUB(SYSDATE(), Interval 2 Day)", $email, $fwdCode);
 		Logger::log("UserDAO ::checkRecoverPwd :: query: ".$sql, 3);
 		

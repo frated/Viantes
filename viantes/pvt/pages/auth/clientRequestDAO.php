@@ -8,7 +8,7 @@ class ClientRequestDAO extends CommonDAO {
     }
 
    /* 
-	* Verifica se il client ha fatto piu' di abbia fatto gia' altre richieste nele credenziali utente 
+	* Verifica se il client ha fatto piu' di un certo numero masismo di richieste
 	* @$type type of request 
 	* @$maxNum
 	* @$interval

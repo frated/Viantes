@@ -94,7 +94,7 @@ function isLogged($delayFromLastActivity) {
 
 /* 
  * Ritorna il Sistema Operativo in uso
- */
+ *
 function getOS() { 
     global $userAgent;
     $osPlatform = "Unknown OS Platform";
@@ -128,25 +128,29 @@ function getOS() {
         }
     }   
     return $osPlatform;
-}
+}*/
 
 /* 
- * Ritorna true se l'utenten usa un Sistema Operativo Unix
+ * <barrato>Ritorna true se l'utenten usa un Sistema Operativo Unix</barrato>
+ * Ritorna true se PHP gira su un Sistema Operativo Unix
  */
 function isUnix(){
-	$os = getOS();
+	/*$os = getOS();
 	return $os == 'Ubuntu' || $os == 'Linux' || $os == 'Mac OS X' || $os == 'Mac OS 9';
+	*/
+	!strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
 }
 
 /* 
- * Ritorna true se l'utenten usa un Sistema Operativo Windows
+ * <barrato>Ritorna true se l'utenten usa un Sistema Operativo Windows</barrato>
+ * Ritorna true se PHP gira su un Sistema Operativo Windows
  */
 function isDOS(){
-	return substr(getOS(), 0, 3) == 'Win';
+	//return substr(getOS(), 0, 3) == 'Win';
+	strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
 }
 
-
-/* 
+/*
  * Ritorna il tipo di browser usato
  */
 function getBrowser() {
