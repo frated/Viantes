@@ -1,5 +1,6 @@
 <?php
 $X_root = "../../../";
+$X_page = "viewer";
 session_start();
 require_once $X_root."pvt/pages/const.php";
 require_once $X_root."pvt/pages/globalFunction.php";
@@ -397,48 +398,3 @@ $mediaBarCurrentPageIndex = round($currentIndex / $mediaBarElemNumber);
 
 </body>
 </html>
- ) echo "display:none;"; ?>" 
-											onclick="goToElement('<?php //echo $i?>')" >
-										<param name="movie" value="<?php //echo $v['name'] ?>">
-										<param name="play" value="false">
-										<embed id="elementMov_<?php //echo $i?>" src="<?php //echo $v['name'] ?>"
-											  type="application/x-shockwave-flash" volume="100" wmode="transparent" allowscriptaccess="always" 
-											  allowfullscreen="false" play="false" height="36" width="<?php //echo $width?>">
-									</object-->
-								<?php
-								}
-								$i++;
-							} ?>
-							<img id="mediaBarNextId" src="/viantes/pvt/img/common/mediaBarNext.png" 
-								 style="margin-bottom:10px; cursor:pointer; <?php  if ( $mediaBarElemNumber >= $i) echo "display:none;"; ?>" 
-								 onclick="mediaBarNext();">
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</body>
-</html>
-
-											  type="application/x-shockwave-flash" volume="100" wmode="transparent" allowscriptaccess="always" 
-											  allowfullscreen="false" play="false" height="36" width="<?php //echo $width?>">
-									</object-->
-								<?php
-								}
-								$i++;
-							} ?>
-							<img id="mediaBarNextId" src="/viantes/pvt/img/common/mediaBarNext.png" 
-								 style="margin-bottom:10px; cursor:pointer; <?php  if ( $mediaBarElemNumber >= $i) echo "display:none;"; ?>" 
-								 onclick="mediaBarNext();">
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</body>
-</html>
-tml>
