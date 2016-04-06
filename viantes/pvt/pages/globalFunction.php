@@ -138,7 +138,7 @@ function isUnix(){
 	/*$os = getOS();
 	return $os == 'Ubuntu' || $os == 'Linux' || $os == 'Mac OS X' || $os == 'Mac OS 9';
 	*/
-	!strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+	return strtoupper(substr(PHP_OS, 0, 3)) != 'WIN';
 }
 
 /* 
@@ -147,7 +147,7 @@ function isUnix(){
  */
 function isDOS(){
 	//return substr(getOS(), 0, 3) == 'Win';
-	strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+	return strtoupper(substr(PHP_OS, 0, 3)) == 'WIN';
 }
 
 /*
