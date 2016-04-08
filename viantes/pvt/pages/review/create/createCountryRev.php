@@ -29,14 +29,14 @@ doAsyncGet($X_langArray);
 require_once $X_root."pvt/pages/checkSession.php";
 
 /** ------ Gestione POST ------ **/
-$country = addslashes( htmlspecialchars($_POST['country']) );
-$langCode = addslashes( htmlspecialchars($_POST['langCode']) );
+$country = htmlspecialchars($_POST['country']);
+$langCode = htmlspecialchars($_POST['langCode']);
 $descr = addslashes($_POST['descr']);
-$warn = addslashes( htmlspecialchars($_POST['warn']) );
-$arrive = addslashes( htmlspecialchars($_POST['arrive']) );
-$cook = addslashes( htmlspecialchars($_POST['cook']) );
-$myth = addslashes( htmlspecialchars($_POST['myth']) );
-$vote = addslashes( htmlspecialchars($_POST['vote']) );
+$warn = htmlspecialchars($_POST['warn']);
+$arrive = htmlspecialchars($_POST['arrive']);
+$cook = htmlspecialchars($_POST['cook']);
+$myth = htmlspecialchars($_POST['myth']);
+$vote = htmlspecialchars($_POST['vote']);
 $vote = preg_match("/^\d{1,2}$/", $vote) && $vote >= 0 && $vote <= 5 ? $vote : 3;
 
 checkCountry($country, $X_langArray);
@@ -46,16 +46,15 @@ checkArrive($arrive, $X_langArray);
 checkWarn($warn, $X_langArray);
 checkCook($cook, $X_langArray);
 checkMyth($myth, $X_langArray);
-//checkInterest($X_langArray);
+checkInterest($X_langArray);
 
 // GEO Code
-$countryName = addslashes( htmlspecialchars($_POST['countryName']) );
-checkGeoSite($countryName, $X_langArray);
+$countryName = htmlspecialchars($_POST['countryName']);
 
 //old params
-$oldParams = 'tabactive=1&country='.urlencode($country).'&countryName='.urlencode($countryName).'&descr='.urlencode($descr).
-			 '&arrive='.urlencode($arrive).'&cook='.urlencode($cook).'&warn='.urlencode($warn).
-			 '&myth='.urlencode($myth).'&vote='.urlencode($vote);
+$oldParams = 'tabactive=1&country='.urlencode(stripslashes($country)).'&countryName='.urlencode(stripslashes($countryName)).'&descr='.urlencode(stripslashes($descr)).
+			 '&arrive='.urlencode(stripslashes($arrive)).'&cook='.urlencode(stripslashes($cook)).'&warn='.urlencode(stripslashes($warn)).
+			 '&myth='.urlencode(stripslashes($myth)).'&vote='.urlencode($vote);
 
 //no errors
 if ($errorField == "") {
@@ -73,6 +72,8 @@ if ($errorField == "") {
 			exit;
 		break;
 	}
+
+	addSlash($country, $langCode, $descr, $warn, $arrive, $cook, $myth, $countryName);
 	
 	$userDO = unserialize($_SESSION["USER_LOGGED"]) ;
 	$bean = unserialize($_SESSION[$_POST['beanSessionKey']]);	
@@ -313,5 +314,18 @@ function checkGeoSite($countryName, $X_langArray) {
 	if ($countryName == '') {
 		$errorField .= "&cityErrMsg=".urlencode($X_langArray['CREATE_COUNTRY_ADDRS_NOT_FOUND']);
 	}
+}
+/* Add slash function */
+function addSlash($_country, $_langCode, $_descr, $_warn, $_arrive, $_cook, $_myth, $_countryName) {
+	global $country, $langCode, $descr, $warn, $arrive, $cook, $myth, $countryName;
+	
+	$country = addslashes( $_country );
+	$langCode = addslashes( $_langCode );
+	$descr = addslashes($_descr);
+	$warn = addslashes($_warn);
+	$arrive = addslashes($_arrive);
+	$cook = addslashes($_cook);
+	$myth = addslashes($_myth);
+	$countryName = addslashes($_countryName);
 }
 ?>

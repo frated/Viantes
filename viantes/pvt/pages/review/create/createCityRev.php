@@ -29,18 +29,18 @@ doAsyncGet($X_langArray);
 require_once $X_root."pvt/pages/checkSession.php";
 
 /** ------ Gestione POST ------ **/
-$city = addslashes( htmlspecialchars($_POST['city']) );			//nome che digita l'utente
-$cityName = addslashes( htmlspecialchars($_POST['cityName']) ); //nome che correggo io con google maps
-$country = addslashes( htmlspecialchars($_POST['country']) );
-$langCode = addslashes( htmlspecialchars($_POST['langCode']) );
-$descr = addslashes($_POST['descr']);
-$arrive = addslashes( htmlspecialchars($_POST['arrive']) );
-$warn = addslashes( htmlspecialchars($_POST['warn']) );
-$whEat = addslashes( htmlspecialchars($_POST['whEat']) );
-$cook = addslashes( htmlspecialchars($_POST['cook']) );
-$whStay = addslashes( htmlspecialchars($_POST['whStay']) );
-$myth = addslashes( htmlspecialchars($_POST['myth']) );
-$vote = addslashes( htmlspecialchars($_POST['vote']) );
+$city = htmlspecialchars($_POST['city']);			//nome che digita l'utente
+$cityName = htmlspecialchars($_POST['cityName']); //nome che correggo io con google maps
+$country = htmlspecialchars($_POST['country']);
+$langCode = htmlspecialchars($_POST['langCode']);
+$descr = $_POST['descr'];
+$arrive = htmlspecialchars($_POST['arrive']);
+$warn = htmlspecialchars($_POST['warn']);
+$whEat = htmlspecialchars($_POST['whEat']);
+$cook = htmlspecialchars($_POST['cook']);
+$whStay = htmlspecialchars($_POST['whStay']);
+$myth = htmlspecialchars($_POST['myth']);
+$vote = htmlspecialchars($_POST['vote']);
 $vote = preg_match("/^\d{1,2}$/", $vote) && $vote >= 0 && $vote <= 5 ? $vote : 3;
 
 checkCity($city, $X_langArray);
@@ -56,8 +56,8 @@ checkInterest($X_langArray);
 
 // GEO Code
 $geoSite = array();
-$geoSite['cityName']  = $cityName;
-$geoSite['country']   = addslashes( htmlspecialchars($_POST['country']) );
+$geoSite['cityName'] = $cityName;
+$geoSite['country']  = htmlspecialchars($_POST['country']);
 checkGeoSite($geoSite, $X_langArray);
 
 //old params
@@ -81,6 +81,8 @@ if ($errorField == "") {
 			exit;
 		break;
 	}
+	
+	addSlash($city, $cityName, $country, $descr, $arrive, $warn, $whEat, $cook, $whStay, $myth, $geoSite);
 	
 	$userDO = unserialize($_SESSION["USER_LOGGED"]) ;
 	$bean = unserialize($_SESSION[$_POST['beanSessionKey']]);
@@ -176,6 +178,7 @@ function doAsyncGet($X_langArray){
 	}
 	if ( isset($_GET['warn']) ) {
 		$warnGet = htmlspecialchars( $_GET['warn'] );
+		echo strlen($warnGet); 
 		checkWarn($warnGet, $X_langArray);
 		if ($errorField != "") {
 			$errorDesc = explode("=", $errorField);
@@ -368,4 +371,21 @@ function checkGeoSite($geoSite, $X_langArray) {
 		$errorField .= "&cityErrMsg=".urlencode($X_langArray['CREATE_CITY_ADDRS_NOT_FOUND']);
 	}
 }
+/* Add slash function */
+function addSlash($_city, $_cityName, $_country, $_descr, $_arrive, $_warn, $_whEat, $_cook, $_whStay, $_myth, $_geoSite) {
+	global $city, $cityName, $country, $descr, $arrive, $warn, $whEat, $cook, $whStay, $myth, $geoSite;
+	
+	$city = addslashes($_city);
+	$cityName = addslashes($_cityName);
+	$country = addslashes($_country);
+	$descr = addslashes($_descr);
+	$arrive = addslashes($_arrive);
+	$warn = addslashes($_warn);
+	$whEat = addslashes($_whEat);
+	$cook = addslashes($_cook);
+	$whStay = addslashes($_whStay);
+	$myth = addslashes($_myth);
+	$geoSite['cityName'] = addslashes($_geoSite['cityName']);
+	$geoSite['country'] = addslashes($_geoSite['country']);
+};
 ?>

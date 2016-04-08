@@ -38,7 +38,7 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 					<b><?php echo $X_langArray['CREATE_REVIEW_FIELD_SITE_NAME'] ?></b>&nbsp;
 				</span>
 				<?php 
-					echo '<p id="siteNameP" class="commonRowTxt_col2 dspl-inln-blk"></p>';
+					echo '<p id="siteNameP" class="commonRowTxt_col2_fff dspl-inln-blk"></p>';
 				?>	
 			</label>
 		</div>
@@ -53,7 +53,7 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 					<b><?php echo $X_langArray['CREATE_REVIEW_FIELD_LOCALITY'] ?></b>&nbsp;
 				</span>
 				<?php 
-					echo '<p id="frmtdAdrsP"  class="commonRowTxt_col2 dspl-inln-blk"></p>';
+					echo '<p id="frmtdAdrsP"  class="commonRowTxt_col2_fff dspl-inln-blk"></p>';
 				?>	
 			</label>
 		</div>
@@ -87,7 +87,7 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 				<?php 
 					foreach ($reviewCategoryArray as $category) {
 						if (isset($_GET['catRev']) && $category->getId() == $_GET['catRev'] ) {
-							echo '<p class="commonRowTxt_col2 dspl-inln-blk">'.$category->getCategoryName().'</p>';
+							echo '<p class="commonRowTxt_col2_fff dspl-inln-blk">'.$category->getCategoryName().'</p>';
 							echo '<input type="hidden" name="catRev" value="'.$category->getId().'" />';
 						}
 					}

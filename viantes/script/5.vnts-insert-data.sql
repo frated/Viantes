@@ -42,6 +42,12 @@ insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (114
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (114101, 100101, 'en', 'Abbey');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (115100, 100100, 'it', 'Basilica');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (115101, 100101, 'en', 'Basilica');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (116100, 100100, 'it', 'Monumento');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (116101, 100101, 'en', 'Monument');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (117100, 100100, 'it', 'Arena');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (117101, 100101, 'en', 'Arena');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (118100, 100100, 'it', 'Teatro');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (118101, 100101, 'en', 'Theater');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (200100, 200100, 'it', 'Monte/Montagna');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (200101, 200101, 'en', 'Mountain');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (201100, 200100, 'it', 'Parco');
@@ -53,9 +59,13 @@ insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (203
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (300100, 300100, 'it', 'Quartiere');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (300101, 300101, 'en', 'District');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (302100, 300100, 'it', 'Via/Viale');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (301100, 300100, 'it', 'Piazza/Piazzale/Largo');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (301101, 300101, 'en', 'Square/Large Square');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (302101, 300101, 'en', 'Street/Avenue');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (303100, 300100, 'it', 'Borgo/Paese');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (303101, 300101, 'en', 'Village');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (304100, 300100, 'it', 'Ponte');
+insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (304101, 300101, 'en', 'Bridge');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (400100, 400100, 'it', 'Museo');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (400101, 400101, 'en', 'Museum');
 insert into CATEGORY_REVIEW (id, idCategoryMain, langCode, category) values (401100, 400100, 'it', 'Pinacoteca');

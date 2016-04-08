@@ -32,7 +32,7 @@ require_once $X_root."pvt/pages/geo/cityMap.html";
 					<b><?php echo $X_langArray['CREATE_CITY_REV_FIELD_CITY_NAME'] ?></b>&nbsp;
 				</span>
 				<?php 
-					echo '<p id="cityNameP" class="commonRowTxt_col2 dspl-inln-blk"></p>';
+					echo '<p id="cityNameP" class="commonRowTxt_col2_fff dspl-inln-blk"></p>';
 				?>	
 			</label>
 		</div>

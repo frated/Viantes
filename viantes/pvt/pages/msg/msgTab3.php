@@ -1,3 +1,13 @@
+<script>
+	function openDraftMsg(to, sbjt, msg) {
+		$('#autoComplMsgTo').val(to);
+		$('#ovrMsgSbjjt').val(sbjt);
+		//sostituisco agli eventuali <br>, < br\>
+		$('#ovlMsgMsg').val(msg.replace(/<br\s*[\/]?>/gi, "\n"));
+		$('#tabactive').val('3'); 
+		showMsgOverlay('/viantes/pub/pages/profile/message.php');
+	}
+</script>	
 <?php 
 require_once $X_root."pvt/pages/msg/msgDAO.php";
 require_once $X_root."pvt/pages/msg/msgDO.php";
@@ -30,29 +40,29 @@ if (count($msgDOArray) == 0) { ?>
 			<?php 
 			$i = 1;
 			foreach ($msgDOArray as $key => $msgDO) { ?>
-				<tr class="msgBodyRow crs-pnt <?php if ($i % 2 == 0)  { echo 'msgBodyRowBG'; } $i++; ?>" 
-					onclick="$('#autoComplMsgTo').val('<?php echo $msgDO->getToUsrName() ?>');
-							 $('#ovrMsgSbjjt').val('<?php echo $msgDO->getSubject() ?>');
-							 $('#ovlMsgMsg').val('<?php echo str_replace("<br>", "\r\n", $msgDO->getMessage()) ?>');
-							 $('#tabactive').val('3'); showMsgOverlay('/viantes/pub/pages/profile/message.php');">
-					<td class="msgBodyCell">
+				<tr class="msgBodyRow crs-pnt <?php if ($i % 2 == 0)  { echo 'msgBodyRowBG'; } $i++; ?>">
+					<td class="msgBodyCell" 
+						onclick="openDraftMsg('<?php echo $msgDO->getToUsrName() ?>', '<?php echo addslashes($msgDO->getSubject())?>', '<?php echo addslashes($msgDO->getMessage()) ?>')">
 						<?php echo $msgDO->getDtIns() ?>
 					</td>
-					<td class="msgBodyCell">
-							<img class="msgCoverBodyCell" <?php echo IMG_25_25 ?> src="<?php echo $msgDO->getToUsrCoverFileName() ?>" />
-							<?php echo $msgDO->getToUsrName() ?>
+					<td class="msgBodyCell"
+						onclick="openDraftMsg('<?php echo $msgDO->getToUsrName() ?>', '<?php echo addslashes($msgDO->getSubject())?>', '<?php echo addslashes($msgDO->getMessage()) ?>')">
+						<img class="msgCoverBodyCell" <?php echo IMG_25_25 ?> src="<?php echo $msgDO->getToUsrCoverFileName() ?>" />
+						<?php echo $msgDO->getToUsrName() ?>
 					</td>
-					<td class="msgBodyCell">
-							<?php echo substr($msgDO->getSubject(), 0, 14); 
-							if ( strlen($msgDO->getSubject()) > 14 ) echo "..." ?>
+					<td class="msgBodyCell"
+						onclick="openDraftMsg('<?php echo $msgDO->getToUsrName() ?>', '<?php echo addslashes($msgDO->getSubject())?>', '<?php echo addslashes($msgDO->getMessage()) ?>')">
+						<?php echo substr($msgDO->getSubject(), 0, 14); 
+						if ( strlen($msgDO->getSubject()) > 14 ) echo "..." ?>
 					</td>
-					<td class="msgBodyCell">
-							<?php $lunghOriginale = strlen ( str_replace('<br />',' ', str_replace('<br>',' ', $msgDO->getMessage() )) ); 
-							$msg = str_replace('<br />',' ', str_replace('<br>',' ', substr($msgDO->getMessage(), 0, 28))); 
-							echo $msg;
-							if ( $lunghOriginale > 28 ) echo "..." ?>
+					<td class="msgBodyCell"
+						onclick="openDraftMsg('<?php echo $msgDO->getToUsrName() ?>', '<?php echo addslashes($msgDO->getSubject())?>', '<?php echo addslashes($msgDO->getMessage()) ?>')">
+						<?php $lunghOriginale = strlen ( str_replace('<br />',' ', str_replace('<br>',' ', $msgDO->getMessage() )) ); 
+						$msg = str_replace('<br />',' ', str_replace('<br>',' ', substr($msgDO->getMessage(), 0, 28))); 
+						echo $msg;
+						if ( $lunghOriginale > 28 ) echo "..." ?>
 					</td>
-					<td class="msgBodyCell">
+					<td class="msgBodyCell" onclick="">
 						<input class="msgP5" type="checkbox" name="delMsgTab3" value="<?php echo X_code($msgDO->getId()) ?>" > 
 					</td>
 				</tr>	

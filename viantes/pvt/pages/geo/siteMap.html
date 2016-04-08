@@ -2,18 +2,13 @@
 <?php if ($X_GEO_loadMap) { ?> 
 	<script type="text/javascript">
 		$( window ).load(function() {
-			loadMap('<?php echo $X_GEO_site?>', '<?php echo $X_GEO_locality?>');
+			loadMap('<?php echo str_replace("'", "\'", $X_GEO_site)?>', '<?php echo str_replace("'", "\'", $X_GEO_locality)?>');
 		});
 	</script>
 <?php } ?>
 
-<script src="https://maps.googleapis.com/maps/api/js?&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>&key=AIzaSyCcD6XaO7EsW_bfWFKWkmBOTC8dggL9RyM&signed_in=true&callback=initMap&libraries=places" 
+<script src="https://maps.googleapis.com/maps/api/js?&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>&key=AIzaSyAEcK7KQhrETw4L9mVAup63XPlYob_G0TY&signed_in=true&callback=initMap&libraries=places" 
 	async defer></script>
-<!--script src="https://maps.googleapis.com/maps/api/js?&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>&signed_in=true&callback=initMap&libraries=places" 
-	async defer></script-->
-
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAEcK7KQhrETw4L9mVAup63XPlYob_G0TY&region=<?php echo $_SESSION['langCode'] ?>&language=<?php echo $_SESSION['langCode'] ?>"></script>
-<!--script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&region=IT"></script--> 
 
 <script type="text/javascript">
 	//<![CDATA[
@@ -62,8 +57,10 @@
 				$('#lat').val(lat);
 				$('#lng').val(lng);
 				
-				//Creo la mappa 
+				//Creo e mostro la mappa 
 				var map = createMap(lat, lng);
+				shoMap();
+								
 				//NB l'immagine loading la devo nascondere appena carico la mappa altrimenti avrei 
 				//la mappa grigia e l'immagine di loading coesistere per qualche decimo di secondo 
 				$('#loadMap').hide();
@@ -116,9 +113,6 @@
 								});
 								
 								//console.log(place.address_components);
-								
-								//Mostro la mappa
-								shoMap();
 							}
 						});
 					} 

@@ -29,9 +29,9 @@ if ( Conf::getInstance()->get('doCaptcha') == 1) {
 $srcPage = $_POST['srcPage'];
 $destPage = $_POST['destPage'];
 
-$email = htmlspecialchars( $_POST['newemail'] );
+$email = trim(htmlspecialchars( $_POST['newemail'] ));
 $pwd = htmlspecialchars( $_POST['newpassword'] );
-$name = htmlspecialchars( $_POST['name'] );
+$name = trim(htmlspecialchars( $_POST['name'] ));
 $terms = $_POST['terms'];
 
 //Controllo aggiuntivo nel caso in cui il parametro 'srcPage' ha dei parametri => contiene un '?'

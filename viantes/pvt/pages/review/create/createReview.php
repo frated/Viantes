@@ -32,23 +32,20 @@ doAsyncGet($X_langArray);
 require_once $X_root."pvt/pages/checkSession.php";
 
 /** ------ Gestione POST ------ **/
-$catRev = addslashes( htmlspecialchars($_POST['catRev']) );
-$langCode = addslashes( htmlspecialchars($_POST['langCode']) );
-
-$site = addslashes( htmlspecialchars($_POST['site']) ); //nome che digita l'utente
-$siteName = addslashes( htmlspecialchars($_POST['siteName']) ); //nome che correggo io con google maps
-
-$locality = addslashes( htmlspecialchars($_POST['locality']) ); //indirizzo che digita l'utente
-$frmtdAdrs = addslashes( htmlspecialchars($_POST['frmtdAdrs']) ); //indirizzo che correggo io con google maps
-
+$catRev =  htmlspecialchars($_POST['catRev']);
+$langCode =  htmlspecialchars($_POST['langCode']);
+$site = htmlspecialchars($_POST['site']); //nome che digita l'utente
+$siteName = htmlspecialchars($_POST['siteName']); //nome che correggo io con google maps
+$locality = htmlspecialchars($_POST['locality']); //indirizzo che digita l'utente
+$frmtdAdrs = htmlspecialchars($_POST['frmtdAdrs']); //indirizzo che correggo io con google maps
 $descr = addslashes($_POST['descr']);
-$arrive = addslashes( htmlspecialchars($_POST['arrive']) );
-$warn = addslashes( htmlspecialchars($_POST['warn']) );
-$whEat = addslashes( htmlspecialchars($_POST['whEat']) );
-$cook = addslashes( htmlspecialchars($_POST['cook']) );
-$whStay = addslashes( htmlspecialchars($_POST['whStay']) );
-$myth = addslashes( htmlspecialchars($_POST['myth']) );
-$vote = addslashes( htmlspecialchars($_POST['vote']) );
+$arrive = htmlspecialchars($_POST['arrive']);
+$warn = htmlspecialchars($_POST['warn']);
+$whEat = htmlspecialchars($_POST['whEat']);
+$cook = htmlspecialchars($_POST['cook']);
+$whStay = htmlspecialchars($_POST['whStay']);
+$myth = htmlspecialchars($_POST['myth']);
+$vote = htmlspecialchars($_POST['vote']);
 $vote = preg_match("/^\d{1,2}$/", $vote) && $vote >= 0 && $vote <= 5 ? $vote : 3;
 
 //echo  "country".$country. "". "langCode". $langCode. "locality".$locality. "site".$site. ""."descr".$descr. ""."arrive".$arrive. ""."warn".$warn. ""."myth".$myth. ""."whEat".$whEat. "";
@@ -70,16 +67,16 @@ checkMyth($myth, $X_langArray);
 $geoSite = array();
 $geoSite['siteName']  = $siteName;
 $geoSite['frmtdAdrs'] = $frmtdAdrs;
-$geoSite['country']   = addslashes( htmlspecialchars($_POST['country']) );
-$geoSite['lat'] 	  = addslashes( htmlspecialchars($_POST['lat']) );
-$geoSite['lng'] 	  = addslashes( htmlspecialchars($_POST['lng']) );
-$geoSite['placeId']   = addslashes( htmlspecialchars($_POST['placeId']) );
+$geoSite['country']   = htmlspecialchars($_POST['country']);
+$geoSite['lat'] 	  = htmlspecialchars($_POST['lat']);
+$geoSite['lng'] 	  = htmlspecialchars($_POST['lng']);
+$geoSite['placeId']   = htmlspecialchars($_POST['placeId']);
 checkGeoSite($geoSite, $X_langArray);
 
 //Stringa dei parametri inseriti
-$oldParams = 'tabactive=1&catRev='.urlencode($_POST['catRev']).'&locality='.urlencode($locality).'&frmtdAdrs='.urlencode($frmtdAdrs).
-			 '&site='.urlencode($site).'&siteName='.urlencode($siteName).'&descr='.urlencode($_POST['descr']).
-			 '&arrive='.urlencode($_POST['arrive']).'&warn='.urlencode($warn).'&myth='.urlencode($myth).'&whEat='.urlencode($_POST['whEat']).
+$oldParams = 'tabactive=1&catRev='.urlencode($_POST['catRev']).'&locality='.urlencode(stripslashes($locality)).'&frmtdAdrs='.urlencode(stripslashes($frmtdAdrs)).
+			 '&site='.urlencode(stripslashes($site)).'&siteName='.urlencode(stripslashes($siteName)).'&descr='.urlencode($_POST['descr']).
+			 '&arrive='.urlencode($_POST['arrive']).'&warn='.urlencode(stripslashes($warn)).'&myth='.urlencode(stripslashes($myth)).'&whEat='.urlencode($_POST['whEat']).
 			 '&cook='.urlencode($_POST['cook']).'&whStay='.urlencode($_POST['whStay']).'&vote='.urlencode($vote);
 //no errors
 if ($errorField == "") {
@@ -97,6 +94,8 @@ if ($errorField == "") {
 			exit;
 		break;
 	}
+	
+	addSlash($catRev, $langCode, $site, $siteName, $locality, $frmtdAdrs, $descr, $arrive, $warn, $whEat, $cook, $whStay, $myth, $geoSite);
 	
 	$userDO = unserialize($_SESSION["USER_LOGGED"]) ;
 	$bean = unserialize($_SESSION[$_POST['beanSessionKey']]);
@@ -418,4 +417,28 @@ function checkGeoSite($geoSite, $X_langArray) {
 		$errorField .= "&localityErrMsg=".urlencode($X_langArray['CREATE_REVIEW_ADDRS_NOT_VALID']);
 	}
 }	
+/* Add slash function */
+function addSlash($_catRev, $_langCode, $_site, $_siteName, $_locality, $_frmtdAdrs, $_descr, $_arrive, $_warn, $_whEat, $_cook, $_whStay, $_myth, $_geoSite) {
+	global $catRev, $langCode, $site, $siteName, $locality, $frmtdAdrs, $descr, $arrive, $warn, $whEat, $cook, $whStay, $myth, $geoSite;
+	
+	$catRev = addslashes($_catRev);
+	$langCode = addslashes($_langCode);
+	$site = addslashes($site);
+	$siteName = addslashes($_siteName);
+	$locality = addslashes($_locality);
+	$frmtdAdrs = addslashes($_frmtdAdrs);
+	$descr = addslashes($_descr);
+	$arrive = addslashes($_arrive);
+	$warn = addslashes($_warn);
+	$whEat = addslashes($_whEat);
+	$cook = addslashes($_cook);
+	$whStay = addslashes($_whStay);
+	$myth = addslashes($_myth);
+	$geoSite['siteName'] = addslashes($_geoSite['siteName']);
+	$geoSite['frmtdAdrs'] =	addslashes($_geoSite['frmtdAdrs']);
+	$geoSite['placeId'] = addslashes($_geoSite['placeId']);
+	$geoSite['country'] = addslashes($_geoSite['country']);
+	$geoSite['lat'] = addslashes($_geoSite['lat']);
+	$geoSite['lng'] = addslashes($_geoSite['lng']);
+};
 ?>

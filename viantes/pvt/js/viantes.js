@@ -182,7 +182,13 @@ function doFieldAsyncGet(destUrl, fieldName) {
  * da dove leggre il dato "fieldName".
  */
 function doGet(destUrl, fieldName){
-	dataString = fieldName + "=" + $('#'+fieldName+'').val();
+	//poiche le new line vengono automaticamente eliminate dalla GET, per garantire che la lunghezza di una stringa sia uguale 
+	//sia quando e' inviata in GET sia quando e' inviata in POST (altrimenti la POST risulta piu' lunga), devo fare cosi'
+	var valNoNewLine = $('#'+fieldName+'').val().replace(/(?:\r|\n)/g, '§');
+	//valNoNewLine.replace(/(?:\r)/g, '§');
+	//valNoNewLine.replace(/(?:\n)/g, '§');
+	
+	dataString = fieldName + "=" + valNoNewLine;
 	$.ajax({
 		type: "GET",
 		url: destUrl,

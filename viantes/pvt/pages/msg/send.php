@@ -14,12 +14,12 @@ $usrDAO = New UserDAO();
 $errorField = "";
 
 /** ------ Gestione POST ------ **/
-$from = X_deco(addslashes( htmlspecialchars($_POST['from']) ) );
-$to = addslashes( htmlspecialchars($_POST['to']) );
-$sbjt = addslashes( htmlspecialchars($_POST['sbjt']) );
-$message = addslashes($_POST['message']);
-$status = addslashes( htmlspecialchars($_POST['status']) );
-$usrId = addslashes( htmlspecialchars($_POST['usrId']) );
+$from = X_deco(htmlspecialchars($_POST['from']));
+$to = htmlspecialchars($_POST['to']);
+$sbjt = htmlspecialchars($_POST['sbjt']);
+$message = $_POST['message'];
+$status = htmlspecialchars($_POST['status']);
+$usrId = htmlspecialchars($_POST['usrId']);
 
 //URL BACK
 $urlBack = addslashes( htmlspecialchars($_POST['overlay-msg-url-back']) );
@@ -36,6 +36,11 @@ if ($errorField == "") {
 
 	$toUsrId = $usrDAO->checkNameAlreadyExists($to);
 	
+	addSlash($to, $sbjt, $message, $status, $usrId);
+	echo $sbjt.'<br>';
+	echo $message.'<br>';
+	echo $status.'<br>';
+	//exit;
 	//Se sto salvando un msg che era gia' in bozza (evirtare di fare un'altra insert)
 	if ( isset($_POST['msgDrftId']) && $_POST['msgDrftId'] != "-1" ) {
 		$msgDrftId = addslashes( htmlspecialchars($_POST['msgDrftId']) );
@@ -58,8 +63,9 @@ if ($errorField == "") {
 }
 
 //old params
-$oldParams = '&overlay-msg-url-back='.$urlBack.'&to='.urlencode($to).'&sbjt='.urlencode($sbjt).'&message='.urlencode($message).
-			 '&msgDrftId='.$_POST['msgDrftId'].'&usrId='.$_POST['usrId'].'&msgId='.$_POST['msgId'].'&tabactive='.$_POST['tabactive'];
+$oldParams = '&overlay-msg-url-back='.$urlBack.'&to='.urlencode(stripslashes($to)).'&sbjt='.urlencode(stripslashes($sbjt)).
+			 '&message='.urlencode(stripslashes($message)).'&msgDrftId='.$_POST['msgDrftId'].'&usrId='.$_POST['usrId'].
+			 '&msgId='.$_POST['msgId'].'&tabactive='.$_POST['tabactive'];
 
 //forward
 header('Location: '.getURI().$urlBack.'?showOverlay=t'.$oldParams.$errorField);
@@ -108,5 +114,16 @@ function checkTo($from, $to, $sbjt, $message, $X_langArray) {
 	} else if ( !$usrDAO->checkNameAlreadyExists($to) ) {
 		$errorField .= "&toErrMsg=".urlencode($X_langArray['MESSAGE_SEND_TO_NOT_EXISTS']);
 	}
+}
+
+/* Add slash function */
+function addSlash($_to, $_sbjt, $_message, $_status, $_usrId){
+	global $to, $sbjt, $message, $status, $usrId;
+	
+	$to = addslashes($_to);
+	$sbjt = addslashes($_sbjt);
+	$message = addslashes($_message);
+	$status  = addslashes($_status);
+	$usrId   = addslashes($_usrId);	
 }
 ?>
