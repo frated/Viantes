@@ -1,10 +1,11 @@
 <?php
+require_once $X_root.'pvt/pages/globalFunction.php';
 require_once $X_root.'pvt/pages/extra/mobile/Mobile_Detect.php';
 
 $detect = new Mobile_Detect;
-//echo  $_SERVER['HTTP_USER_AGENT']; echo "<br><br> is Mobile? " . $detect->isMobile(); exit;
-if($detect->isMobile()) {
-    header('Location: http://localhost/viantes/mobile/index.php');
+
+if($detect->isMobile() || $detect->isTablet()) {
+    header('Location: '.getURI().'/indexM.php');
     exit;
 }
 
@@ -23,7 +24,7 @@ if( $detect->isMobile() && !$detect->isTablet()) {
  
 // Check for a specific platform with the help of the magic methods:
 if( $detect->isiOS()) {
- 
+
 }
  
 if( $detect->isAndroidOS()) {

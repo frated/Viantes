@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', '1');
 $X_root = "../../../../";
 session_start();
 require_once $X_root."pvt/pages/const.php";

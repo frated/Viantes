@@ -1,6 +1,6 @@
 <?php 
 $X_root = "../../../";
-$X_page = "showReview";
+$X_page = "showMsg";
 session_start();
 require_once $X_root."pvt/pages/const.php";
 require_once $X_root."pvt/pages/globalFunction.php";

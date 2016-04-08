@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', 1);
 require_once $X_root."pvt/pages/const.php";
 require_once $X_root."pvt/pages/log/log.php";
 require_once $X_root."pvt/pages/review/attachDO.php";

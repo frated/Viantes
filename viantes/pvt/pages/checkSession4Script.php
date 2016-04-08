@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', 1);
 require_once $X_root."pvt/pages/cfg/conf.php";
 require_once $X_root."pvt/pages/globalFunction.php";
 require_once $X_root."pvt/pages/auth/userDAO.php";

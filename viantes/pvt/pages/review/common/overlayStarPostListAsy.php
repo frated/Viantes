@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', '1');
 /**
  * Invcocato dalla funzione javascript renderSSP(revId, revTp)
  */

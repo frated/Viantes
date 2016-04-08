@@ -1,5 +1,4 @@
 <?php 
-ini_set('display_errors',1);
 $X_root = "../../../";
 $X_page = "myReview";
 session_start();
