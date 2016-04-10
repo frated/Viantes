@@ -1,4 +1,6 @@
 <?php
+require_once $X_root.'pvt/pages/extra/mobile/Mobile_Detect.php';
+$mobDetect = new Mobile_Detect;
 
 $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -74,7 +76,8 @@ function X_deco_mail($code){
  * Ritorna l'uri del server 
  */
 function getURI(){
-	return ((!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
+	global $mobDetect;
+	return ((!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . ($mobDetect->isMobile() ? '/m' : '');
 }
 
 /*
