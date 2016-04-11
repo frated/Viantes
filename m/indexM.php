@@ -64,8 +64,8 @@ if (isset($_SESSION["USER_LOGGED"]) && isset($_SESSION["USER_LOGGED"])) {
 				//On-Load
 				$(document).ready(function() {
 					doReviewItemBox('<?php  echo Conf::getInstance()->get('maxReviewItem'); ?>', 'PUSH', 
-									'<?php echo $txt1 ?>', '<?php echo $txt2 ?>', '<?php echo $usrId ?>');
-					setInterval("doReviewItemBox('<?php  echo Conf::getInstance()->get('maxReviewItem'); ?>', 'PUSH', '<?php echo $txt1 ?>', '<?php echo $txt2 ?>', '<?php echo $usrId ?>')", 
+									'<?php echo $txt1 ?>', '<?php echo $txt2 ?>', '<?php echo $usrId ?>', true);
+					setInterval("doReviewItemBox('<?php  echo Conf::getInstance()->get('maxReviewItem'); ?>', 'PUSH', '<?php echo $txt1 ?>', '<?php echo $txt2 ?>', '<?php echo $usrId ?>', true)", 
 								<?php  echo Conf::getInstance()->get('reloadItemEvery'); ?>);
 				});
 				

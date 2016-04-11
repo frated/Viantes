@@ -30,6 +30,11 @@ Logger::log("showRevListAsy :: main :: parameters: reviewId:" .$reviewId. "cityR
 $reviewDOArray = $reviewDAO->getReviews($reviewId, $cityRevId, $countryRevId, $numOfBox, $mode);
 
 foreach($reviewDOArray as $reviewDO) {
+	//get initial dimension
+	list($widthIn, $heightIn) = getimagesize(HT_ROOT.$reviewDO->getCoverFileName());
+	
+	//scale in ratio
+	$width = ratioImagDimensionFixHeight($widthIn, $heightIn, 128);
 	
 	if ( $reviewDO instanceof ReviewDO) {
 		$result .= X_code($reviewDO->getId()).attributeDelim. X_code($reviewDO->getUsrId()).attributeDelim. $reviewDO->getSiteName().attributeDelim.  

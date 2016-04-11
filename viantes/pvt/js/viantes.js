@@ -341,7 +341,7 @@ function doDocTagAsyncGet(destUrl, id, revTp){
 /**
  * Costruisce "n" reviewItemBox a partire da una chiamata asincrona
  */
-function doReviewItemBox(numOfBox, mode, txt1, txt2, loggeUsrId){
+function doReviewItemBox(numOfBox, mode, txt1, txt2, loggeUsrId, isMob){
 	var reviewId = ( mode == "PUSH" ) ? $("input[id=\"topReviewId\"]:hidden").val() : $("input[id=\"bottomReviewId\"]:hidden").val();
 	var cityRevId = ( mode == "PUSH" ) ? $("input[id=\"topCityReviewId\"]:hidden").val() : $("input[id=\"bottomCityReviewId\"]:hidden").val();
 	var countryRevId = ( mode == "PUSH" ) ? $("input[id=\"topCountryReviewId\"]:hidden").val() : $("input[id=\"bottomCountryReviewId\"]:hidden").val();
@@ -393,7 +393,7 @@ function doReviewItemBox(numOfBox, mode, txt1, txt2, loggeUsrId){
 											"</p>" +
 										"</div>" +
 										"<div class=\"reviewItemBoxCenter\">" + 
-											"<img src=\"" + revCV + "\" width=\"" + reviewCoverWidt + "\" height=\"128\">" + 
+											"<img src=\"" + revCV + "\" width=\"" + reviewCoverWidt + "\" height=\"128\"" + (isMob ? " style=\"display:block; margin-bottom: 6px;\" " : "" ) + ">" + 
 											"<p>" + 
 												descr +
 												"<br><br>" + 

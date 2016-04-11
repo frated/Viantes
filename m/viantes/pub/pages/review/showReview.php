@@ -159,17 +159,6 @@ include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 			
 			<?php include $X_root."pvt/pages/review/common/starAndAuthor.php"; ?>
 			
-			<div id="postDivId" class="postDiv" style="position:relative">
-				<p class="dspl-inln-blk mrg-top-24">Post a comment</p>
-				<textarea style="height: 55px; width: 500px;" name="postTxtArea" id="postTxtArea"></textarea>
-				
-				<button class="personalButton" onclick="doPost('<?php echo $reviewDO->getId()?>', '<?php echo $reviewType ?>')">
-					Post
-				</button>
-				<img src="/viantes/pvt/img/common/close_666.png" onclick="$('#postDivId').hide()" width="16" 
-					 class="flt-r" style="margin-top: -4px; cursor: pointer"/>
-			</div>
-			
 			<div class="tabs">
 				<input type="hidden" name="tabactive" value="<?php echo $activeTabIdx ?>" id="tabactive"/>
 				<?php if ( isset($reviewDO) ) { ?>

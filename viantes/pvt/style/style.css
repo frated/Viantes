@@ -169,7 +169,7 @@ body {
 .header-search-button{
 	margin-left: 33px;
 }
-.header-review-text, .header-user-text, .header-eneter-text, .header-eneter-text {
+.header-review-text, .header-user-text, .header-eneter-text {
 	margin-left: 0%;
 	float: right;
 	margin-top: 13px;
@@ -1552,15 +1552,47 @@ p.bjqs-caption{
 
 /* Media Query */
 @media (max-width: 768px) {
+	.header-user-text, .header-eneter-text {
+		margin-right: 8px;
+	}
 	.tab-links a {
 		padding:3px 10px;
+	}
+	.reviewItemBoxCenter p {
+		position: relative;
+		margin-top: 6px;
+	}
+	.reviewItemBoxCenterButtons {
+		position: relative;
+	}
+	.reviewItemBoxTop p {
+		margin: 5px 0px 0px 4px;
+	}
+	.reviewItemBoxCoverImg{
+		display:block;
 	}
 }
 
 /* @media (max-width: 768px) and (orientation: landscape) { } */
 
 @media all and (max-width: 320px) {
+	.header-user-text, .header-eneter-text {
+		margin-right: 8px;
+	}
 	.tab-links a {
 		padding:3px 6px;
+	}
+	.reviewItemBoxCenter p {
+		position: relative;
+		margin-top: 6px;
+	}
+	.reviewItemBoxCenterButtons {
+		position: relative;
+	}
+	.reviewItemBoxTop p {
+		margin: 5px 0px 0px 4px;
+	}
+	.reviewItemBoxCoverImg{
+		display:block;
 	}
 }
