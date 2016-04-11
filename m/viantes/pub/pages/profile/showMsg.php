@@ -64,104 +64,101 @@ if ($msgDO->getRecipientStatus() == 0 && $msgDO->getToUsrId() == $userDO->getId(
 	
 	<div class="main-div">
 		
-		<div id="main-div" class="body-div">
-			<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
-			
-			<div class="mrg-top-24">
-				<a href="/viantes/pub/pages/profile/message.php?tabactive=<?php echo $_GET['tabactive']?>">
-					<?php echo $X_langArray['MESSAGE_BACK_LINK'] ?>
-				</a>
-			</div>
+		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 		
-			<div class="mrg-top-36 showMsgContainerDiv">
-				<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
-					<label>
-						<span class="show-msg-pan_col1">
-							<b><?php echo $X_langArray['MESSAGE_COMMON_FROM'] ?>:</b>
-						</span>
-						<span class="show-msg-col2">
-							<a href="/viantes/pub/pages/profile/showProfile.php?usrId=<?php echo X_code($msgDO->getFromUsrId())?>" >
-								<?php echo $msgDO->getFromUsrName(); ?>
-								<img class="msgCoverBodyCell" <?php echo IMG_25_25 ?> src="<?php echo $msgDO->getFromUsrCoverFileName() ?>" />
-							</a>
-						</span>
-					</label>	
-				</div>
-				
-				<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
-					<label>
-						<span class="show-msg-pan_col1">
-							<b><?php echo $X_langArray['MESSAGE_COMMON_TO'] ?>:</b>
-						</span>
-						<span class="show-msg-col2">
-							<a href="/viantes/pub/pages/profile/showProfile.php?usrId=<?php echo X_code($msgDO->getToUsrId())?>" >
-								<?php echo $msgDO->getToUsrName(); ?>
-								<img class="msgCoverBodyCell" <?php echo IMG_25_25 ?> src="<?php echo $msgDO->getToUsrCoverFileName() ?>" />
-							</a>
-						</span>
-					</label>	
-				</div>
-				
-				<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
-					<label>
-						<span class="show-msg-pan_col1">
-							<b><?php echo $X_langArray['MESSAGE_COMMON_DT'] ?>:</b>
-						</span>
-						<span class="show-msg-col2">
-							<?php echo $msgDO->getDtIns(); ?>
-						</span>
-					</label>	
-				</div>
-				
-				<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
-					<label>
-						<span class="show-msg-pan_col1">
-							<b><?php echo $X_langArray['MESSAGE_COMMON_SBJ'] ?>:</b>
-						</span>
-						<span class="show-msg-col2">
-							<?php echo $msgDO->getSubject(); ?>
-						</span>
-					</label>	
-				</div>
-				
-				<div class="mrg-top-12 showMsgRowDivPadding">
-					<div>
-						<span class="show-msg-pan_col1">
-							<b><?php echo $X_langArray['MESSAGE_COMMON_MSG'] ?>:</b>
-						</span>
-					</div>
-					<div class="showMsg-Msg">
-						<?php echo $msgDO->getMessage(); ?>
-					</div>
-				</div>
+		<div class="mrg-top-24">
+			<a href="/viantes/pub/pages/profile/message.php?tabactive=<?php echo $_GET['tabactive']?>">
+				<?php echo $X_langArray['MESSAGE_BACK_LINK'] ?>
+			</a>
+		</div>
+	
+		<div class="mrg-top-36 showMsgContainerDiv">
+			<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
+				<label>
+					<span class="show-msg-pan_col1">
+						<b><?php echo $X_langArray['MESSAGE_COMMON_FROM'] ?>:</b>
+					</span>
+					<span class="show-msg-col2">
+						<a href="/viantes/pub/pages/profile/showProfile.php?usrId=<?php echo X_code($msgDO->getFromUsrId())?>" >
+							<?php echo $msgDO->getFromUsrName(); ?>
+							<img class="msgCoverBodyCell" <?php echo IMG_25_25 ?> src="<?php echo $msgDO->getFromUsrCoverFileName() ?>" />
+						</a>
+					</span>
+				</label>	
 			</div>
 			
-			<div class="showMsgButtonsDiv">
-				<a href="#" class="" onclick="$('#overlay-del-msg').show();">
-					<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_DEL']?></div>
-				</a>
-				<?php if ( $_GET['tabactive'] == 1 ) { ?>
-					<a href="#" onclick="$('#autoComplMsgTo').val('<?php echo $msgDO->getFromUsrName() ?>');
-										 $('#ovrMsgSbjjt').val('<?php echo 'RE:'.$msgDO->getSubject() ?>');
-										 $('#msgId').val('<?php echo $_GET['msgId'] ?>');
-										 showMsgOverlay('/viantes/pub/pages/profile/showMsg.php')">
-						<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_REPLY']?></div>
-					</a>
-				<?php } if ( $_GET['tabactive'] == 4 ){ ?>
-				<a href="#" class="" onclick="$('#isRrestore').val(1); $('#overlay-del-msg-question1').hide(); $('#overlay-del-msg-question2').show(); $('#overlay-del-msg').show();">
-					<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_RESTORE']?></div>
-				</a>
-				<?php } ?>	
+			<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
+				<label>
+					<span class="show-msg-pan_col1">
+						<b><?php echo $X_langArray['MESSAGE_COMMON_TO'] ?>:</b>
+					</span>
+					<span class="show-msg-col2">
+						<a href="/viantes/pub/pages/profile/showProfile.php?usrId=<?php echo X_code($msgDO->getToUsrId())?>" >
+							<?php echo $msgDO->getToUsrName(); ?>
+							<img class="msgCoverBodyCell" <?php echo IMG_25_25 ?> src="<?php echo $msgDO->getToUsrCoverFileName() ?>" />
+						</a>
+					</span>
+				</label>	
 			</div>
 			
-			<!-- Questi campi simulano lo scenario come quello che avviene nei file msgTabx 
-				In questo modo posso riusare i metodi confirmDelMsg(), 
-			-->
-			<input type="hidden" id="delMsgShoMsg" value="<?php echo $_GET['msgId'] ?>" > 
-			<input type="hidden" id="isRrestore" value="0"/>	
-			<input type="hidden" id="tabactive" value="<?php echo$_GET['tabactive'] ?>"/>	
+			<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
+				<label>
+					<span class="show-msg-pan_col1">
+						<b><?php echo $X_langArray['MESSAGE_COMMON_DT'] ?>:</b>
+					</span>
+					<span class="show-msg-col2">
+						<?php echo $msgDO->getDtIns(); ?>
+					</span>
+				</label>	
+			</div>
+			
+			<div class="mrg-top-12 showMsgRowDiv showMsgRowDivPadding">
+				<label>
+					<span class="show-msg-pan_col1">
+						<b><?php echo $X_langArray['MESSAGE_COMMON_SBJ'] ?>:</b>
+					</span>
+					<span class="show-msg-col2">
+						<?php echo $msgDO->getSubject(); ?>
+					</span>
+				</label>	
+			</div>
+			
+			<div class="mrg-top-12 showMsgRowDivPadding">
+				<div>
+					<span class="show-msg-pan_col1">
+						<b><?php echo $X_langArray['MESSAGE_COMMON_MSG'] ?>:</b>
+					</span>
+				</div>
+				<div class="showMsg-Msg">
+					<?php echo $msgDO->getMessage(); ?>
+				</div>
+			</div>
 		</div>
 		
+		<div class="showMsgButtonsDiv">
+			<a href="#" class="" onclick="$('#overlay-del-msg').show();">
+				<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_DEL']?></div>
+			</a>
+			<?php if ( $_GET['tabactive'] == 1 ) { ?>
+				<a href="#" onclick="$('#autoComplMsgTo').val('<?php echo $msgDO->getFromUsrName() ?>');
+									 $('#ovrMsgSbjjt').val('<?php echo 'RE:'.$msgDO->getSubject() ?>');
+									 $('#msgId').val('<?php echo $_GET['msgId'] ?>');
+									 showMsgOverlay('/viantes/pub/pages/profile/showMsg.php')">
+					<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_REPLY']?></div>
+				</a>
+			<?php } if ( $_GET['tabactive'] == 4 ){ ?>
+			<a href="#" class="" onclick="$('#isRrestore').val(1); $('#overlay-del-msg-question1').hide(); $('#overlay-del-msg-question2').show(); $('#overlay-del-msg').show();">
+				<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_RESTORE']?></div>
+			</a>
+			<?php } ?>	
+		</div>
+		
+		<!-- Questi campi simulano lo scenario come quello che avviene nei file msgTabx 
+			In questo modo posso riusare i metodi confirmDelMsg(), 
+		-->
+		<input type="hidden" id="delMsgShoMsg" value="<?php echo $_GET['msgId'] ?>" > 
+		<input type="hidden" id="isRrestore" value="0"/>	
+		<input type="hidden" id="tabactive" value="<?php echo$_GET['tabactive'] ?>"/>	
 	</div>
 	
 	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>

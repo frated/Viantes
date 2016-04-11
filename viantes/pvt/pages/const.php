@@ -82,4 +82,7 @@ define('CONTACT', 4);
 /* Tipi di ordinamento */
 define('ORD_BY_MDE_DSC', " DESC");
 define('ORD_BY_MDE_ASC', " ASC");
+
+/* Resized Images */
+define('RSZD_FOR_IND', ".rszd.hm.jpg"); //resized 4 index page
 ?>

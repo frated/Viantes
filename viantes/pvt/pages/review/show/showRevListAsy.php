@@ -30,27 +30,22 @@ Logger::log("showRevListAsy :: main :: parameters: reviewId:" .$reviewId. "cityR
 $reviewDOArray = $reviewDAO->getReviews($reviewId, $cityRevId, $countryRevId, $numOfBox, $mode);
 
 foreach($reviewDOArray as $reviewDO) {
-	//get initial dimension
-	list($widthIn, $heightIn) = getimagesize(HT_ROOT.$reviewDO->getCoverFileName());
-	
-	//scale in ratio
-	$width = ratioImagDimensionFixHeight($widthIn, $heightIn, 128);
 	
 	if ( $reviewDO instanceof ReviewDO) {
 		$result .= X_code($reviewDO->getId()).attributeDelim. X_code($reviewDO->getUsrId()).attributeDelim. $reviewDO->getSiteName().attributeDelim.  
-			   $reviewDO->getDtIns().attributeDelim. $reviewDO->getDescr().attributeDelim. $reviewDO->getCoverFileName().attributeDelim.  
+			   $reviewDO->getDtIns().attributeDelim. $reviewDO->getDescr().attributeDelim. $reviewDO->getCoverFileName().RSZD_FOR_IND.attributeDelim.  
    			   $reviewDO->getUsrName().attributeDelim.$reviewDO->getUserCoverFileName().attributeDelim.$width.attributeDelim.SiteReview.attributeDelim.
    			   $reviewDO->getCntStar().attributeDelim.$reviewDO->getCntSee().attributeDelim.$reviewDO->getCntPost().listDelim;
 	} 
 	else if ( $reviewDO instanceof CityReviewDO) {
 		$result .= X_code($reviewDO->getId()).attributeDelim. X_code($reviewDO->getUsrId()).attributeDelim. $reviewDO->getCityName().attributeDelim.  
-			   $reviewDO->getDtIns().attributeDelim. $reviewDO->getDescr().attributeDelim. $reviewDO->getCoverFileName().attributeDelim.  
+			   $reviewDO->getDtIns().attributeDelim. $reviewDO->getDescr().attributeDelim. $reviewDO->getCoverFileName().RSZD_FOR_IND.attributeDelim.  
    			   $reviewDO->getUsrName().attributeDelim.$reviewDO->getUserCoverFileName().attributeDelim.$width.attributeDelim.CityReview.attributeDelim.
    			   $reviewDO->getCntStar().attributeDelim.$reviewDO->getCntSee().attributeDelim.$reviewDO->getCntPost().listDelim;
 	}
 	else if ( $reviewDO instanceof CountryReviewDO) {
 		$result .= X_code($reviewDO->getId()).attributeDelim. X_code($reviewDO->getUsrId()).attributeDelim. $reviewDO->getCountry().attributeDelim.  
-			   $reviewDO->getDtIns().attributeDelim. $reviewDO->getDescr().attributeDelim. $reviewDO->getCoverFileName().attributeDelim.  
+			   $reviewDO->getDtIns().attributeDelim. $reviewDO->getDescr().attributeDelim. $reviewDO->getCoverFileName().RSZD_FOR_IND.attributeDelim.  
    			   $reviewDO->getUsrName().attributeDelim.$reviewDO->getUserCoverFileName().attributeDelim.$width.attributeDelim.CountryReview.attributeDelim.
    			   $reviewDO->getCntStar().attributeDelim.$reviewDO->getCntSee().attributeDelim.$reviewDO->getCntPost().listDelim;
 	}	

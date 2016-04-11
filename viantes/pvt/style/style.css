@@ -680,7 +680,8 @@ div#setting_top_div {
 	color: #555;
 }
 
-/*----- Footer -----*/.mainFooterDiv{
+/*----- Footer -----*/
+.mainFooterDiv{
 	border-top: 1px solid #FFAA00; /*ededed;*/
 	clear: both;
 	font-size: 13px;
@@ -1546,4 +1547,20 @@ p.bjqs-caption{
 }
 .mrg-lft-24 {
 	margin-left: 24px;
+}
+
+
+/* Media Query */
+@media (max-width: 768px) {
+	.tab-links a {
+		padding:3px 10px;
+	}
+}
+
+/* @media (max-width: 768px) and (orientation: landscape) { } */
+
+@media all and (max-width: 320px) {
+	.tab-links a {
+		padding:3px 6px;
+	}
 }

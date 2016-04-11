@@ -38,28 +38,25 @@ cleanSesison($X_page);
 	<?php require_once $_SERVER['DOCUMENT_ROOT']."/viantes/pvt/pages/common/header.html"; ?>
 	
 	<div id="main-div" class="main-div">
-	
-		<div class="body-div">			
+		<div>
+			<div class="top-header">
+				<h1><?php echo $X_langArray['ERROR_H1'] ?></h1>
+			</div>
 			<div>
-				<div class="top-header">
-					<h1><?php echo $X_langArray['ERROR_H1'] ?></h1>
-				</div>
-				<div>
-					<!-- Descrizione errore -->
-					<?php if (isset($_GET['reason']) && $_GET['reason'] != "" ) { ?>
-						<p class="info-general"><?php echo urldecode($_GET['reason']) ?></p>
-					<?php } else{ ?>
-						<p class="info-general"><?php echo $X_langArray['ERROR_REASON_UNEXPECTED'] ?></p>
-					<?php } ?>
-					<br>
-					
-					<!-- Link close o link home -->
-					<?php if (isset($_GET['closeble']) && $_GET['closeble'] != "" ) { ?>
-						<a href="#" onclick="window.close()"><?php echo $X_langArray['ERROR_CLOSE'] ?></a>
-					<?php } else{ ?>
-						<p class="info-general"><?php echo $X_langArray['ERROR_BACK_TO_HOME'] ?></p>
-					<?php } ?>
-				</div>
+				<!-- Descrizione errore -->
+				<?php if (isset($_GET['reason']) && $_GET['reason'] != "" ) { ?>
+					<p class="info-general"><?php echo urldecode($_GET['reason']) ?></p>
+				<?php } else{ ?>
+					<p class="info-general"><?php echo $X_langArray['ERROR_REASON_UNEXPECTED'] ?></p>
+				<?php } ?>
+				<br>
+				
+				<!-- Link close o link home -->
+				<?php if (isset($_GET['closeble']) && $_GET['closeble'] != "" ) { ?>
+					<a href="#" onclick="window.close()"><?php echo $X_langArray['ERROR_CLOSE'] ?></a>
+				<?php } else{ ?>
+					<p class="info-general"><?php echo $X_langArray['ERROR_BACK_TO_HOME'] ?></p>
+				<?php } ?>
 			</div>
 		</div>
 	</div>

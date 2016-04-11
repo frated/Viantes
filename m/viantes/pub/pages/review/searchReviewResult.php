@@ -140,126 +140,123 @@ include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 
 	<div id="main-div" class="main-div-correct-ie7 main-div">
 		
-		<div class="body-div">
-			<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
+		<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 
-			<div class="mrg-top-24">
-				<a href="/viantes/pub/pages/review/searchReview.php">
-					<?php echo $X_langArray['SEARCH_REVIEW_RESULT_BACK'] ?>
-				</a>
-			</div>
-			<?php if ( isset($reviewDOArray) && count($reviewDOArray) > 0 && isset($reviewDO) ) { ?>
-				
-				<div class="searchRevLftHeaderDiv">
-					<div class="second-header">
-						<h1><?php echo $placeName;?></h1>
-						<!-- Indirizzo -->
-						<?php if ( $reviewType == SiteReview ) {?>
-							<p class="showRevHader"><?php echo $reviewDO->getLocality() ?></p>
-						<?php } else if ( $reviewType == CityReview ) {?>
-							<p class="showRevHader"><?php echo $reviewDO->getFormattedLocality() ?></p>
-						<?php } ?>
-					</div>
-				</div>
-				
-				<div class="searchRevRgtHeaderDiv">
-					<div class="searchRevRgtHeaderDivTitle">
-						<b><p>
-							<?php echo $X_langArray['SEARCH_REVIEW_RESULT_OVER_EVAL'] ?>
-						</p></b>
-					</div>
-					<div class="searchRevRgtHeaderDivVote">
-						<?php  if (!filter_var($avg, FILTER_VALIDATE_INT)) { ?>
-							<img class="vote" src="/viantes/pvt/img/review/vote1-2.png" height="12" width="12"/>
-						<?php  }
-						for ( $i = 1; $i <= $avg; $i++ ) { ?>
-							<img class="vote" src="/viantes/pvt/img/review/vote1.png" height="12" width="12"/>
-						<?php } ?>
-					</div>
-					
-					<!-- Rate -->
-					<?php for ( $j = 5; $j >= 1; $j-- ) { ?>
-						<div class="searchRevRgtHeaderDivVote" style="margin: 0px">
-							<div style="display: inline-block; margin-bottom: 1px; width: 5%; float: right; margin-left:5%">
-								<p><?php echo isset ($rate[$j]) ? $rate[$j] : 0; ?></p>
-							</div>
-							<div style="display: inline-block; margin-bottom: 1px; width: 40%; float: right">
-								<table style="width: 100%; border: 1px solid #fa0; border-collapse:collapse">
-									<tr>
-									<?php for ( $i = 1; $i <= $j; $i++ ) { ?>
-										<td style="height: 9px; width: 9px; background-color: #fa0"></td>
-									<?php } 
-									for ( $i = $j; $i < 5; $i++ ) { ?>
-										<td style="height: 9px; width: 9px; background-color: #fff;"></td>
-									<?php } ?>
-									</tr>
-								</table>
-							</div>
-						</div>
-					<?php } ?>	
-				</div>
-				
-				<?php include $X_root."pvt/pages/review/search/searchReviewResultPaginator.php"; ?>
-				
-				<!-- THE MAP -->
-				<?php if (!$X_GEO_disableMAP) { ?>
-					<div class="showRevMapDiv">
-						<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="height: 200px;"></div>
-						<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="height: 200px;">
-							<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />
-						</div>
-					</div>
-				<?php } ?>
-				
-				<?php include $X_root."pvt/pages/review/common/starAndAuthor.php"; ?>
-				
-				<div id="searchReviewResult" class="tabs mrg-bot-24">
-					<input type="hidden" name="tabactive" value="<?php echo $activeTabIdx ?>" id="tabactive"/>
-					<ul class="tab-links">
-						<li <?php echo ($activeTabIdx == 1) ? 'class="active"' : '' ?>>
-							<a href="#tab1"><?php echo $X_langArray['CREATE_REVIEW_TAB_REV_TITLE'] ?></a>
-						</li>
-						<li <?php echo ($activeTabIdx == 2) ? 'class="active"' : '' ?>>
-							<a href="#tab2"><?php echo $X_langArray['CREATE_REVIEW_TAB_PIC_TITLE'] ?></a>
-						</li>
-						<li <?php echo ($activeTabIdx == 3) ? 'class="active"' : '' ?>>
-							<a href="#tab3"><?php echo $X_langArray['CREATE_REVIEW_TAB_VID_TITLE'] ?></a>
-						</li>
-						<li <?php echo ($activeTabIdx == 4) ? 'class="active"' : '' ?>>
-							<a href="#tab4"><?php echo $X_langArray['CREATE_REVIEW_TAB_DOC_TITLE'] ?></a>
-						</li>
-					</ul>
-					
-					<div class="tab-content">
-						<div id="tab1" <?php echo ($activeTabIdx == 1) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/search/searchReviewResultTab1.php"; ?>
-						</div>
-						<div id="tab2" <?php echo ($activeTabIdx == 2) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/show/showReviewTab2.php"; ?>
-						</div>
-						<div id="tab3" <?php echo ($activeTabIdx == 3) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/show/showReviewTab3.php"; ?>
-						</div>
-						<div id="tab4" <?php echo ($activeTabIdx == 4) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/show/showReviewTab4.php"; ?>
-						</div>	
-					</div>
-				</div>
-
-				<?php include $X_root."pvt/pages/review/search/searchReviewResultPaginator.php"; ?>	
-
-			<?php } else { ?>
-				<div>
-					<div class="top-header mrg-top-24">
-						<h1><?php echo $X_langArray['SEARCH_REVIEW_RESULT_H1']?></h1>
-					</div>
-					<div class="second-header-font14">
-						<h1><?php echo $X_langArray['SEARCH_REVIEW_RESULT_NO_RESULT'] ?></h1>
-					</div>
-				</div>
-			<?php }  ?>
-			
+		<div class="mrg-top-24">
+			<a href="/viantes/pub/pages/review/searchReview.php">
+				<?php echo $X_langArray['SEARCH_REVIEW_RESULT_BACK'] ?>
+			</a>
 		</div>
+		<?php if ( isset($reviewDOArray) && count($reviewDOArray) > 0 && isset($reviewDO) ) { ?>
+			
+			<div class="searchRevLftHeaderDiv">
+				<div class="second-header">
+					<h1><?php echo $placeName;?></h1>
+					<!-- Indirizzo -->
+					<?php if ( $reviewType == SiteReview ) {?>
+						<p class="showRevHader"><?php echo $reviewDO->getLocality() ?></p>
+					<?php } else if ( $reviewType == CityReview ) {?>
+						<p class="showRevHader"><?php echo $reviewDO->getFormattedLocality() ?></p>
+					<?php } ?>
+				</div>
+			</div>
+			
+			<div class="searchRevRgtHeaderDiv">
+				<div class="searchRevRgtHeaderDivTitle">
+					<b><p>
+						<?php echo $X_langArray['SEARCH_REVIEW_RESULT_OVER_EVAL'] ?>
+					</p></b>
+				</div>
+				<div class="searchRevRgtHeaderDivVote">
+					<?php  if (!filter_var($avg, FILTER_VALIDATE_INT)) { ?>
+						<img class="vote" src="/viantes/pvt/img/review/vote1-2.png" height="12" width="12"/>
+					<?php  }
+					for ( $i = 1; $i <= $avg; $i++ ) { ?>
+						<img class="vote" src="/viantes/pvt/img/review/vote1.png" height="12" width="12"/>
+					<?php } ?>
+				</div>
+				
+				<!-- Rate -->
+				<?php for ( $j = 5; $j >= 1; $j-- ) { ?>
+					<div class="searchRevRgtHeaderDivVote" style="margin: 0px">
+						<div style="display: inline-block; margin-bottom: 1px; width: 5%; float: right; margin-left:5%">
+							<p><?php echo isset ($rate[$j]) ? $rate[$j] : 0; ?></p>
+						</div>
+						<div style="display: inline-block; margin-bottom: 1px; width: 40%; float: right">
+							<table style="width: 100%; border: 1px solid #fa0; border-collapse:collapse">
+								<tr>
+								<?php for ( $i = 1; $i <= $j; $i++ ) { ?>
+									<td style="height: 9px; width: 9px; background-color: #fa0"></td>
+								<?php } 
+								for ( $i = $j; $i < 5; $i++ ) { ?>
+									<td style="height: 9px; width: 9px; background-color: #fff;"></td>
+								<?php } ?>
+								</tr>
+							</table>
+						</div>
+					</div>
+				<?php } ?>	
+			</div>
+			
+			<?php include $X_root."pvt/pages/review/search/searchReviewResultPaginator.php"; ?>
+			
+			<!-- THE MAP -->
+			<?php if (!$X_GEO_disableMAP) { ?>
+				<div class="showRevMapDiv">
+					<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="height: 200px;"></div>
+					<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>" style="height: 200px;">
+						<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />
+					</div>
+				</div>
+			<?php } ?>
+			
+			<?php include $X_root."pvt/pages/review/common/starAndAuthor.php"; ?>
+			
+			<div id="searchReviewResult" class="tabs mrg-bot-24">
+				<input type="hidden" name="tabactive" value="<?php echo $activeTabIdx ?>" id="tabactive"/>
+				<ul class="tab-links">
+					<li <?php echo ($activeTabIdx == 1) ? 'class="active"' : '' ?>>
+						<a href="#tab1"><?php echo $X_langArray['CREATE_REVIEW_TAB_REV_TITLE'] ?></a>
+					</li>
+					<li <?php echo ($activeTabIdx == 2) ? 'class="active"' : '' ?>>
+						<a href="#tab2"><?php echo $X_langArray['CREATE_REVIEW_TAB_PIC_TITLE'] ?></a>
+					</li>
+					<li <?php echo ($activeTabIdx == 3) ? 'class="active"' : '' ?>>
+						<a href="#tab3"><?php echo $X_langArray['CREATE_REVIEW_TAB_VID_TITLE'] ?></a>
+					</li>
+					<li <?php echo ($activeTabIdx == 4) ? 'class="active"' : '' ?>>
+						<a href="#tab4"><?php echo $X_langArray['CREATE_REVIEW_TAB_DOC_TITLE'] ?></a>
+					</li>
+				</ul>
+				
+				<div class="tab-content">
+					<div id="tab1" <?php echo ($activeTabIdx == 1) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/search/searchReviewResultTab1.php"; ?>
+					</div>
+					<div id="tab2" <?php echo ($activeTabIdx == 2) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/show/showReviewTab2.php"; ?>
+					</div>
+					<div id="tab3" <?php echo ($activeTabIdx == 3) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/show/showReviewTab3.php"; ?>
+					</div>
+					<div id="tab4" <?php echo ($activeTabIdx == 4) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/show/showReviewTab4.php"; ?>
+					</div>	
+				</div>
+			</div>
+
+			<?php include $X_root."pvt/pages/review/search/searchReviewResultPaginator.php"; ?>	
+
+		<?php } else { ?>
+			<div>
+				<div class="top-header mrg-top-24">
+					<h1><?php echo $X_langArray['SEARCH_REVIEW_RESULT_H1']?></h1>
+				</div>
+				<div class="second-header-font14">
+					<h1><?php echo $X_langArray['SEARCH_REVIEW_RESULT_NO_RESULT'] ?></h1>
+				</div>
+			</div>
+		<?php }  ?>
 		
 	</div>
 	

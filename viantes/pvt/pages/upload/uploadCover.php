@@ -78,11 +78,33 @@ if (move_uploaded_file($tmpFileName, $fullFileName)) {
 		$bean = isset($_SESSION[$beanSessionKey]) ? unserialize($_SESSION[$beanSessionKey]) : New CountryReviewBean();
 	}
 	$bean->setCoverFileName($relativeFilePath.$fileName);
-		
+	
 	list($_width, $_height, $type, $attr) = getimagesize($fullFileName);
 	$bean->setCoverWidth($_width);
 	$bean->setCoverHeight($_height);
-
+	
+	//----------------------------------------------------------------------------------------------------
+	//RESCALE 4 INDEX PAGE
+	
+	//dimensioni della nuova immagine (altezza 128px)
+	$rescaledHeight = 128;
+	$rescaledWidth  =  ratioImagDimensionFixHeight($_width, $_height, $rescaledHeight);
+	
+	//immagine originale
+    $resurceImgOrig = imagecreatefromjpeg($fullFileName);
+	
+	//dimensioni originali
+	list($widthIn, $heightIn) = getimagesize($fullFileName);
+	
+	//creao la nuova immagine 
+	$scaledImg = imagecreatetruecolor($rescaledWidth, $rescaledHeight);
+	//copio, in proporzione, l'orignale su quella scalata
+	imagecopyresampled ($scaledImg , $resurceImgOrig , 0 , 0,  0, 0, $rescaledWidth, $rescaledHeight, $_width, $_height);
+	
+	//salvo con estensione RSZD_FOR_IND
+	imagejpeg($scaledImg, $fullFileName.RSZD_FOR_IND, 100);
+	//----------------------------------------------------------------------------------------------------
+	
 	$_SESSION[$beanSessionKey] = serialize($bean);
 	
 	header('Location: '.$uri.$backUrl);

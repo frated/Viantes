@@ -60,81 +60,78 @@ if ( !isset($_SESSION[$beanSessionKey]) && isset($_GET['finish']) ) {
 	<?php require_once $X_root."pvt/pages/common/header.html";?>
 	
 	<div id="main-div" class="main-div">
-	
-		<div class="body-div">
-			<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
-			
-			<div>
-				<div class="top-header">
-					<h1><?php echo isset($_GET['finish']) ? $X_langArray['CREATE_REVIEW_S2_PAGE_H3'] : 
-															$X_langArray['CREATE_REVIEW_PAGE_H3'] ?></h1>
-				</div>
-				<div>
-					<p><?php echo isset($_GET['finish']) ?  $X_langArray['CREATE_REVIEW_S2_PAGE_DISCL']:
-															$X_langArray['CREATE_REVIEW_PAGE_DISCL'] ?></p>
-				</div>
-			</div>
-			
-			<br><br>
-			<div id="createReview">
-				<div class="tabs">
-					<ul class="tab-links">
-						<li <?php echo ($activeTabIdx == 1) ? 'class="active"' : '' ?>>
-							<a href="#tab1" onclick="$('#tabactive').val(1)">
-								<?php echo $X_langArray['CREATE_REVIEW_TAB_REV_TITLE'] ?>
-							</a>
-						</li>
-						<li <?php echo ($activeTabIdx == 2) ? 'class="active"' : '' ?>>
-							<a href="#tab2"  onclick="$('#tabactive').val(2)">
-								<?php echo $X_langArray['CREATE_REVIEW_TAB_PIC_TITLE'] ?>
-							</a>
-						</li>
-						<li <?php echo ($activeTabIdx == 3) ? 'class="active"' : '' ?>>
-							<a href="#tab3" onclick="$('#tabactive').val(3)">
-								<?php echo $X_langArray['CREATE_REVIEW_TAB_VID_TITLE'] ?>
-							</a>
-						</li>
-						<li <?php echo ($activeTabIdx == 4) ? 'class="active"' : '' ?>>
-							<a href="#tab4" onclick="$('#tabactive').val(4)">
-								<?php echo $X_langArray['CREATE_REVIEW_TAB_DOC_TITLE'] ?>
-							</a>
-						</li>
-					</ul>
-					<div class="tab-content" >
-						<?php $backUrl='/viantes/pub/pages/review/createReview.php'; ?>
-						
-						<div id="tab1" <?php echo ($activeTabIdx == 1) ? 'class="tab active"' : 'class="tab"' ?> >
-							
-							<?php if (isset($_GET['finish'])) {
-								require_once $X_root."pvt/pages/review/create/createReviewTab1Step2.php"; 
-							}
-							else{
-								require_once $X_root."pvt/pages/review/create/createReviewTab1.php"; 
-							} ?>
-						</div>
-						
-						<div id="tab2" <?php echo ($activeTabIdx == 2) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/create/createReviewTab2.php"; ?>
-						</div>
-				 
-						<div id="tab3"  <?php echo ($activeTabIdx == 3) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/create/createReviewTab3.php"; ?>
-						</div>
-						
-						<div id="tab4"  <?php echo ($activeTabIdx == 4) ? 'class="tab active"' : 'class="tab"' ?> >
-							<?php require_once $X_root."pvt/pages/review/create/createReviewTab4.php"; ?>
-						</div>
-					</div>
 
-					<input type="hidden" name="tabactive" value="<?php echo $activeTabIdx ?>" id="tabactive"/>
-					<input type="hidden" id="del-element-name-param" value=""/>
-					<input type="hidden" id="del-element-type-param" value=""/>
-					<input type="hidden" id="del-element-pstn-param" value=""/>
-					
-				</div>
+		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
+		
+		<div>
+			<div class="top-header">
+				<h1><?php echo isset($_GET['finish']) ? $X_langArray['CREATE_REVIEW_S2_PAGE_H3'] : 
+														$X_langArray['CREATE_REVIEW_PAGE_H3'] ?></h1>
+			</div>
+			<div>
+				<p><?php echo isset($_GET['finish']) ?  $X_langArray['CREATE_REVIEW_S2_PAGE_DISCL']:
+														$X_langArray['CREATE_REVIEW_PAGE_DISCL'] ?></p>
 			</div>
 		</div>
 		
+		<br><br>
+		<div id="createReview">
+			<div class="tabs">
+				<ul class="tab-links">
+					<li <?php echo ($activeTabIdx == 1) ? 'class="active"' : '' ?>>
+						<a href="#tab1" onclick="$('#tabactive').val(1)">
+							<?php echo $X_langArray['CREATE_REVIEW_TAB_REV_TITLE'] ?>
+						</a>
+					</li>
+					<li <?php echo ($activeTabIdx == 2) ? 'class="active"' : '' ?>>
+						<a href="#tab2"  onclick="$('#tabactive').val(2)">
+							<?php echo $X_langArray['CREATE_REVIEW_TAB_PIC_TITLE'] ?>
+						</a>
+					</li>
+					<li <?php echo ($activeTabIdx == 3) ? 'class="active"' : '' ?>>
+						<a href="#tab3" onclick="$('#tabactive').val(3)">
+							<?php echo $X_langArray['CREATE_REVIEW_TAB_VID_TITLE'] ?>
+						</a>
+					</li>
+					<li <?php echo ($activeTabIdx == 4) ? 'class="active"' : '' ?>>
+						<a href="#tab4" onclick="$('#tabactive').val(4)">
+							<?php echo $X_langArray['CREATE_REVIEW_TAB_DOC_TITLE'] ?>
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content" >
+					<?php $backUrl='/viantes/pub/pages/review/createReview.php'; ?>
+					
+					<div id="tab1" <?php echo ($activeTabIdx == 1) ? 'class="tab active"' : 'class="tab"' ?> >
+						
+						<?php if (isset($_GET['finish'])) {
+							require_once $X_root."pvt/pages/review/create/createReviewTab1Step2.php"; 
+						}
+						else{
+							require_once $X_root."pvt/pages/review/create/createReviewTab1.php"; 
+						} ?>
+					</div>
+					
+					<div id="tab2" <?php echo ($activeTabIdx == 2) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/create/createReviewTab2.php"; ?>
+					</div>
+			 
+					<div id="tab3"  <?php echo ($activeTabIdx == 3) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/create/createReviewTab3.php"; ?>
+					</div>
+					
+					<div id="tab4"  <?php echo ($activeTabIdx == 4) ? 'class="tab active"' : 'class="tab"' ?> >
+						<?php require_once $X_root."pvt/pages/review/create/createReviewTab4.php"; ?>
+					</div>
+				</div>
+
+				<input type="hidden" name="tabactive" value="<?php echo $activeTabIdx ?>" id="tabactive"/>
+				<input type="hidden" id="del-element-name-param" value=""/>
+				<input type="hidden" id="del-element-type-param" value=""/>
+				<input type="hidden" id="del-element-pstn-param" value=""/>
+				
+			</div>
+		</div>
 	</div>
 	
 	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>

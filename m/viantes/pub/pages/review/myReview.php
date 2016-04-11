@@ -43,33 +43,30 @@ Logger::log("myProfile :: pattern per data rilevato :: ".$X_pattern, 3);
 	
 	<div class="main-div">
 
-		<div class="body-div">
-			<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
-			
-			<!-- MY REVIEW - Header -->
-			<div class="myRevHeaderDiv">
-				<div class="top-header">
-					<h1><?php echo $X_langArray['MY_REV_PAGE_H3'] ?></h1>
-				</div>	
-				<div class="myRevDisclaimerDiv">
-					<p><?php echo $X_langArray['MY_REV_PAGE_DISCL'] ?></p>
-				</div>
-				<div  class="myRevCreateRevLink personalButton">
-					<a href="/viantes/pub/pages/review/createReview.php">
-						<!--img class="myRevCreareRevImg" src="/viantes/pvt/img/review/review_18.png" -->
-						<?php echo $X_langArray['MY_REV_CREATE_REV']?>
-					</a>
-				</div>
+		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
+		
+		<!-- MY REVIEW - Header -->
+		<div class="myRevHeaderDiv">
+			<div class="top-header">
+				<h1><?php echo $X_langArray['MY_REV_PAGE_H3'] ?></h1>
+			</div>	
+			<div class="myRevDisclaimerDiv">
+				<p><?php echo $X_langArray['MY_REV_PAGE_DISCL'] ?></p>
 			</div>
+			<div  class="myRevCreateRevLink personalButton">
+				<a href="/viantes/pub/pages/review/createReview.php">
+					<!--img class="myRevCreareRevImg" src="/viantes/pvt/img/review/review_18.png" -->
+					<?php echo $X_langArray['MY_REV_CREATE_REV']?>
+				</a>
+			</div>
+		</div>
+	
+		<div id="setting_top_div">
+			<h3><?php echo $X_langArray['MYPROFILE_MY_REVIEW'] ?></h3>
+		</div>					
+		<?php include $X_root."pvt/pages/review/common/userReview.php" ?>
 		
-			<div id="setting_top_div">
-				<h3><?php echo $X_langArray['MYPROFILE_MY_REVIEW'] ?></h3>
-			</div>					
-			<?php include $X_root."pvt/pages/review/common/userReview.php" ?>
-			
-		</div>	
-		
-	</div>
+	</div>	
 		
 	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>		
 	

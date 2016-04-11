@@ -110,76 +110,73 @@ imagedestroy($img);
 	<?php require_once $X_root."pvt/pages/common/header.html";?>
 	
 	<div class="main-div">
+		<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
+		
+		<style type="text/css">
+		.imgOriginalOverlay {
+			color: #f00;
+			margin: 10px;
+			width: <?php echo $width ?>px;
+			height:<?php echo $height?>px;
+			position: relative;
+			top: 0px; left: 0px;
+			/* for IE9 and below : NB Insert to the top of css */
+			background: url('<?php echo $fileName ?>') no-repeat;
+			/* Standard */
+			background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("<?php echo $fileName ?>");
+			/* Firefox */
+			background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(256, 255, 255, 0.4)), url("<?php echo $fileName ?>");
+			/* Opera 11.10+ */
+			background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("<?php echo $fileName ?>");
+			/* IE10+ */
+			background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("<?php echo $fileName ?>");
+			/* Chrome10+,Safari5.1+ */
+			background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.4)), to(rgba(255, 255, 255, 0.4))), url("<?php echo $fileName ?>"); 
+		}
+		.imgOver {
+			position: relative; <?php echo $imgCropperStyle ?> overflow: hidden; border: 1px #fa0 solid; top: <?php echo $y0?>px; left: <?php echo $x0?>px;
+		}
+		</style>
 
-		<div class="body-div">		
-			<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
-			
-			<style type="text/css">
-			.imgOriginalOverlay {
-				color: #f00;
-				margin: 10px;
-				width: <?php echo $width ?>px;
-				height:<?php echo $height?>px;
-				position: relative;
-				top: 0px; left: 0px;
-				/* for IE9 and below : NB Insert to the top of css */
-				background: url('<?php echo $fileName ?>') no-repeat;
-				/* Standard */
-				background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("<?php echo $fileName ?>");
-				/* Firefox */
-				background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(256, 255, 255, 0.4)), url("<?php echo $fileName ?>");
-				/* Opera 11.10+ */
-				background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("<?php echo $fileName ?>");
-				/* IE10+ */
-				background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("<?php echo $fileName ?>");
-				/* Chrome10+,Safari5.1+ */
-				background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.4)), to(rgba(255, 255, 255, 0.4))), url("<?php echo $fileName ?>"); 
-			}
-			.imgOver {
-			  	position: relative; <?php echo $imgCropperStyle ?> overflow: hidden; border: 1px #fa0 solid; top: <?php echo $y0?>px; left: <?php echo $x0?>px;
-			}
-			</style>
+		<div>
+			<form id="attachCoverFrm" enctype="multipart/form-data" action="/viantes/pvt/pages/upload/crop.php" method="POST">
+				<div class="imgOriginalOverlay">
+					<div id="divToBeMoved" class="imgOver" >
+						<img id="imgToBeMoved" src="<?php echo $fileName ?>" 
+							style="position: absolute; top: <?php echo ($y0*-1) ?>px; left: <?php echo ($x0*-1) ?>px;"/>
+					</div>						
+				</div>
 
-			<div>
-				<form id="attachCoverFrm" enctype="multipart/form-data" action="/viantes/pvt/pages/upload/crop.php" method="POST">
-					<div class="imgOriginalOverlay">
-						<div id="divToBeMoved" class="imgOver" >
-							<img id="imgToBeMoved" src="<?php echo $fileName ?>" 
-								style="position: absolute; top: <?php echo ($y0*-1) ?>px; left: <?php echo ($x0*-1) ?>px;"/>
-						</div>						
-					</div>
+				<div style="width: <?php echo $width ?>px;" class="mrg-top-36 mrg-bot-36">
+					<?php 
+					//il minimo e' il valore del lato (400) il masismo e' la massima dimensione x o Y
+					$shift = 20; $minX1 = $base; $minY1 = $altezza; $maxX1 = $width; $maxY1 = $height;
+					?>
+					<img src="/viantes/pvt/img/cropper/left.png"  width="24px" onclick="toLeft( <?php echo $shift. ",". $minX1?>);"/>
+					<img src="/viantes/pvt/img/cropper/right.png" width="24px" onclick="toRight(<?php echo $shift. ",". $maxX1?>);"/>
+					<img src="/viantes/pvt/img/cropper/up.png"    width="24px" onclick="toTop(  <?php echo $shift. ",". $minY1?>);"/>
+					<img src="/viantes/pvt/img/cropper/down.png"  width="24px" onclick="toDown( <?php echo $shift. ",". $maxY1?>);"/>
+					<input style="float: right; height: 26px;" type="submit" value="OK"/>
+				</div>
+				
+				<!-- Id utente -->
+				<input type="hidden" name="usrId" value="<?php echo $_GET['uid']?>"/>
+				
+				<!-- coordinate del vertice alto a sinistra e basso destra-->
+				<input id="x0" name="x0" type="hidden" value="<?php echo $x0?>"/>
+				<input id="y0" name="y0" type="hidden" value="<?php echo $y0?>"/>
+				<input id="x1" name="x1" type="hidden" value="<?php echo $x1?>"/>
+				<input id="y1" name="y1" type="hidden" value="<?php echo $y1?>"/>
+				
+				<!-- Nome del file -->
+				<input name="fn"  type="hidden" value="<?php echo $fn?>"/>
+				<input name="directoryName" type="hidden" value="<?php echo $directoryName?>"/>
+				<!-- Fattore di scala -->
+				<input id="dn" name="scala" type="hidden" value="<?php echo $scale?>"/>
 
-					<div style="width: <?php echo $width ?>px;" class="mrg-top-36 mrg-bot-36">
-						<?php 
-						//il minimo e' il valore del lato (400) il masismo e' la massima dimensione x o Y
-						$shift = 20; $minX1 = $base; $minY1 = $altezza; $maxX1 = $width; $maxY1 = $height;
-						?>
-						<img src="/viantes/pvt/img/cropper/left.png"  width="24px" onclick="toLeft( <?php echo $shift. ",". $minX1?>);"/>
-						<img src="/viantes/pvt/img/cropper/right.png" width="24px" onclick="toRight(<?php echo $shift. ",". $maxX1?>);"/>
-						<img src="/viantes/pvt/img/cropper/up.png"    width="24px" onclick="toTop(  <?php echo $shift. ",". $minY1?>);"/>
-						<img src="/viantes/pvt/img/cropper/down.png"  width="24px" onclick="toDown( <?php echo $shift. ",". $maxY1?>);"/>
-						<input style="float: right; height: 26px;" type="submit" value="OK"/>
-					</div>
-					
-					<!-- Id utente -->
-					<input type="hidden" name="usrId" value="<?php echo $_GET['uid']?>"/>
-					
-					<!-- coordinate del vertice alto a sinistra e basso destra-->
-					<input id="x0" name="x0" type="hidden" value="<?php echo $x0?>"/>
-					<input id="y0" name="y0" type="hidden" value="<?php echo $y0?>"/>
-					<input id="x1" name="x1" type="hidden" value="<?php echo $x1?>"/>
-					<input id="y1" name="y1" type="hidden" value="<?php echo $y1?>"/>
-					
-					<!-- Nome del file -->
-					<input name="fn"  type="hidden" value="<?php echo $fn?>"/>
-					<input name="directoryName" type="hidden" value="<?php echo $directoryName?>"/>
-					<!-- Fattore di scala -->
-					<input id="dn" name="scala" type="hidden" value="<?php echo $scale?>"/>
-
-					<!-- Cover Type 2 = Background Profile Image-->
-					<input name="coverType" type="hidden" value="<?php echo COVER_TYPE_BCK_PROF ?>"/>
-				</form>	
-			</div>
+				<!-- Cover Type 2 = Background Profile Image-->
+				<input name="coverType" type="hidden" value="<?php echo COVER_TYPE_BCK_PROF ?>"/>
+			</form>	
 		</div>
 	</div>
 		

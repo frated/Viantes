@@ -1,5 +1,5 @@
 <?php
-$X_root = "../../../../../../viantes/";
+$X_root = "../../../../../viantes/";
 $X_page = "showReview";
 session_start();
 require_once $X_root."pvt/pages/const.php";
