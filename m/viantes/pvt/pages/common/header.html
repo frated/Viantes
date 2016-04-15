@@ -1,0 +1,76 @@
+<script>
+	function showViewMenu(){
+		if ($('#menu-status').val() == 0) { 
+			$('#main-div').hide();
+			$('#mobile-menu-page').show(); 
+			$('#menu-status').val(1); 
+		} else { 
+			$('#main-div').show(); 
+			$('#mobile-menu-page').hide(); 
+			$('#menu-status').val(0);
+		}
+	}
+	function showViewLogin(){
+		if ($('#menu-status').val() == 0) { 
+			$('#main-div').hide();
+			$('#mobile-login-signin').show(); 
+			$('#menu-status').val(1); 
+		} else { 
+			$('#main-div').show(); 
+			$('#mobile-login-signin').hide(); 
+			$('#menu-status').val(0);
+		}
+	}
+</script>
+<div id="header-div" class="header-class">
+	<div>
+		<div class="main-header-div">
+			<a href="/index.php">
+				<img id="header-welcome-img"  class="header-logo-img" src="/viantes/pvt/img/logo_23_36.png" />
+				<img id="header-welc-img-txt" class="header-logo-txt" src="/viantes/pvt/img/viantes_19_77.png" />
+			</a>
+			
+			<!-- Inut text di ricerca -->
+			<div class="header-search-input">
+				<!-- Immagine Cerca -->
+				<img width="12" style="position: absolute; margin: 10px 0px 0px 3px" src="/viantes/pvt/img/header/find_G.png"/>	
+				
+				<!-- Input text -->
+				<input id="autoComplHeaderSearchRev" class="txt-search" type="text">
+			</div>
+			<!-- Pulsante Cerca -->
+			<div class="header-search-button">
+				<input class="personalButton headerButton" style="height: 24px;" type="submit" value="<?php echo $X_langArray['COMM_SEARCH_MSG']?>"
+					   onclick="if($('#kwrds').val() == '') { $('#autoComplHeaderSearchRev').val(''); return; } $('#headerForm').submit();" >
+			</div>
+		
+			<div class="header-menu">
+				<?php if ($X_logged) { ?>
+					<img onclick="showViewMenu()" src="/viantes/pvt/img/m/menu.png" >
+				<?php } else { ?>
+					<img onclick="showViewLogin();" src="/viantes/pvt/img/m/menu.png" >
+				<?php } ?>
+			</div>
+			<input type="hidden" id="menu-status"  name="menu-status" value="0" >
+		</div>
+	</div>
+	
+	<!-- Nella versione mobile questi parametri vengono riempiti dalla menu.html -->
+	<form id="headerForm" action="/viantes/pvt/pages/review/search/searchReviewFromHeader.php"  method="post">
+		<input type="hidden" id="kwrds"    name="kwrds"      value="" >
+		<input type="hidden" id="type"     name="reviewType" value="" >
+		<input type="hidden" id="langCode" name="langCode"   value="<?php echo $_SESSION['langCode'];?>" >
+	</form>
+</div>
+
+<!-- Informativa sui Cookie -->
+<?php if ( $X_show_cookie ){ ?>
+	<div id="info-cook-div" style="position: fixed ! important; margin-top: 36px; background: rgb(9, 9, 9) none repeat scroll 0% 0% ! important; 
+								   margin: 0px auto; width: 100% ! important; z-index: 30 ! important; color: rgb(255, 255, 255) ! important; 
+								   opacity: 0.8; top: 36px;">
+		<a class="close" style="color: #fafafa; opacity: 1;" onclick="$('#info-cook-div').hide();">×</a>  
+		<div style="margin: 12px auto; max-width: 80%;">
+			<?php echo $X_langArray['INO_COOKIE_MSG']?>
+		</div>
+	</div>
+<?php }  ?>

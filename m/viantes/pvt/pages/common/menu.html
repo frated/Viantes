@@ -1,0 +1,76 @@
+<div id ="mobile-menu-page" class="mobile-menu-page hidden">
+	<div class="mobile-menu-content">
+		<ul>
+			<li class="usermenu1elem" id="usrMenu21" onmouseover="selectElement('usrMenu21');" onmouseout ="unselectElement('usrMenu21');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/myProfile.png" />
+				<a  style="position: absolute;" href="/m/viantes/pub/pages/profile/myProfile.php">
+					<?php echo $X_langArray['COMM_MENU_MYPROFILE'] ?>
+				</a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu22" onmouseover="selectElement('usrMenu22');" onmouseout ="unselectElement('usrMenu22');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/setting.png" />
+				<a style="position: absolute;" href="/m/viantes/pub/pages/profile/setting.php"><?php echo $X_langArray['COMM_MENU_SETTINGS'] ?></a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu23" onmouseover="selectElement('usrMenu23');" onmouseout ="unselectElement('usrMenu23');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/message.png" />
+				<a  style="position: absolute;" href="/m/viantes/pub/pages/profile/message.php">
+					<?php echo $X_langArray['COMM_MENU_MESSAGES'] ?>
+					<?php if ($X_logged && $userDO->getInBoxMsgNum() > 0) {  ?>	
+						<div class="header-msg-in-box" style="border-color: rgb(78, 51, 51)">&nbsp;<?php echo $userDO->getInBoxMsgNum() ?>&nbsp;</div>
+					<?php } ?>	
+				</a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu24" onmouseover="selectElement('usrMenu24');" onmouseout ="unselectElement('usrMenu24');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/profile/exit.png" />
+				<?php 
+				//se e' una pagina public, quando clicco su exit devo restare sull pagina, altrimenti vaddo alla index
+				if ( isset($X_is_public) )  {
+					$destPage = str_replace('&', '^', $_SERVER['REQUEST_URI']);
+					//se contiene un prefisso /m (dovrebbe sembre contenterlo, controllo giusto per sicurezza) lo elimino
+					if ( strpos($destPage, '/m/') !== false) {
+						$destPage = substr($destPage, 2);
+					}
+				} else {
+					$destPage = "/index.php"; 
+				}?>
+				<a  style="position: absolute;" href="/viantes/pvt/pages/exit.php?destPage=<?php echo $destPage; ?>">
+					<?php echo $X_langArray['COMM_MENU_EXIT'] ?>
+				</a>
+			</li>
+			
+			<hr>
+			
+			<li class="usermenu2elem" id="usrMenu11" onmouseover="selectElement('usrMenu11');" onmouseout ="unselectElement('usrMenu11');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/review/createRev.png" />
+				<a style="position: absolute;" href="/m/viantes/pub/pages/review/createReview.php">
+					<?php echo $X_langArray['COMM_MENU_CREATE_REVIEW'] ?>
+				</a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu12" onmouseover="selectElement('usrMenu12');" onmouseout ="unselectElement('usrMenu12');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/review/cityRev.png" />
+				<a style="position: absolute;" href="/m/viantes/pub/pages/review/createCityReview.php">
+					<?php echo $X_langArray['COMM_MENU_CITY_REVIEW'] ?>
+				</a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu13" onmouseover="selectElement('usrMenu13');" onmouseout ="unselectElement('usrMenu13');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/review/countryRev.png" />
+				<a style="position: absolute;" href="/m/viantes/pub/pages/review/createCountryReview.php">
+					<?php echo $X_langArray['COMM_MENU_COUNTRY_REVIEW'] ?>
+				</a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu14" onmouseover="selectElement('usrMenu14');" onmouseout ="unselectElement('usrMenu14');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/review/find.png" />
+				<a  style="position: absolute;" href="/m/viantes/pub/pages/review/searchReview.php">
+					<?php echo $X_langArray['COMM_MENU_ADV_SEARCH'] ?>
+				</a>
+			</li>
+			<li class="usermenu2elem" id="usrMenu15" onmouseover="selectElement('usrMenu15');" onmouseout ="unselectElement('usrMenu15');">
+				<img class="mrg-rgt-6" src="/viantes/pvt/img/review/myReview.png" />
+				<a  style="position: absolute;" href="/m/viantes/pub/pages/review/myReview.php">
+					<?php echo $X_langArray['COMM_MENU_MY_REVIEW'] ?>
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+</div>
