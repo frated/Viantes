@@ -52,7 +52,7 @@ define('COVER_TYPE_BCK_PROF', '2');
 //Dimensioni delle immagini
 define('IMG_748_290',' width="748" height="290" '); // immagine copertina nella pagina del profilo
 define('IMG_100_126',' width="100" height="126" '); // usata per le icone del pdf
-define('IMG_128_128',' width="128" height="128" '); // immagine profilo   nella pagina del profilo
+define('IMG_128_128',' width="128" height="128" '); // immagine profilo
 define('IMG_25_25',  ' width="25"  height="25" ' );
 define('IMG_36_36',  ' width="36"  height="36" ' );
 

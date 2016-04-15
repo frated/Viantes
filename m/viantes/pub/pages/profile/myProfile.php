@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "myProfile";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -47,9 +48,13 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 </head>
 		
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
 	
-	<div class="main-div">
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
+	
+	<div id="main-div" class="main-div">
 
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 		
@@ -57,11 +62,9 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 			<div class="bckGrndProfileCover">
 				<form id="attachCoverFrm" enctype="multipart/form-data" action="/viantes/pvt/pages/upload/uploadUserCover.php" method="POST">
 					<!-- Visibile sui browser -->
-					<img class="hideInIE"  src="<?php echo $userDO->getBckCoverFileName(); ?>" <?php echo IMG_748_290 ?>
+					<img src="<?php echo $userDO->getBckCoverFileName(); ?>" width="100%"
 							 onclick="$('#attachImgInput2').click();">
-					<!-- Visibili in ie7/8 -->
-					<img class="showInIE" src="<?php echo $userDO->getBckCoverFileName(); ?>" <?php echo IMG_748_290 ?> >
-
+					
 					<!-- Pulsante type=file nascosto per i browser visibile in ie -->
 					<input class="hideInputButtonFile" style="position:absolute; right: 0; width: 70px; height: 26px; margin-top: -26px; z-index:999" 
 						   id="attachImgInput2" name="userfile" type="file" onchange="$('#submitCov2').click();" value="cambia"/>
@@ -69,7 +72,7 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 					<!-- Pulsante submit che non si vede mai -->
 					<input class="hidden" id="submitCov2" name="submit" type="submit" value="GO" />
 
-					<input type="hidden"  name="backUrl"   value="/viantes/pub/pages/profile/myProfile.php" />
+					<input type="hidden"  name="backUrl"   value="/m/viantes/pub/pages/profile/myProfile.php" />
 					<input type="hidden"  name="usrId"     value="<?php echo $userDO->getId();?>"/>
 					<input id="coverType" name="coverType" value="2" type="hidden"  /><!-- vale 1 => cover profile - 2 => load back cover profile-->
 				</form>
@@ -77,11 +80,9 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 				<form id="attachCoverFrm" enctype="multipart/form-data" action="/viantes/pvt/pages/upload/uploadUserCover.php" method="POST">
 					<div style="position: relative;">
 						<!-- Visibile sui browser -->
-						<img class="profileCover hideInIE" src="<?php echo $userDO->getCoverFileName(); ?>" <?php echo IMG_128_128 ?>
+						<img class="profileCover" src="<?php echo $userDO->getCoverFileName(); ?>"
 							 onclick="$('#attachImgInput1').click();">
-
-						<!-- Visibili in ie -->
-						<img class="profileCover showInIE" src="<?php echo $userDO->getCoverFileName(); ?>" <?php echo IMG_128_128 ?> >
+							 
 						<input id="attachImgInput1" class="profileCover hideInputButtonFile" style="margin:105px 0px 0px 68px; width: 70px; height: 26px;"  
 							   name="userfile" type="file" onchange="$('#submitCov1').click();" />
 					</div>
@@ -89,7 +90,7 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 					<!-- Pulsante submit che non si vede mai -->
 					<input class="hidden" id="submitCov1" name="submit" type="submit" value="GO" />
 
-					<input type="hidden"  name="backUrl"   value="/viantes/pub/pages/profile/myProfile.php" />
+					<input type="hidden"  name="backUrl"   value="/m/viantes/pub/pages/profile/myProfile.php" />
 					<input type="hidden"  name="usrId"     value="<?php echo $userDO->getId();?>"/>
 					<input id="coverType" name="coverType" value="1" type="hidden"  /><!-- vale 1 => cover profile - 2 => load back cover profile-->
 				</form>
@@ -111,7 +112,7 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 					<h3><?php echo $X_langArray['MYPROFILE_MY_INFO'] ?></h3>
 					<?php if ( isset($_GET['mod']) && "m" == $_GET['mod'] ) { ?>
 						<!-- Cancel and Save link -->
-						<a class="setting-a1" href="/viantes/pub/pages/profile/myProfile.php">
+						<a class="setting-a1" href="/m/viantes/pub/pages/profile/myProfile.php">
 							<?php echo $X_langArray['MYPROFILE_MY_INFO_CANCEL'] ?>
 						</a>
 						<a class="setting-a2" href="javascript:$('#myProfileFrm').submit();">
@@ -119,7 +120,7 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 						</a>
 					<?php } else { ?>
 					<!-- Modify link -->
-					<a class="setting-a3" href="/viantes/pub/pages/profile/myProfile.php?mod=m">
+					<a class="setting-a3" href="/m/viantes/pub/pages/profile/myProfile.php?mod=m">
 						<?php echo $X_langArray['MYPROFILE_MY_INFO_MODIFY'] ?>
 					</a>
 					<?php } ?>
@@ -306,7 +307,7 @@ $userRegistryDO = $userRegistryDAO->getUserRegistryByUserId($userDO->getId(), $p
 		
 	</div>
 		
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 
 </body>
 </html>

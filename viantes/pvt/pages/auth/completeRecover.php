@@ -21,21 +21,21 @@ $password2 = htmlspecialchars(isset($_POST['pwd2'])? $_POST['pwd2']: "");
 //controllo i parametri inseriti
 checkPassword($password, $password2, $X_langArray);
 if ($errorField != "") {
-	header('Location: '.$uri.'/viantes/pub/pages/recoverPwd.php?&fwdCode='.$fwdCode.'&email='.$email.'&pwd='.$password.'&pwd2='.$password2.$errorField);
+	header('Location: '.getURI().'/viantes/pub/pages/recoverPwd.php?&fwdCode='.$fwdCode.'&email='.$email.'&pwd='.$password.'&pwd2='.$password2.$errorField);
 	exit;
 }
 
 $userDAO  = NEW UserDAO();
 $userDO = $userDAO->checkRecoverPwd($email, $fwdCode);
 if (!is_object($userDO)) {
-	header('Location: '.$uri.'/viantes/pub/pages/recoverPwd.php?&fwdCode='.$fwdCode.'&email='.$email);
+	header('Location: '.getURI().'/viantes/pub/pages/recoverPwd.php?&fwdCode='.$fwdCode.'&email='.$email);
 	exit;
 }
 
 $userDAO->updatePassword($password, $userDO->getId());
 $_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['GEN_REQUEST_OK'];
 
-header('Location: '.$uri.'/index.php');
+header('Location: '.getURI().'/index.php');
 exit;
 ?>
 

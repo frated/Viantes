@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "message";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -56,7 +57,11 @@ if ($toBeRead > 0) {
 <?php require_once $X_root."pvt/pages/common/overlay-loading.html"; ?>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div id="main-div" class="main-div">
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
@@ -105,28 +110,28 @@ if ($toBeRead > 0) {
 					</li>
 				</ul>
 				<div class="tab-content" >
-					<?php $backUrl='/viantes/pub/pages/profile/message.php'; ?>
+					<?php $backUrl='/m/viantes/pub/pages/profile/message.php'; ?>
 					<div id="tab1" <?php echo ($activeTabIdx == 1) ? 'class="tab active"' : 'class="tab"' ?> >
-						<?php require_once $X_root."pvt/pages/msg/msgTab1.php"; ?>
+						<?php require_once $MX_root."pvt/pages/msg/msgTab1.php"; ?>
 					</div>
 					
 					<div id="tab2" <?php echo ($activeTabIdx == 2) ? 'class="tab active"' : 'class="tab"' ?> >
-						<?php require_once $X_root."pvt/pages/msg/msgTab2.php"; ?>
+						<?php require_once $MX_root."pvt/pages/msg/msgTab2.php"; ?>
 					</div>
 			 
 					<div id="tab3"  <?php echo ($activeTabIdx == 3) ? 'class="tab active"' : 'class="tab"' ?> >
-						<?php require_once $X_root."pvt/pages/msg/msgTab3.php"; ?>
+						<?php require_once $MX_root."pvt/pages/msg/msgTab3.php"; ?>
 					</div>
 					
 					<div id="tab4"  <?php echo ($activeTabIdx == 4) ? 'class="tab active"' : 'class="tab"' ?> >
-						<?php require_once $X_root."pvt/pages/msg/msgTab4.php"; ?>
+						<?php require_once $MX_root."pvt/pages/msg/msgTab4.php"; ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 	
 </body>
 </html>

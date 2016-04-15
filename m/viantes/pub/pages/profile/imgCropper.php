@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 session_start();
 require_once $X_root."pvt/pages/const.php";
 require_once $X_root."pvt/pages/globalFunction.php";
@@ -92,7 +93,11 @@ imagedestroy($img);
 </head>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div class="main-div">
 
@@ -166,7 +171,7 @@ imagedestroy($img);
 		</div>
 	</div>
 		
-	<?php include $X_root."pvt/pages/common/footer.html"; ?>
+	<?php include $MX_root."pvt/pages/common/footer.html"; ?>
 
 </body>
 </html>

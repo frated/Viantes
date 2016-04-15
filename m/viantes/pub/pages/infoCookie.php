@@ -1,5 +1,6 @@
 <?php
-$X_root = "../../../../viantes/";
+$X_root = "../../../../viantes/";//root che referenzia risorse sotto /vaintes
+$MX_root = "../../"; //root che referenzia risorse sotto /m/vaintes
 $X_page = "infoCookie";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -27,15 +28,22 @@ cleanSesison($X_page);
 	<?php require_once $X_root."pvt/pages/common/meta-link-script.html"; ?>
 </head>
 
-<!-- Overlay-login-signin -->
-<?php require_once $X_root."pvt/pages/common/overlay-login-signin.html"; ?>
-<input type="hidden" id="ovrly-initial-src-page" value="/viantes/pub/pages/infoCookie.php" />
-<input type="hidden" id="ovrly-initial-login-dst-page" value="/viantes/pub/pages/infoCookie.php" />
-<input type="hidden" id="ovrly-initial-sign-dst-page" value="/viantes/pub/pages/infoCookie.php" />
-
-
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html"; ?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html"; ?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
+	
+	<!-- Mobile Login Page -->
+	<?php 
+	include $MX_root."pvt/pages/common/login-signin.html"; 
+	//e' il not dello show del div login-singup
+	$mainDivShow = isset($_GET['showOverlayLgSg']) ? "display : none;" : "display: block;";
+	?>
+	<input type="hidden" id="ovrly-initial-src-page" value="/viantes/pub/pages/infoCookie.php" />
+	<input type="hidden" id="ovrly-initial-login-dst-page" value="/viantes/pub/pages/infoCookie.php" />
+	<input type="hidden" id="ovrly-initial-sign-dst-page" value="/viantes/pub/pages/infoCookie.php" />
 	
 	<div id="main-div" class="main-div">
 		<div>
@@ -74,7 +82,7 @@ cleanSesison($X_page);
 		</div>
 	</div>
 	
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 			
 </body>
 </html>

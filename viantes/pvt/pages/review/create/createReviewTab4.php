@@ -15,7 +15,9 @@ $haveElement = $bean != null && count($bean->getImgFileNameArray()) > 0
 		<!-- Upload Button - il tag img e' visibile per i browser, l'input-type-file per ie -->
 		<img class="hideInIE crs-pnt" src="/viantes/pvt/img/review/attachDoc_32.png" onclick="$('#attachDocInput').click();" >	
 		<input id="attachDocInput" class="hideInputButtonFile" name="userfile" type="file" 
-			   onchange="setFieldsAndErrMsgReviewPage(4); $('#loadImgT4').show(); $('#submitDoc').click();"/> <?php
+			   onchange="setFieldsAndErrMsgReviewPage(4); $('#loadImgT4').show(); $('#submitDoc').click();
+						 showOverlayForLoad('<?php echo $X_langArray['CREATE_REVIEW_IMG_WAIT_LOAD'] ?>', 'submitDoc')"/> 
+	<?php
 	} 	 
 	if ( isset($_GET['loadDocErrMsg']) ) { ?>
 		<p class="articleLoadDocError"><?php echo urldecode($_GET['loadDocErrMsg']) ?></p>
@@ -24,8 +26,6 @@ $haveElement = $bean != null && count($bean->getImgFileNameArray()) > 0
 	<br><br>
 
 	<?php include $X_root."pvt/pages/review/common/renderDocFromSession.php"; ?>
-
-	<img id="loadImgT4" class="loadImgDoc" style="display:none" src="/viantes/pvt/img/animate/ld_32_ffffff.gif"/>
 
 	<!-- UPLOAD -->
 	<input class="hidden" id="submitDoc" name="submit" type="submit" value="GO"/>	   

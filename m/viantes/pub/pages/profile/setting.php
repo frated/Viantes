@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "setting";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -42,7 +43,11 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 </head>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html"; ?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div class="main-div">
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
@@ -63,7 +68,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 			<h3><?php echo $X_langArray['SETTING_ACCOUNT'] ?></h3>
 			<?php if ( isset($_GET['mod']) && "m" == $_GET['mod'] && isset($_GET['t']) && $_GET['t'] == "inf" ) { ?>
 				<!-- Cancel link -->
-				<a class="setting-a1" href="/viantes/pub/pages/profile/setting.php#setting_inf_div_anchor">
+				<a class="setting-a1" href="/m/viantes/pub/pages/profile/setting.php#setting_inf_div_anchor">
 					<?php echo $X_langArray['MYPROFILE_MY_INFO_CANCEL'] ?>
 				</a>
 				<!-- Save link -->
@@ -72,7 +77,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 				</a>
 			<?php } else { ?>
 				<!-- Modify link -->
-				<a class="setting-a3" href="/viantes/pub/pages/profile/setting.php?mod=m&t=inf#setting_inf_div_anchor">
+				<a class="setting-a3" href="/m/viantes/pub/pages/profile/setting.php?mod=m&t=inf#setting_inf_div_anchor">
 					<?php echo $X_langArray['MYPROFILE_MY_INFO_MODIFY'] ?>
 				</a>
 			<?php } ?>
@@ -117,7 +122,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 			
 			<?php if ($isModPwd) { ?>
 				<!-- Cancel link -->
-				<a class="setting-a1" href="/viantes/pub/pages/profile/setting.php#setting_pwd_div_anchor">
+				<a class="setting-a1" href="/m/viantes/pub/pages/profile/setting.php#setting_pwd_div_anchor">
 					<?php echo $X_langArray['MYPROFILE_MY_INFO_CANCEL'] ?>
 				</a>
 				<!-- Save link -->
@@ -126,7 +131,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 				</a>
 			<?php } else { ?>
 				<!-- Modify link -->
-				<a class="setting-a3" href="/viantes/pub/pages/profile/setting.php?mod=m&t=pwd#setting_pwd_div_anchor">
+				<a class="setting-a3" href="/m/viantes/pub/pages/profile/setting.php?mod=m&t=pwd#setting_pwd_div_anchor">
 					<?php echo $X_langArray['MYPROFILE_MY_INFO_MODIFY'] ?>
 				</a>
 			<?php } ?>
@@ -177,7 +182,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 			<h3><?php echo $X_langArray['SETTING_PRIVACY'] ?></h3>
 			<?php if ( isset($_GET['mod']) && "m" == $_GET['mod'] && isset($_GET['t']) && $_GET['t'] == "priv" ) { ?>
 				<!-- Cancel link -->
-				<a class="setting-a1" href="/viantes/pub/pages/profile/setting.php#setting_priv_div_anchor">
+				<a class="setting-a1" href="/m/viantes/pub/pages/profile/setting.php#setting_priv_div_anchor">
 					<?php echo $X_langArray['MYPROFILE_MY_INFO_CANCEL'] ?>
 				</a>
 				<!-- Save link -->
@@ -186,7 +191,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 				</a>
 			<?php } else { ?>
 				<!-- Modify link -->
-				<a class="setting-a3" href="/viantes/pub/pages/profile/setting.php?mod=m&t=priv#setting_priv_div_anchor">
+				<a class="setting-a3" href="/m/viantes/pub/pages/profile/setting.php?mod=m&t=priv#setting_priv_div_anchor">
 					<?php echo $X_langArray['MYPROFILE_MY_INFO_MODIFY'] ?>
 				</a>
 			<?php } ?>
@@ -218,7 +223,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 		
 	</div>
 		
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 		
 </body>
 </html>

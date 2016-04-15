@@ -15,7 +15,6 @@ if ( !$X_logged )  {
 	destroyUserSession();
 	
 	// forward to welcome
-	$uri = getURI();
-	header('Location: '.$uri.'/index.php?showOverlayLgSg=val&srcPage=index.php&destPage='.$destPage);
+	header('Location: '.getURI().'/index.php?showOverlayLgSg=val&srcPage=index.php&destPage='.$destPage);
 }
 ?>

@@ -46,7 +46,7 @@ if ($errorField == "") {
 			$reviewDO = $reviewDOArray[0];
 			$rate = $reviewDAO->getRateArray($reviewDO->getSiteId(), SiteReview);
 			$_SESSION["SEARCH_REVIEW_RATE_ARRAY"] = $rate;
-			header('Location: '.$uri.'/viantes/pub/pages/review/searchReviewResult.php?searchRevResCur=0');
+			header('Location: '.getURI().'/viantes/pub/pages/review/searchReviewResult.php?searchRevResCur=0');
 			exit;
 		}
 	} else if ($type == CityReview) {
@@ -61,7 +61,7 @@ if ($errorField == "") {
 			$rate = $reviewDAO->getRateArray($cityReviewDO->getCityId(), CityReview);
 			$_SESSION["SEARCH_REVIEW_RATE_ARRAY"] = $rate;
 			
-			header('Location: '.$uri.'/viantes/pub/pages/review/searchReviewResult.php?searchRevResCur=0');
+			header('Location: '.getURI().'/viantes/pub/pages/review/searchReviewResult.php?searchRevResCur=0');
 			exit;
 		}
 	} else if ($type == CountryReview) {
@@ -76,13 +76,13 @@ if ($errorField == "") {
 			$rate = $reviewDAO->getRateArray($countryReviewDO->getCountryId(), CountryReview);
 			$_SESSION["SEARCH_REVIEW_RATE_ARRAY"] = $rate;
 			
-			header('Location: '.$uri.'/viantes/pub/pages/review/searchReviewResult.php?searchRevResCur=0');
+			header('Location: '.getURI().'/viantes/pub/pages/review/searchReviewResult.php?searchRevResCur=0');
 			exit;
 		}
 	}
 }
 //forward - se non trovo nulla torno nella home ma NON dovrebbe mai poter succedere
-header('Location: '.$uri.'/index.php');
+header('Location: '.getURI().'/index.php');
 exit;
 ?>
 

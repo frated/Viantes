@@ -36,7 +36,7 @@ if ( isset($_POST['type']) && $_POST['type'] != "" ) {
 		//controllo i parametri inseriti
 		checkPassword($password, $newPwd, $repetPwd, $userDO->getEmail(), $X_langArray);
 		if ($errorField != "") {
-			header('Location: '.$uri.'/viantes/pub/pages/profile/setting.php?mod=m&t=pwd'.$errorField);
+			header('Location: '.getURI().'/viantes/pub/pages/profile/setting.php?mod=m&t=pwd'.$errorField);
 			exit;
 		}
 		else{
@@ -56,7 +56,7 @@ if ( isset($_POST['type']) && $_POST['type'] != "" ) {
 	
 	$_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['GEN_REQUEST_OK'];
 
-	header('Location: '.$uri.'/viantes/pub/pages/profile/setting.php');
+	header('Location: '.getURI().'/viantes/pub/pages/profile/setting.php');
 }
 
 

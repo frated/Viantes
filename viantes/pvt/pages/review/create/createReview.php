@@ -85,12 +85,12 @@ if ($errorField == "") {
 	switch ($_POST['submit']) {
 		//Avanti
 		case $X_langArray['CREATE_REVIEW_SUBMIT_VAL']:
-			header('Location: '.$uri.'/viantes/pub/pages/review/createReview.php?'.$oldParams.'&finish=true');
+			header('Location: '.getURI().'/viantes/pub/pages/review/createReview.php?'.$oldParams.'&finish=true');
 			exit;
         break;
 		//Indietro
 		case $X_langArray['CREATE_REVIEW_CHANGE_VAL']:
-			header('Location: '.$uri.'/viantes/pub/pages/review/createReview.php?'.$oldParams);
+			header('Location: '.getURI().'/viantes/pub/pages/review/createReview.php?'.$oldParams);
 			exit;
 		break;
 	}
@@ -141,12 +141,12 @@ if ($errorField == "") {
 	$_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['CREATE_REVIEW_PAGE_TOP_MSG_OK'];
 	unset($_SESSION[$_POST['beanSessionKey']]);
 	
-	header('Location: '.$uri.'/viantes/pub/pages/review/myReview.php');
+	header('Location: '.getURI().'/viantes/pub/pages/review/myReview.php');
 	exit;
 }
 
 //forward
-header('Location: '.$uri.'/viantes/pub/pages/review/createReview.php?'.$oldParams.$errorField);
+header('Location: '.getURI().'/viantes/pub/pages/review/createReview.php?'.$oldParams.$errorField);
 exit;
 ?>
 

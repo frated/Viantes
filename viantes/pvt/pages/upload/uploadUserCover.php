@@ -16,6 +16,9 @@ $backUrl = isset($_POST['backUrl']) ? $_POST['backUrl']."?1=1" : "";
 //nome del file temporaneo (prima di essere stato uploadato)
 $tmpFileName = $_FILES['userfile']['tmp_name'];
 
+//the uri to came back
+$uri = getURI();
+
 //Not is an Image
 if ( !exif_imagetype( $tmpFileName ) ) {
 	$backUrl .= "&loadCovImgErrMsg=".urlencode($X_langArray['UPLOAD_IMG_ERR_TYPE']);

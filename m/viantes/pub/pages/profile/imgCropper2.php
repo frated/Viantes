@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 session_start();
 require_once $X_root."pvt/pages/const.php";
 require_once $X_root."pvt/pages/globalFunction.php";
@@ -21,13 +22,14 @@ list($widthIn, $heightIn) = getimagesize($fullFileName);
 
 //il cropper che e' un rettangolo 686x250 N.B. non cambiare questo rapporto senza cambiare il rapporto del DIV 
 //che conterra l'immagine (686x266) nella pagina myProfile.php
-$base = 600;
-$altezza = 233;  
+$base = 270; //600; 
+$altezza = 112; //233;  
 
 //fattore di scala e' 1 per immagini 686x266
 $scale = 1;
 
-$width = 686; $height = 514; //dimensioni del div contanitore del cropper (immagine esterna)
+//$width = 686; $height = 514; //dimensioni del div contanitore del cropper (immagine esterna)
+$width = 287; $height = 331; //dimensioni del div contanitore del cropper (immagine esterna)
 
 //se entrambe le dimensioni sono inferiori alla dimensione voluta (640x640)
 if ($widthIn < $width && $heightIn < $height) {
@@ -107,7 +109,11 @@ imagedestroy($img);
 </head>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div class="main-div">
 		<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
@@ -180,7 +186,7 @@ imagedestroy($img);
 		</div>
 	</div>
 		
-	<?php include $X_root."pvt/pages/common/footer.html"; ?>
+	<?php include $MX_root."pvt/pages/common/footer.html"; ?>
 
 </body>
 </html>

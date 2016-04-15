@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "showProfile";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -62,7 +63,11 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 <?php require_once $X_root."pvt/pages/common/overlay-loading.html"; ?>		
 		
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div id="main-div" class="main-div">
 
@@ -71,13 +76,13 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 		<div>
 			<?php $currentUserDO->getBckCoverFileName();?>
 			<div class="bckGrndProfileCover">
-				<img src="<?php echo $currentUserDO->getBckCoverFileName(); ?>" <?php echo IMG_748_290 ?> >
+				<img src="<?php echo $currentUserDO->getBckCoverFileName(); ?>"  width="100%">
 				<div style="position: relative;">
-					<img class="profileCover" src="<?php echo $currentUserDO->getCoverFileName(); ?>" <?php echo IMG_128_128 ?> >
+					<img class="profileCover" src="<?php echo $currentUserDO->getCoverFileName(); ?>" >
 				</div>
 			</div>
 
-			<div class="second-header dspl-inln-blk">	
+			<div class="second-header">	
 				<?php if ( isset($_GET['loadCovImgErrMsg']) ){ ?>
 					<p class="p-error"><?php echo urldecode($_GET['loadCovImgErrMsg']) ?><p>
 				<?php } ?>
@@ -189,7 +194,7 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 		
 	</div>
 		
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 
 </body>
 </html>

@@ -109,34 +109,33 @@ require_once $X_root."pvt/pages/geo/countryMap.html";
 
 		<!-- COVER -->
 		<div class="commonRowDiv">
-			<label>
-				<?php 
-				$bean = isset($_SESSION[$beanSessionKey]) ? unserialize($_SESSION[$beanSessionKey]) : null;
-				if ( $bean == null || $bean->getCoverFileName() == null || $bean->getCoverFileName() == '' ) {?>
-					<span class="commonRowSpan_col1"><b><?php echo $X_langArray['CREATE_COUNTRY_REV_FIELD_COVER'] ?></b></span>
-					<div class="commonRowCoverDiv">
-						<!-- visible on all browser -->
-						<img class="hideInIE" width="24" src="/viantes/pvt/img/review/articleCoverButton_32.png" onclick="$('#reviewCoverId').click();">
-						<!-- visible on ie :( -->
-						<input class="hideInputButtonFile" id="reviewCoverId" name="userfile" type="file" onchange="$('#loadCov').show(); $('#submitCov').click();"/>
-						<span class="commonRowMandatory">*</span>
-					</div>					
-				<?php } else { ?>
-					<span class="commonRowSpan_col1_txtArea"><b><?php echo $X_langArray['CREATE_COUNTRY_REV_FIELD_COVER'] ?></b></span>
-				<?php	
-					include $X_root."pvt/pages/review/common/renderCover.php";
-				}
-				?>
-				<!-- Seconda riga - Msg Err -->
-				<?php if ( isset($_GET['loadCovImgErrMsg']) ) { ?>
-					<div id="descrDIV" class="commonRowInnerDivError">
-						<p class="p-error">
-						<!--p class="articleLoadImgError"-->
-							<?php echo urldecode($_GET['loadCovImgErrMsg']) ?>
-						</p>
-					</div>
-				<?php } ?>	 	
-			</label>	
+			<?php 
+			$bean = isset($_SESSION[$beanSessionKey]) ? unserialize($_SESSION[$beanSessionKey]) : null;
+			if ( $bean == null || $bean->getCoverFileName() == null || $bean->getCoverFileName() == '' ) {?>
+				<span class="commonRowSpan_col1"><b><?php echo $X_langArray['CREATE_COUNTRY_REV_FIELD_COVER'] ?></b></span>
+				<div class="commonRowCoverDiv">
+					<!-- visible on all browser -->
+					<img class="hideInIE crs-pnt" width="24" src="/viantes/pvt/img/review/articleCoverButton_32.png" onclick="$('#reviewCoverId').click();">
+					<!-- visible on ie :( -->
+					<input class="hideInputButtonFile" id="reviewCoverId" name="userfile" type="file"  
+						   onchange="$('#submitCov').click(); showOverlayForLoad('<?php echo $X_langArray['CREATE_REVIEW_IMG_WAIT_LOAD'] ?>','submitCov')"/>
+					<span class="commonRowMandatory">*</span>
+				</div>					
+			<?php } else { ?>
+				<span class="commonRowSpan_col1_txtArea"><b><?php echo $X_langArray['CREATE_COUNTRY_REV_FIELD_COVER'] ?></b></span>
+			<?php	
+				include $X_root."pvt/pages/review/common/renderCover.php";
+			}
+			?>
+			<!-- Seconda riga - Msg Err -->
+			<?php if ( isset($_GET['loadCovImgErrMsg']) ) { ?>
+				<div id="descrDIV" class="commonRowInnerDivError">
+					<p class="p-error">
+					<!--p class="articleLoadImgError"-->
+						<?php echo urldecode($_GET['loadCovImgErrMsg']) ?>
+					</p>
+				</div>
+			<?php } ?>
 		</div>
 	</div>
 	
@@ -299,27 +298,25 @@ require_once $X_root."pvt/pages/geo/countryMap.html";
 		
 		<!-- MYTH -->
 		<div class="commonRowDiv">
-			<label>
-				<!-- Prima riga - Campi -->
-				<span class="commonRowSpan_col1_txtArea">
-					<b><?php echo $X_langArray['CREATE_COUNTRY_REV_FIELD_MYTH'] ?></b>&nbsp;
-				</span>
-				<textarea id="myth" name="myth" class="commonRowArea_col2_250 
-					   <?php if (isset($_GET['mythErrMsg']) && urldecode($_GET['mythErrMsg']) != "") { echo " errorInput";} ?>"
-					   onfocus="showCartoon('myth');"
-					   onkeyup="doFieldAsyncGetMinLen('/viantes/pvt/pages/review/create/createCountryRev.php','myth', 10);"
-					   onblur="doFieldAsyncGet('/viantes/pvt/pages/review/create/createCountryRev.php','myth'); hideCartoon('myth');"><?php if (isset($_GET['myth'])) echo urldecode($_GET['myth']);?></textarea>
-				<img id="mythFldLD"   class="commonRowImg"   src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
-				<img id="mythFldOK"   class="commonRowImg"   src="/viantes/pvt/img/common/ok_32_22.png">
-				<img id="mythFrcCart" class="frecciaCartoon" src="/viantes/pvt/img/review/fumettoFreccia.png">
-				
-				<!-- Seconda riga - Msg Err -->
-				<div id="mythDIV" class="commonTextAreaDivError">
-					<p class="p-error">
-						<?php if ( isset($_GET['mythErrMsg']) ) { echo urldecode($_GET['mythErrMsg']);} ?>
-					</p>
-				</div>
-			</label>
+			<!-- Prima riga - Campi -->
+			<span class="commonRowSpan_col1_txtArea">
+				<b><?php echo $X_langArray['CREATE_COUNTRY_REV_FIELD_MYTH'] ?></b>&nbsp;
+			</span>
+			<textarea id="myth" name="myth" class="commonRowArea_col2_250 
+				   <?php if (isset($_GET['mythErrMsg']) && urldecode($_GET['mythErrMsg']) != "") { echo " errorInput";} ?>"
+				   onfocus="showCartoon('myth');"
+				   onkeyup="doFieldAsyncGetMinLen('/viantes/pvt/pages/review/create/createCountryRev.php','myth', 10);"
+				   onblur="doFieldAsyncGet('/viantes/pvt/pages/review/create/createCountryRev.php','myth'); hideCartoon('myth');"><?php if (isset($_GET['myth'])) echo urldecode($_GET['myth']);?></textarea>
+			<img id="mythFldLD"   class="commonRowImg"   src="/viantes/pvt/img/animate/ld_16_ffffff.gif">
+			<img id="mythFldOK"   class="commonRowImg"   src="/viantes/pvt/img/common/ok_32_22.png">
+			<img id="mythFrcCart" class="frecciaCartoon" src="/viantes/pvt/img/review/fumettoFreccia.png">
+			
+			<!-- Seconda riga - Msg Err -->
+			<div id="mythDIV" class="commonTextAreaDivError">
+				<p class="p-error">
+					<?php if ( isset($_GET['mythErrMsg']) ) { echo urldecode($_GET['mythErrMsg']);} ?>
+				</p>
+			</div>
 		</div>
 		
 		<!-- VOTE -->

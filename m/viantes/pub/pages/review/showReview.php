@@ -1,5 +1,6 @@
 <?php
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "showReview";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -114,19 +115,29 @@ $activeTabIdx = 1;
 
 
 <?php 
-//Overlay-login-signin
-include $X_root."pvt/pages/common/overlay-login-signin.html";
-$page="/viantes/pub/pages/review/showReview.php?revId=".$_GET['revId']."&reviewType=".$_GET['reviewType'];
 
 //Overlay-star-post-list
 include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 ?>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";
-		  if (!$X_GEO_disableMAP) require_once $X_root.$requiredJSMap;?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";
+		  if (!$X_GEO_disableMAP) require_once $X_root.$requiredJSMap; ?>
 	
-	<div id="main-div" class="main-div">
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
+	
+	<!-- Mobile Login Page -->
+	<?php 
+	include $MX_root."pvt/pages/common/login-signin.html"; 
+	$page="/viantes/pub/pages/review/showReview.php?revId=".$_GET['revId']."&reviewType=".$_GET['reviewType'];
+	
+	//e' il not dello show del div login-singup
+	$mainDivShow = isset($_GET['showOverlayLgSg']) ? "display : none;" : "display: block;";
+	?>
+	
+	<div id="main-div" class="main-div" style="<?php echo $mainDivShow ?>">
 	
 		<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 
@@ -197,7 +208,7 @@ include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 		
 	</div>
 	
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 
 	<input type="hidden" id="ovrly-initial-src-page" value="<?php echo $page?>" />
 	<input type="hidden" id="ovrly-initial-login-dst-page" value="<?php echo $page?>" />

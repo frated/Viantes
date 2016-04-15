@@ -5,7 +5,7 @@ require_once $X_root.'pvt/pages/extra/mobile/Mobile_Detect.php';
 $detect = new Mobile_Detect;
 
 if($detect->isMobile() || $detect->isTablet()) {
-    header('Location: '.getURI().'/indexM.php');
+    header('Location: '.getURI().'/index.php');
     exit;
 }
 

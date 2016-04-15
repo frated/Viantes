@@ -63,12 +63,12 @@ if ($errorField == "") {
 	switch ($_POST['submit']) {
 		//Avanti
 		case $X_langArray['CREATE_COUNTRY_REV_SUBMIT_VAL']:
-			header('Location: '.$uri.'/viantes/pub/pages/review/createCountryReview.php?'.$oldParams.'&finish=true');
+			header('Location: '.getURI().'/viantes/pub/pages/review/createCountryReview.php?'.$oldParams.'&finish=true');
 			exit;
         break;
 		//Indietro
 		case $X_langArray['CREATE_COUNTRY_REV_CHANGE_VAL']:
-			header('Location: '.$uri.'/viantes/pub/pages/review/createCountryReview.php?'.$oldParams);
+			header('Location: '.getURI().'/viantes/pub/pages/review/createCountryReview.php?'.$oldParams);
 			exit;
 		break;
 	}
@@ -117,12 +117,12 @@ if ($errorField == "") {
 	$_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['CREATE_COUNTRY_REV_PAGE_TOP_MSG_OK'];
 	unset($_SESSION["COUNTRY_REVIEWN_BEAN"]);
 	
-	header('Location: '.$uri.'/viantes/pub/pages/review/myReview.php');
+	header('Location: '.getURI().'/viantes/pub/pages/review/myReview.php');
 	exit;
 }
 
 //forward
-header('Location: '.$uri.'/viantes/pub/pages/review/createCountryReview.php?'.$oldParams.$errorField);
+header('Location: '.getURI().'/viantes/pub/pages/review/createCountryReview.php?'.$oldParams.$errorField);
 exit;
 ?>
 

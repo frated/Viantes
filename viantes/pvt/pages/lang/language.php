@@ -151,6 +151,7 @@ class Language {
 		$lang['CREATE_REVIEW_IMG_TXT1'] = 'Foto Allegate';
 		$lang['CREATE_REVIEW_IMG_TXT2'] = 'Clicca sul pulsante per aggiungere nuove foto';
 		$lang['CREATE_REVIEW_IMG_BT_TITLE'] = 'aggiungi una foto';
+		$lang['CREATE_REVIEW_IMG_WAIT_LOAD'] = 'Attendere prego';
 		$lang['CREATE_REVIEW_NO_MOV_TXT1'] = 'Non hai caricato ancora nessun video';
 		$lang['CREATE_REVIEW_NO_MOV_TXT2'] = 'Clicca sul pulsante per caricare il tuo primo video';
 		$lang['CREATE_REVIEW_MOV_TXT1'] = 'Video Allegati';
@@ -785,6 +786,7 @@ class Language {
 		$lang['CREATE_REVIEW_IMG_TXT1'] = 'Attached Pictures';
 		$lang['CREATE_REVIEW_IMG_TXT2'] = 'Click the button to add new pictures';
 		$lang['CREATE_REVIEW_IMG_BT_TITLE'] = 'add pictires now';
+		$lang['CREATE_REVIEW_IMG_WAIT_LOAD'] = 'Wait please';
 		$lang['CREATE_REVIEW_NO_MOV_TXT1'] = 'No video uploaded yet';
 		$lang['CREATE_REVIEW_NO_MOV_TXT2'] = 'Click the button to add your first video';
 		$lang['CREATE_REVIEW_MOV_TXT1'] = 'Attached Video';

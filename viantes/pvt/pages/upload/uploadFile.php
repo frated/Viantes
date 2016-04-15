@@ -16,6 +16,9 @@ if ( isset($_POST['revId']) ) $backUrl .= "&revId=".urlencode($_POST['revId']);
 //nome del file temporaneo (prima di essere stato uploadato)
 $tmpFileName = $_FILES['userfile']['tmp_name'];
 
+//the uri to came back
+$uri = getURI();
+
 //Not is an Image
 if ( $_POST['type'] == IMG && !exif_imagetype( $tmpFileName ) ) {
 	$backUrl .= getErrParamname().urlencode($X_langArray['UPLOAD_IMG_ERR_TYPE']);

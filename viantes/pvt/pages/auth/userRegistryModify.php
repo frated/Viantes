@@ -40,7 +40,7 @@ checkParams($firstName, $lastName, $mobileNum, $dateOfBirth, $city, $postcode, $
 $oldParam = "&firstName=".$firstName."&lastName=".$lastName."&mobileNum=".$mobileNum."&dateOfBirth=".$dateOfBirth."&city=".$city."&postcode=".$postcode."&country=".$country;
 
 if ($errorField != "") {
-	header('Location: '.$uri.'/viantes/pub/pages/profile/myProfile.php?mod=m'.$errorField.$oldParam);
+	header('Location: '.getURI().'/viantes/pub/pages/profile/myProfile.php?mod=m'.$errorField.$oldParam);
 	exit;
 }
 else{
@@ -54,7 +54,7 @@ else{
 
 $_SESSION[GLOBAL_TOP_MSG_SUCCESS] = $X_langArray['GEN_REQUEST_OK'];
 	
-header('Location: '.$uri.'/viantes/pub/pages/profile/myProfile.php');
+header('Location: '.getURI().'/viantes/pub/pages/profile/myProfile.php');
 exit;
 ?>
 

@@ -130,7 +130,7 @@ cleanSesison($X_page);
 					
 					<!-- SUBMIT -->
 					<div class="mrg-bot-24">
-						<input id="submit" name="submit" class="hgt-30" type="submit" value="<?php echo $X_langArray['CREATE_CITY_REV_SUBMIT_VAL'] ?>"/>
+						<input id="submit" name="submit" class="hgt-30" type="submit" value="<?php echo $X_langArray['CONTACT_SEND'] ?>"/>
 					</div>
 
 				</form>

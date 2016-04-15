@@ -16,7 +16,7 @@ $haveElement = $bean != null && count($bean->getImgFileNameArray()) > 0
 		<img id="attachMov32" src="/viantes/pvt/img/review/attachMov_32.png" class="hideInIE crs-pnt"  onclick=" $('#attachMovInput').click();" >
 		<input id="attachMovInput" name="userfile" class="hideInputButtonFile" type="file"
 			   onchange="setFieldsAndErrMsgReviewPage(3);$('#submitMov').click();
-						 showOverlayForVideo('<?php echo $X_langArray['CREATE_REVIEW_MOV_WAIT_LOAD'] ?>')" /> <?php
+						 showOverlayForLoad('<?php echo $X_langArray['CREATE_REVIEW_MOV_WAIT_LOAD'] ?>','submitMov')" /> <?php
 	}
 	if ( isset($_GET['loadMovErrMsg']) ) { ?>
 		<p class="articleLoadMovError"><?php echo urldecode($_GET['loadMovErrMsg']) ?></p>

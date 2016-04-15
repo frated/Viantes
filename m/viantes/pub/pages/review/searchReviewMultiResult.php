@@ -1,5 +1,6 @@
 <?php
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "searchReviewMultiResult";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -123,7 +124,7 @@ $tp = $_GET['tp'];
 		
 	</div><!--main-div-->
 	
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 			
 </body>
 </html>

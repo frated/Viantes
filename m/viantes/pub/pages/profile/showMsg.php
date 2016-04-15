@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "showMsg";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -60,9 +61,13 @@ if ($msgDO->getRecipientStatus() == 0 && $msgDO->getToUsrId() == $userDO->getId(
 <?php require_once $X_root."pvt/pages/common/overlay-loading.html"; ?>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html"; ?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
 	
-	<div class="main-div">
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
+	
+	<div id="main-div" class="main-div">
 		
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 		
@@ -161,7 +166,7 @@ if ($msgDO->getRecipientStatus() == 0 && $msgDO->getToUsrId() == $userDO->getId(
 		<input type="hidden" id="tabactive" value="<?php echo$_GET['tabactive'] ?>"/>	
 	</div>
 	
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 			
 </body>
 </html>

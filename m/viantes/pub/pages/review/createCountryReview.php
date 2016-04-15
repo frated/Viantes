@@ -1,5 +1,6 @@
 <?php 
-$X_root = "../../../../../viantes/";
+$X_root = "../../../../../viantes/"; //root che referenzia risorse sotto /vaintes
+$MX_root = "../../../";              //root che referenzia risorse sotto /m/vaintes
 $X_page = "createCountryReview";
 session_start();
 require_once $X_root."pvt/pages/const.php";
@@ -64,7 +65,11 @@ if ( !isset($_SESSION[$beanSessionKey]) && isset($_GET['finish']) ) {
 <?php require_once $X_root."pvt/pages/review/create/overlayAddInterestCity.html"; ?>
 
 <body>
-	<?php require_once $X_root."pvt/pages/common/header.html";?>
+	<!-- Mobile Header -->
+	<?php require_once $MX_root."pvt/pages/common/header.html";?>
+	
+	<!-- Mobile Menu -->
+	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div id="main-div" class="main-div">
 	
@@ -116,10 +121,10 @@ if ( !isset($_SESSION[$beanSessionKey]) && isset($_GET['finish']) ) {
 					<div id="tab1" <?php echo ($activeTabIdx == 1) ? 'class="tab active"' : 'class="tab"' ?> >
 						<?php 
 						if (isset($_GET['finish'])) {
-							require_once $X_root."pvt/pages/review/create/createCountryRevTab1Step2.php"; 
+							require_once $MX_root."pvt/pages/review/create/createCountryRevTab1Step2.php"; 
 						}
 						else{
-							require_once $X_root."pvt/pages/review/create/createCountryRevTab1.php";
+							require_once $MX_root."pvt/pages/review/create/createCountryRevTab1.php";
 						}?>
 					</div>
 					
@@ -139,7 +144,7 @@ if ( !isset($_SESSION[$beanSessionKey]) && isset($_GET['finish']) ) {
 		</div>		
 	</div>
 	
-	<?php require_once $X_root."pvt/pages/common/footer.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/footer.html"; ?>
 	
 </body>
 </html>

@@ -42,10 +42,11 @@ function hideOvrlyLgSg(){
 	window.location.href = $('#overlay-srcPage-lg').val();
 }
 
-/* Mostra l'overlay per il caricamento di un video */
-function showOverlayForVideo(text) {
+/* Mostra l'overlay per il caricamento di un'immagine un video o un doc */
+function showOverlayForLoad(text, submitId) {
 	$('#overlay-loadImg-simple-msg').text(text); 
-	$('#overlay-loadImg').show();  $('#submitMov').click();
+	$('#overlay-loadImg').show();  
+	$('#'+submitId+'').click();
 	showOverlayIfIE('#fff');
 }
 
@@ -383,7 +384,7 @@ function doReviewItemBox(numOfBox, mode, txt1, txt2, loggeUsrId, isMob){
 				var revItemBoxDiv = "<div class=\"reviewItemBoxContainer\">" + 
 										"<div class=\"reviewItemBoxTop\">" + 
 											"<a href=\"viantes/pub/pages/profile/" + (loggeUsrId == usrId ? "myProfile.php" : "showProfile.php?usrId=" +usrId) + " \">" +
-												"<img src=\"" + usrCv + "\" width=\"36\" height=\"36\">" +
+												"<img src=\"" + usrCv + "\" width=\"36\" height=\"36\" class=\"reviewItemsUsrCover\" >" +
 											"</a>" +
 											"<p><b>" + 
 												"<a href=\"viantes/pub/pages/profile/" + (loggeUsrId == usrId ? "myProfile.php" : "showProfile.php?usrId=" +usrId) + " \"> " + 

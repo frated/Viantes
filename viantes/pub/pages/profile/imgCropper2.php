@@ -21,13 +21,14 @@ list($widthIn, $heightIn) = getimagesize($fullFileName);
 
 //il cropper che e' un rettangolo 686x250 N.B. non cambiare questo rapporto senza cambiare il rapporto del DIV 
 //che conterra l'immagine (686x266) nella pagina myProfile.php
-$base = 600;
-$altezza = 233;  
+$base = 748; //600; 
+$altezza = 290; //233;  
 
 //fattore di scala e' 1 per immagini 686x266
 $scale = 1;
 
-$width = 686; $height = 514; //dimensioni del div contanitore del cropper (immagine esterna)
+//$width = 686; $height = 514; //dimensioni del div contanitore del cropper (immagine esterna)
+$width = 748; $height = 560; //dimensioni del div contanitore del cropper (immagine esterna)
 
 //se entrambe le dimensioni sono inferiori alla dimensione voluta (640x640)
 if ($widthIn < $width && $heightIn < $height) {

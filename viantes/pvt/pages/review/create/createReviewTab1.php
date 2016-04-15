@@ -87,7 +87,7 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 				<span class="commonRowSpan_col1">
 					<b><?php echo $X_langArray['CREATE_REVIEW_FIELD_LOCALITY'] ?></b>&nbsp;
 				</span>
-				<input id="locality" type="text" name="locality" class="commonRowTxt_col2 
+				<input id="locality" type="text" name="locality" style="width: 52%" class="commonRowTxt_col2 
 					   <?php if (isset($_GET['localityErrMsg']) && urldecode($_GET['localityErrMsg']) != "") { echo " errorInput";} ?>"
 					   value="<?php if (isset($_GET['locality'])) echo urldecode($_GET['locality']);?>" 
 					   onfocus="showCartoon('locality');"
@@ -202,36 +202,37 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 
 		<!-- COVER -->
 		<div class="commonRowDiv">
-			<label>
-				<?php 
-				$bean = isset($_SESSION[$beanSessionKey]) ? unserialize($_SESSION[$beanSessionKey]) : null;
-				if ( $bean == null || $bean->getCoverFileName() == null || $bean->getCoverFileName() == '' ) {?>
-					<span class="commonRowSpan_col1"><b><?php echo $X_langArray['CREATE_REVIEW_FIELD_COVER'] ?></b></span>
-					<div class="commonRowCoverDiv">
-						<!-- visible on all browser -->
-						<img class="hideInIE" width="24" src="/viantes/pvt/img/review/articleCoverButton_32.png" onclick="$('#reviewCoverId').click();">
-						<!-- visible on ie :( -->
-						<input class="hideInputButtonFile" id="reviewCoverId" name="userfile" type="file" onchange="$('#loadCov').show(); $('#submitCov').click();"/>
-						<span class="commonRowMandatory">*</span>
-					</div>
-				<?php } else { ?>
-					<span class="commonRowSpan_col1_txtArea"><b><?php echo $X_langArray['CREATE_REVIEW_FIELD_COVER'] ?></b></span>
-				<?php	
-					include $X_root."pvt/pages/review/common/renderCover.php";
-				}
-				?>
-				<!-- Seconda riga - Msg Err -->
-				<?php if ( isset($_GET['loadCovImgErrMsg']) ) { ?>
-					<div id="descrDIV" class="commonRowInnerDivError">
-						<p class="p-error">
-						<!--p class="articleLoadImgError"-->
-							<?php echo urldecode($_GET['loadCovImgErrMsg']) ?>
-						</p>
-					</div>
-				<?php } ?>	 	
-			</label>	
+			<?php 
+			$bean = isset($_SESSION[$beanSessionKey]) ? unserialize($_SESSION[$beanSessionKey]) : null;
+			if ( $bean == null || $bean->getCoverFileName() == null || $bean->getCoverFileName() == '' ) {?>
+				<span class="commonRowSpan_col1"><b><?php echo $X_langArray['CREATE_REVIEW_FIELD_COVER'] ?></b></span>
+				<div class="commonRowCoverDiv">
+					<!-- visible on all browser -->
+					<img class="hideInIE" width="24" src="/viantes/pvt/img/review/articleCoverButton_32.png" onclick="$('#reviewCoverId').click();">
+					<!-- visible on ie :( -->
+					<input class="hideInputButtonFile" id="reviewCoverId" name="userfile" type="file" 
+						   onchange="$('#submitCov').click(); showOverlayForLoad('<?php echo $X_langArray['CREATE_REVIEW_IMG_WAIT_LOAD'] ?>','submitCov')"/>
+					<input class="hidden" id="submitCov" name="submit" type="submit" value="GO"/>
+					
+					<span class="commonRowMandatory">*</span>
+				</div>
+			<?php } else { ?>
+				<span class="commonRowSpan_col1_txtArea"><b><?php echo $X_langArray['CREATE_REVIEW_FIELD_COVER'] ?></b></span>
+			<?php	
+				include $X_root."pvt/pages/review/common/renderCover.php";
+			}
+			?>
+			<!-- Seconda riga - Msg Err -->
+			<?php if ( isset($_GET['loadCovImgErrMsg']) ) { ?>
+				<div id="descrDIV" class="commonRowInnerDivError">
+					<p class="p-error">
+					<!--p class="articleLoadImgError"-->
+						<?php echo urldecode($_GET['loadCovImgErrMsg']) ?>
+					</p>
+				</div>
+			<?php } ?>	
 		</div>
-
+		
 	</div>
 	
 	<div class="commonDIVRight">
@@ -478,8 +479,6 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 	</div>
 
 	<!-- UPLOAD -->
-	<input class="hidden" id="submitCov" name="submit" type="submit" value="GO"/>
-	
 	<input type="hidden" name="MAX_FILE_SIZE" value="20000" />
 	<input type="hidden" name="tabactive" value="1" id="tabactive"/>
 	<input type="hidden" name="backUrl" value="<?php echo $backUrl?>" />
