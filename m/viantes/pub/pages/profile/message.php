@@ -50,12 +50,6 @@ if ($toBeRead > 0) {
 	<?php require_once $X_root."pvt/pages/common/meta-link-script.html"; ?>
 </head>
 
-<!-- Overlay -->
-<?php require_once $X_root."pvt/pages/common/overlay-send-msg.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-del-msg.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-del-msg-no-selected.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-loading.html"; ?>
-
 <body>
 	<!-- Mobile Header -->
 	<?php require_once $MX_root."pvt/pages/common/header.html";?>
@@ -63,6 +57,12 @@ if ($toBeRead > 0) {
 	<!-- Mobile Menu -->
 	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
+	<!-- Messaggi -->
+	<?php require_once $MX_root."pvt/pages/common/send-msg.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/del-msg.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/del-msg-no-selected.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/loading.html"; ?>
+
 	<div id="main-div" class="main-div">
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 		
@@ -74,7 +74,7 @@ if ($toBeRead > 0) {
 				<p><?php echo $X_langArray['MESSAGE_PAGE_DISCL'] ?></p>
 			</div>
 			<div  class="msgNewMsgLink personalButton">
-				<a href="#" onclick="showMsgOverlay('/viantes/pub/pages/profile/message.php');">
+				<a href="#" onclick="showNewMsg('/viantes/pub/pages/profile/message.php');">
 					<?php echo $X_langArray['MESSAGE_NEW']?>
 				</a>
 			</div>

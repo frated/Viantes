@@ -7,8 +7,8 @@ $categoryReviewDAO = new CategoryReviewDAO();
 $reviewCategoryArray = $categoryReviewDAO->retrieveCategoriesByLangCode($langCode);
 
 //===================== GEO ===========================
-$X_GEO_site     = isset($_GET['siteName']) ? $_GET['siteName']  : $_GET['site']; 
-$X_GEO_locality = isset($_GET['frmtdAdrs'])? $_GET['frmtdAdrs'] : $_GET['locality'];
+$X_GEO_site     = $_GET['site']; 
+$X_GEO_locality = $_GET['locality'];
 
 $X_GEO_zoom = 17; //zoom
 $X_GEO_mapType = 'roadmap'; //tipo di mappa 
@@ -29,6 +29,7 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 	<input type="hidden" name="langCode"       value="<?php echo $langCode ?>"/>
 	<input type="hidden" name="beanSessionKey" value="<?php echo $beanSessionKey?>" />
 	
+	<?php echo $X_GEO_site. "  <br>  ".$X_GEO_locality?>
 	<div>	
 		<!-- SITE NAME -->
 		<div class="commonRowDiv">
@@ -64,10 +65,6 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 		<!-- Le prime due (id="map" e id="loadMap" ) sono alternative alla terza (id="fkMap"). A loro volte le prime due sono 
 			 sono gestite dal javascript che all'inizio mostra la id="loadMap" poi la  id="map" -->
 		<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>"></div>
-		<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>">
-			<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />
-		</div>	
-		<img id="fkMap"   class="<?php if ($X_GEO_loadMap)  echo " hidden ";?>" style="width: 90%; height: 300px;" src="/viantes/pvt/img/common/iniMap.png">
 		
 		<input type="hidden" id="siteName"    	name="siteName" 	 value=""/><!-- Nome letto dalle api di google maps -->
 		<input type="hidden" id="frmtdAdrs"    	name="frmtdAdrs" 	 value=""/><!-- Nome letto dalle api di google maps -->

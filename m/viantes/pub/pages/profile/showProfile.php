@@ -56,11 +56,6 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 	<title><?php echo $X_langArray['SHOWPROFILE_PAGE_TITLE'] ?></title>
 	<?php require_once $X_root."pvt/pages/common/meta-link-script.html";  ?>
 </head>
-
-<!-- Overlay delete item  -->
-<?php require_once $X_root."pvt/pages/common/overlay-send-msg.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-den-usr.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-loading.html"; ?>		
 		
 <body>
 	<!-- Mobile Header -->
@@ -68,6 +63,14 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 	
 	<!-- Mobile Menu -->
 	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
+	
+	<!-- Messaggi -->
+	<?php require_once $MX_root."pvt/pages/common/send-msg.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/del-msg.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/loading.html"; ?>
+	
+	<!-- Den-Usr -->
+	<?php require_once $MX_root."pvt/pages/common/den-usr.html"; ?>
 	
 	<div id="main-div" class="main-div">
 
@@ -94,7 +97,7 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 			<?php if ( $currentUserDO->getId() != $userDO->getId() ) { ?>
 				<!--Blocca Utente-->
 				<div class="personalButton denUsrButton">
-					<a href="#" onclick="$('#overlay-den-usr').show()">
+					<a href="#" onclick="showDenUsr();">
 						<?php $blocked = in_array($currentUserDO->getId(), $blockedUsrList);
 							  echo $blocked ? $X_langArray['MYPROFILE_MY_ALLOW_USR'] : $X_langArray['MYPROFILE_MY_DEN_USR']?>
 					</a>
@@ -105,7 +108,7 @@ $blockedUsrList = $userDAO->getBlockedUsrList($userDO->getId());
 				
 				<!--Invia Messaggio-->
 				<div class="personalButton sendMsgUsr">
-					<a href="#" onclick="showMsgOverlay('/viantes/pub/pages/profile/showProfile.php');
+					<a href="#" onclick="showNewMsg('/viantes/pub/pages/profile/showProfile.php');
 										 $('#autoComplMsgTo').val('<?php echo $currentUserDO->getName() ?>');
 										 $('#usrId').val('<?php echo $_GET['usrId'] ?> '); ">
 						<?php echo $X_langArray['MYPROFILE_MY_SEND_MSG']?>

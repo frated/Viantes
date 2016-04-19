@@ -100,7 +100,8 @@ function checkAll($from, $to, $sbjt, $message, $X_langArray) {
 	//Sto scrivendo ad un utente che mi ha bloccato
 	$haveBlockedUsrList = $usrDAO->getHaveBlockedUsrList($from);
 	$toUsrId = $usrDAO->checkNameAlreadyExists($to);
-	if ( in_array($toUsrId, $haveBlockedUsrList) ) {
+	//se ho trovato un id ed e' nell'array di quelli che mi hanno bloccato
+	if ( $toUsrId && in_array($toUsrId, $haveBlockedUsrList) ) {
 		$errorField .= "&toErrMsg=".urlencode($X_langArray['MESSAGE_SEND_MESSAGE_NO_PERMITTED']);
 	}
 }

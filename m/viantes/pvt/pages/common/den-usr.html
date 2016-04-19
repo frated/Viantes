@@ -1,0 +1,43 @@
+<script>
+/* Blocca o sblocca l'utente */
+function blockOrUnblockUsr() {
+
+	var initialURL = window.location.href.split('?')[0];
+	
+	$('#overlay-loadImg').show();
+	$('#overlay-den-usr').hide();
+	
+	var usrId     = $('#loggedUsrId').val(); 
+	var denUsrId  = $('#denUsrId').val(); 
+	var denStatus = $('#denStatus').val(); 
+	
+	$.ajax({
+		type: "GET",
+		url: "/viantes/pvt/pages/auth/blockOrUnblockUsr.php",
+		data: "usrId=" + usrId + "&denUsrId=" + denUsrId + "&denStatus=" + denStatus,
+		dataType: "html",
+		success: function(response){
+			$('#overlay-loadImg').hide();
+			window.location.href = initialURL + "?usrId=" + denUsrId;
+		},
+		error: function(){
+			//no action
+		}
+	});
+}
+</script>
+<div id="mob-den-usr" class="mob-den-usr" style="display: none;" >
+	<div>
+		<h3 class="overlay-common-msg-h3"><?php echo $X_langArray['OVERLAY_DEN_USR_TITLE']?></h3>
+		
+		<p id="overlay-den-usr-question1" ><?php echo $X_langArray['OVERLAY_DEN_USR_QUESTION']?></p>
+		<p id="overlay-den-usr-question2" class="hidden" ><?php echo $X_langArray['OVERLAY_DEN_USR_QUESTION2']?></p>
+		
+		<button class="overlay-common-but personalButton" onclick="javascript:blockOrUnblockUsr();">
+			<?php echo $X_langArray['OVERLAY_DEN_USR_ANSW_YES']?>
+		</button>
+		<button class="overlay-common-but personalButton" onclick="$('#mob-den-usr').hide(); $('#main-div').show();">
+			<?php echo $X_langArray['OVERLAY_DEN_USR_ANSW_CANC']?>
+		</button>
+	</div>
+</div>

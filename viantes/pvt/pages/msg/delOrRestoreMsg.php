@@ -20,6 +20,8 @@ $ids = array();
 //Decodifico i codeIds 
 foreach($codeIds as $key => $val) array_push($ids, X_deco($val));
 
+echo $mode; //exit;
+
 if ($mode == 1 ) $msgDAO->delInMsg($ids);
 if ($mode == 2 ) $msgDAO->delSentMsg($ids); 
 if ($mode == 3 ) $msgDAO->delDraftMsg($ids);

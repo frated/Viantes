@@ -1660,9 +1660,9 @@ p.bjqs-caption{
 		height: 100%;
 	}
 	.profileCover {
-		top: -150px;
-		width: 128px;
-		height: 128px;
+		top: -75px;
+		width: 64px;
+		height: 64px;
 	}
 	.denUsrButton, .sendMsgUsr{
 		margin-bottom: 12px; 
@@ -1676,6 +1676,28 @@ p.bjqs-caption{
 		display: block; 
 		float:right; 
 		margin-top: 6px; 
+	}
+	.ovl-msg-span_col1{
+		display: block; 
+		width: 100%;
+	}
+	.overlay-msg-ErrorDiv {
+		float: left;
+		width: 100%;
+		margin: 4px 0px 12px 2px;
+	}
+	.overlay-msg-input-col2 {
+		width: 75%;
+	}
+	.mob-del-msg, .mob-del-msg-no-sel, .mob-den-usr{
+		margin: 36px auto;
+		padding: 24px; 
+	}
+	
+	/* Load Img */
+	.mob-lod-img {
+		margin-top: 36px; 
+		padding-top: 24px; 
 	}
 }
 
@@ -1794,5 +1816,29 @@ p.bjqs-caption{
 		float:right; 
 		margin-top: 6px; 
 	}
-}
+	.ovl-msg-span_col1{
+		display: block; 
+		margin-bottom: 6px;
+		width: 100%;
+	}
+	.overlay-msg-ErrorDiv {
+		float: left;
+		width: 100%;
+		margin: 4px 0px 10px 2px;
+	}
+	.overlay-msg-input-col2 {
+		width: 75%;
+	}
+	.mob-del-msg, .mob-del-msg-no-sel, .mob-den-usr{
+		margin-top: 36px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 24px; 
+	}
+	
+	/* Load Img */
+	.mob-lod-img {
+		margin-top: 36px; 
+		padding-top: 24px; 
+	}
 }

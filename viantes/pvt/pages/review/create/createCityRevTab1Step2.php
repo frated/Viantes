@@ -4,7 +4,7 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 $langCode = $settingDO->getLangCode();
 
 //===================== GEO ===========================
-$X_GEO_city = isset($_GET['cityName']) ? $_GET['cityName'] : $_GET['city'];
+$X_GEO_city = $_GET['city'];
 
 $X_GEO_loadMap = true;
 $X_GEO_zoom = 11;
@@ -43,10 +43,6 @@ require_once $X_root."pvt/pages/geo/cityMap.html";
 		<!-- Le prime due (id="map" e id="loadMap" ) sono alternative alla terza (id="fkMap"). A loro volte le prime due sono 
 			 sono gestite dal javascript che all'inizio mostra la id="loadMap" poi la  id="map" -->
 		<div id="map"     class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>"></div>
-		<div id="loadMap" class="<?php if (!$X_GEO_loadMap) echo " hidden ";?>">
-			<img id="loadMapImg" width="48" src="/viantes/pvt/img/animate/ld_32_ffffff.gif" />
-		</div>	
-		<img id="fkMap"   class="<?php if ($X_GEO_loadMap)  echo " hidden ";?>" src="/viantes/pvt/img/common/iniMap.png">
 		
 		<input type="hidden" id="cityName"  name="cityName"  value=""/><!-- Nome letto dalle api di google maps -->
 		<input type="hidden" id="country"   name="country" 	 value=""/><!-- Nome letto dalle api di google maps -->

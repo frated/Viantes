@@ -43,7 +43,7 @@ if ($widthIn < $width && $heightIn < $height) {
 		$width = ratioImagDimensionFixHeight($widthIn, $heightIn, $height);	
 		$scale  = round($heightIn / $height, 4);
 	}
-} 
+}
 
 //se, dopo il ridimensionamento, una dimensione e' < del lato del cropper
 if ( $width < $base ) {
@@ -102,10 +102,9 @@ imagedestroy($img);
 
 <head>
 	<title></title>
-	<?php include $X_root."pvt/pages/common/meta-link-script.html"; ?>
+	<?php include $X_root."pvt/pages/common/meta-link-script.html";  ?>
 
 	<script type="text/javascript" src="<?php echo $X_root.'pvt/js/jCropper.js'?>"></script>
-
 </head>
 
 <body>
@@ -116,7 +115,7 @@ imagedestroy($img);
 	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
 	<div class="main-div">
-		<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>
+		<?php include $X_root."pvt/pages/common/globalTopMsg.php";?>
 		
 		<style type="text/css">
 		.imgOriginalOverlay {

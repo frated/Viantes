@@ -20,10 +20,10 @@ $fullFileName = UPLOAD_PATH.SLASH.$directoryName.SLASH.$fn;
 //dimensione reale in input dell'immagine
 list($widthIn, $heightIn) = getimagesize($fullFileName);
 
-$lato = 400; //il cropper che e' un quadrato ha dimensioni 400x400
+$lato = 160; //il cropper che e' un quadrato ha dimensioni 400x400
 $scale = 1;  //fattore di scala e' 1 per immagini 400x400
 
-$width = 640; $height = 640; //dimensioni del div contanitore del cropper (immagine esterna)
+$width = 256; $height = 256; //dimensioni del div contanitore del cropper (immagine esterna)
 
 //se entrambe le dimensioni sono inferiori alla dimensione voluta (640x640)
 if ($widthIn < $width && $heightIn < $height) {
@@ -89,7 +89,6 @@ imagedestroy($img);
 	<?php include $X_root."pvt/pages/common/meta-link-script.html"; ?>
 
 	<script type="text/javascript" src="<?php echo $X_root.'pvt/js/jCropper.js'?>"></script>
-
 </head>
 
 <body>

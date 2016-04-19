@@ -48,10 +48,12 @@
 		
 		//Cerco l'indirizzo
 		var address = site + ' ' + locality;
+		
 		geocoder.geocode( { address: address }, function(results, status) {
+			alert(status);
 			//Se lo trovo
 			if (status == google.maps.GeocoderStatus.OK) {
-				
+			
 				var lat = results[0].geometry.location.lat();
 				var lng = results[0].geometry.location.lng();
 				$('#lat').val(lat);

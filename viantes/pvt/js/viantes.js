@@ -964,6 +964,12 @@ function renderSSP(revId, revTp){
 /* ###########################################################
    #################### COMMON GENERIC ####################### */
 
+ /* Ritorna true se nella barra degli indirizzi e' presente la stringa 
+  * /m/viantes => quasi certamente 99.99% e' un mobile */
+ function isMobile(){
+	var arr = window.location.href.split('?');
+	return arr[0].indexOf('/m/viantes') > -1;
+}
 /* Verifica la selezione degli interest, prepara i parametri 
  * ed una chiamata asincrono verso saveInterest.php */
 function callSaveInterestAsy(name) {
@@ -1021,10 +1027,23 @@ function confirmDelMsg(tabNum) {
 		}
 	});
 	if (find){
-		$('#overlay-del-msg').show();
+		// a seconda che sia mobile o no faccio cose diverse
+		if (isMobile()) {
+			showDelMsg();
+		}
+		else{
+			$('#overlay-del-msg').show();
+			$('#menu-status').val(4); 
+		}
 		return;
 	}else{
-		$('#overlay-del-msg-no-sel').show();
+		// a seconda che sia mobile o no faccio cose diverse
+		if (isMobile()) {
+			showDelNoItemMsg();
+		}
+		else {
+			$('#overlay-del-msg-no-sel').show();
+		}
 		return;
 	}
 }
@@ -1046,4 +1065,93 @@ function refreshCaptcha(reqType){
 	$('#captcha_img').attr('src', '/viantes/pvt/pages/captcha/captcha.php?reqType=' + reqType + '&' + Math.random());
 	$('#captcha_code').val(''); 
 	return false;
+}
+
+
+/* #####################################################
+   #################### MESSAGGI ####################### */
+   
+/* Cancella o ripristina (se sono nel tab4) i messaggi selezionati del tab corrente */
+function delOrRestoreMsg() {
+
+	//nascondo la finestra di conferma cancellazione
+	if (isMobile()) {
+		$('#mob-lod-img').show();
+		$('#mob-del-msg').hide();
+	}
+	//nascondo l'overlay di conferma cancellazione
+	else{
+		$('#overlay-loadImg').show();
+		$('#overlay-del-msg').hide();
+	}
+
+	var tabactive = $('#tabactive').val();
+	var isRrestore = $('#isRrestore').val(); 
+	var mode = ( tabactive == '4' && isRrestore ==  '1') ? '5' : tabactive;
+	
+	//Ciclo sull'oggetto check box e prendo solo euqlli checked
+	var objId = 'input[name=delMsgTab'+ tabactive + ']';
+	var msgList = '';
+	$(objId).each(function () {
+		if (this.checked) {
+			var id = this.value;
+			msgList +=  ( msgList == '' ) ? id : ';' + id;
+		}
+	});
+	
+	//se non trovo nulla cerco un eventuale campo hidden (vuol dire che vengo dalla pagina showMsg.php)
+	if (msgList == '')	msgList = $('#delMsgShoMsg').val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/viantes/pvt/pages/msg/delOrRestoreMsg.php",
+		data: "msgList=" + msgList + "&mode=" + mode,
+		dataType: "html",
+		success: function(response){
+			if (isMobile()) {				
+				window.location.href = window.location.origin + "/m/viantes/pub/pages/profile/message.php?tabactive=" + tabactive;
+				$('#mob-lod-img').hide();
+			}	
+			else{				
+				window.location.href = window.location.origin + "/viantes/pub/pages/profile/message.php?tabactive=" + tabactive;
+				$('#overlay-loadImg').hide();
+			}
+		},
+		error: function(){
+			//no action
+		}
+	});
+}
+/* Chiude l'overlay del messaggio */
+function closeOverlayMsg () {
+	$('#overlay-msg-new').hide();
+	
+	//divido l'url in 2 parti
+	var arr = window.location.href.split('?');
+	
+	var queryStr = "";
+	
+	//cerco nella parte di destra (se esiste, arr.length > 1 ) i parametri che mi interessano 
+	if ( arr.length > 1) {
+		var paramArray = arr[1].split('&');	
+		for (var i = 0; i < paramArray.length; i++) {
+			//il parametro usrId=xxx devo rimetterlo nell'url
+			if (paramArray[i].indexOf('usrId=') != -1)
+				queryStr += "&" + paramArray[i];
+			//il parametro msgId=xxx devo rimetterlo nell'url
+			if (paramArray[i].indexOf('msgId=') != -1)
+				queryStr += "&" + paramArray[i];
+		}
+	}
+	
+	//il tab active puo' non esserci (e' presente solo nei messaggi)
+	if ($('#tabactive').length) {
+		var url  = arr[0] + "?tabactive=" + $('#tabactive').val() + queryStr;
+	} else {
+		var url  = arr[0] + "?1=1" + queryStr;
+	}
+	
+	//Ricarico la pagina 
+	url = url.replace("#", "");
+	window.location.href = url;
 }

@@ -1,0 +1,124 @@
+<?php 
+$msgDrftId = isset($_GET['msgDrftId']) ? $_GET['msgDrftId'] : -1; 
+?>
+
+<script>
+<?php if (isset($_GET['showOverlay'])) {?>
+	/* Questo overlay sa quando deve mostrarsi */
+	jQuery(document).ready(function() { 
+		showNewMsg('<?php echo $_GET['overlay-msg-url-back'] ?>'); 
+	});
+<?php  } ?>
+</script>
+
+<div id="mob-msg-new" class="hidden">
+	<div style="padding: 36px 0px 12px 16px">
+		<form action="/viantes/pvt/pages/msg/send.php" method="post" id="ovl-msg-send">
+			<div>
+				<!-- CLOSE -->					
+				<div class="crs-pnt" style="margin: 22px 8% 0px 0px;">
+					<label>
+						<span class="ovl-msg-span_col1"></span>
+						<img width="16" src="/viantes/pvt/img/common/close.png" class="flt-r" onclick="javascript:closeOverlayMsg();">
+					</label>
+				</div>
+
+				<!-- TO -->					
+				<div class="mrg-top-12">
+					<!-- Prima riga - Campi -->
+					<label>
+						<span class="ovl-msg-span_col1">
+							<b><?php echo $X_langArray['MESSAGE_OVERLAY_RECIPIENT'] ?>:</b>
+						</span>
+						<input type="text" id="autoComplMsgTo" name="to" 
+							class="overlay-msg-input-col2
+							<?php 
+							if (isset($_GET['toErrMsg']) && urldecode($_GET['toErrMsg']) != "") { 
+								echo " errorInput";} 
+							?>"
+							value="<?php if (isset($_GET['to'])) echo urldecode($_GET['to']);?>"
+						/>
+						<span class="commonRowMandatory">*</span>
+
+						<!-- Seconda riga - Msg Err -->
+						<div id="newemailDIV" class="overlay-msg-ErrorDiv">
+							<p class="p-error">
+								<?php if ( isset($_GET['toErrMsg']) ) { echo urldecode($_GET['toErrMsg']);} ?>
+							</p>
+						</div>
+					</label>
+				</div>
+				
+				<!-- SUBJECT -->
+				<div class="mrg-top-12">
+					<!-- Prima riga - Campi -->
+					<label>
+						<span class="ovl-msg-span_col1">
+							<b><?php echo $X_langArray['MESSAGE_COMMON_SBJ'] ?>:</b>
+						</span>
+						<input id="ovrMsgSbjjt" name="sbjt" 
+							   class="overlay-msg-input-col2 
+							   <?php if (isset($_GET['sbjtErrMsg']) && urldecode($_GET['sbjtErrMsg']) != "") { echo " errorInput";} ?>"
+							   value="<?php if (isset($_GET['sbjt'])) echo urldecode($_GET['sbjt']);?>"
+						/>
+						<span class="commonRowMandatory">*</span>
+						<!-- Seconda riga - Msg Err -->
+						<div id="newpasswordDIV" class="overlay-msg-ErrorDiv">
+							<p class="p-error">
+								<?php 
+								if ( isset($_GET['sbjtErrMsg']) ) { 
+									echo urldecode($_GET['sbjtErrMsg']);} 
+								?>
+							</p>
+						</div>
+					</label>
+				</div>
+
+				<!-- MESSAGE -->
+				<div class="mrg-top-12">
+					<!-- Prima riga - Campi -->
+					<label>
+						<span class="ovl-msg-span_col1">
+							<b><?php echo $X_langArray['MESSAGE_COMMON_MSG'] ?>:</b>
+						</span>
+						<textarea id="ovlMsgMsg" name="message" class="overlay-msg-input-col2 height-150
+							<?php if (isset($_GET['messageErrMsg']) && urldecode($_GET['messageErrMsg']) != "") { echo " errorInput";}?>"
+						><?php if (isset($_GET['message'])) echo urldecode($_GET['message']);?></textarea>
+						<span class="commonRowMandatory">*</span>
+						<!-- Seconda riga - Msg Err -->
+						<div id="nameDIV" class="overlay-msg-ErrorDiv">
+							<p class="p-error">
+								<?php 
+								if ( isset($_GET['messageErrMsg']) ) { 
+									echo urldecode($_GET['messageErrMsg']);
+								} ?>
+							</p>
+						</div>
+					</label>
+				</div>
+				
+				<!-- SEND -->
+				<div class="mrg-top-36">
+					<label>
+						<span class="ovl-msg-span_col1">
+							<!-- Salva Bozza -->
+							<a onclick="$('#status').val(0);$('#ovl-msg-send').submit();" href="#"><?php echo $X_langArray['MESSAGE_OVERLAY_SAVE'] ?></a>
+						</span>
+						<!-- INVIA -->
+						<input type="submit" name="invia" class="overlay-msg-submit-col2" value="<?php echo $X_langArray['MESSAGE_OVERLAY_SEND'] ?>"/>
+					</label>
+				</div>
+
+			</div>
+			<input type="hidden" id="status"     name="status" value="1"/>
+			<input type="hidden" id="from"       name="from"   value="<?php echo X_code($userDO->getId()); ?>"/>
+			<input type="hidden" id="msgDrftId"  name="msgDrftId"  value="<?php echo $msgDrftId; ?>"/>
+			<input type="hidden" id="overlay-msg-url-back" name="overlay-msg-url-back" value="" />
+			<!-- usato in showProfile.php-->
+			<input type="hidden" id="usrId"      name="usrId" value="<?php if (isset($_GET['usrId'])) echo $_GET['usrId'] ?>" />
+			<!-- usato in showMsg.php-->
+			<input type="hidden" id="msgId"      name="msgId" value="<?php if (isset($_GET['msgId'])) echo $_GET['msgId'] ?>" />
+			<input type="hidden" id="tabactive"  name="tabactive" value="<?php if (isset($_GET['tabactive'])) echo $_GET['tabactive'] ?>" />
+		</form>	
+	</div>	
+</div>

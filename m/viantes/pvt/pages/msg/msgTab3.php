@@ -5,7 +5,7 @@
 		//sostituisco agli eventuali <br>, < br\>
 		$('#ovlMsgMsg').val(msg.replace(/<br\s*[\/]?>/gi, "\n"));
 		$('#tabactive').val('3'); 
-		showMsgOverlay('/viantes/pub/pages/profile/message.php');
+		showNewMsg('/viantes/pub/pages/profile/message.php');
 	}
 </script>	
 <?php 

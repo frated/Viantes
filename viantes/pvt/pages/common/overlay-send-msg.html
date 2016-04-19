@@ -9,39 +9,6 @@ $msgDrftId = isset($_GET['msgDrftId']) ? $_GET['msgDrftId'] : -1;
 		showMsgOverlay('<?php echo $_GET['overlay-msg-url-back'] ?>'); 
 	});
 <?php  } ?>
-
-function closeOverlayMsg () {
-	$('#overlay-msg-new').hide();
-	
-	//divido l'url in 2 parti
-	var arr = window.location.href.split('?');
-	
-	var queryStr = "";
-	
-	//cerco nella parte di destra (se esiste, arr.length > 1 ) i parametri che mi interessano 
-	if ( arr.length > 1) {
-		var paramArray = arr[1].split('&');	
-		for (var i = 0; i < paramArray.length; i++) {
-			//il parametro usrId=xxx devo rimetterlo nell'url
-			if (paramArray[i].indexOf('usrId=') != -1)
-				queryStr += "&" + paramArray[i];
-			//il parametro msgId=xxx devo rimetterlo nell'url
-			if (paramArray[i].indexOf('msgId=') != -1)
-				queryStr += "&" + paramArray[i];
-		}
-	}
-	
-	//il tab active puo' non esserci (e' presente solo nei messaggi)
-	if ($('#tabactive').length) {
-		var url  = arr[0] + "?tabactive=" + $('#tabactive').val() + queryStr;
-	} else {
-		var url  = arr[0] + "?1=1" + queryStr;
-	}
-	
-	//Ricarico la pagina 
-	url = url.replace("#", "");
-	window.location.href = url;
-}
 </script>
 
 <div id="overlay-msg-new" class="overlay hidden">

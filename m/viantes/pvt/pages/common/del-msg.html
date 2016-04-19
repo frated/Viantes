@@ -1,0 +1,15 @@
+<div id="mob-del-msg" class="mob-del-msg"  style="display: none;" >
+	<div>	
+		<h3 class="overlay-common-msg-h3"><?php echo $X_langArray['OVERLAY_DEL_MSG_TITLE']?></h3>
+		
+		<p id="overlay-del-msg-question1" ><?php echo $X_langArray['OVERLAY_DEL_MSG_QUESTION']?></p>
+		<p id="overlay-del-msg-question2" class="hidden"><?php echo $X_langArray['OVERLAY_RESTORE_MSG_QUESTION']?></p>
+		
+		<button class="overlay-common-but personalButton" onclick="javascript:delOrRestoreMsg();">
+			<?php echo $X_langArray['OVERLAY_DEL_MSG_ANSW_YES']?>
+		</button>
+		<button class="overlay-common-but personalButton" onclick="$('#mob-del-msg').hide(); $('#main-div').show();">
+			<?php echo $X_langArray['OVERLAY_DEL_MSG_ANSW_CANC']?>
+		</button>
+	</div>
+</div>

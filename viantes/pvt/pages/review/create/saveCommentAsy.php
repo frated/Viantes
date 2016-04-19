@@ -21,6 +21,7 @@ if (isset($_GET['id']) && isset($_GET['val'])) {
 	$position  = substr($commentId, 3);
 	
 	$val = strlen($_GET['val']) > 250 ? substr($_GET['val'], 0, 250) : $_GET['val'];
+	$val = addslashes($val);
 	
 	$bean = unserialize($_SESSION[$_GET['name']]);
 	if ($type == 'Img') {

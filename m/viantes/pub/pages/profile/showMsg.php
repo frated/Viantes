@@ -55,11 +55,6 @@ if ($msgDO->getRecipientStatus() == 0 && $msgDO->getToUsrId() == $userDO->getId(
 	<?php require_once $X_root."pvt/pages/common/meta-link-script.html"; ?>
 </head>
 
-<!-- Overlay -->
-<?php require_once $X_root."pvt/pages/common/overlay-send-msg.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-del-msg.html"; ?>
-<?php require_once $X_root."pvt/pages/common/overlay-loading.html"; ?>
-
 <body>
 	<!-- Mobile Header -->
 	<?php require_once $MX_root."pvt/pages/common/header.html";?>
@@ -67,12 +62,17 @@ if ($msgDO->getRecipientStatus() == 0 && $msgDO->getToUsrId() == $userDO->getId(
 	<!-- Mobile Menu -->
 	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
+	<!-- Messaggi -->
+	<?php require_once $MX_root."pvt/pages/common/send-msg.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/del-msg.html"; ?>
+	<?php require_once $MX_root."pvt/pages/common/loading.html"; ?>
+	
 	<div id="main-div" class="main-div">
 		
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 		
 		<div class="mrg-top-24">
-			<a href="/viantes/pub/pages/profile/message.php?tabactive=<?php echo $_GET['tabactive']?>">
+			<a href="/m/viantes/pub/pages/profile/message.php?tabactive=<?php echo $_GET['tabactive']?>">
 				<?php echo $X_langArray['MESSAGE_BACK_LINK'] ?>
 			</a>
 		</div>
@@ -141,14 +141,14 @@ if ($msgDO->getRecipientStatus() == 0 && $msgDO->getToUsrId() == $userDO->getId(
 		</div>
 		
 		<div class="showMsgButtonsDiv">
-			<a href="#" class="" onclick="$('#overlay-del-msg').show();">
+			<a href="#" class="" onclick="$('#main-div').hide(); $('#mob-del-msg').show();">
 				<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_DEL']?></div>
 			</a>
 			<?php if ( $_GET['tabactive'] == 1 ) { ?>
 				<a href="#" onclick="$('#autoComplMsgTo').val('<?php echo $msgDO->getFromUsrName() ?>');
 									 $('#ovrMsgSbjjt').val('<?php echo 'RE:'.$msgDO->getSubject() ?>');
 									 $('#msgId').val('<?php echo $_GET['msgId'] ?>');
-									 showMsgOverlay('/viantes/pub/pages/profile/showMsg.php')">
+									 showNewMsg('/viantes/pub/pages/profile/showMsg.php')">
 					<div class="delMsg personalButton"><?php echo $X_langArray['MESSAGE_OVERLAY_REPLY']?></div>
 				</a>
 			<?php } if ( $_GET['tabactive'] == 4 ){ ?>

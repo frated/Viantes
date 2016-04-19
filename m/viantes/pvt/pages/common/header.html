@@ -1,24 +1,106 @@
 <script>
+	/* Mostra la pagina di menu 
+	   Stati 1 <=> Mostra #menu-div
+			-1 <=> Mostra #mobile-menu-page sopra menu-div
+			 2 <=> Mostra #menu-div
+			-2 <=> Mostra #mobile-menu-page sopra menu-div
+			 3 <=> Mostra #mob-del-msg
+			-3 <=> Mostra #mob-del-msg-no-sel sopra menu-div
+			 4 <=> Mostra #mob-del-msg-no-sel
+			-4 <=> Mostra #mob-del-msg-no-sel sopra menu-div
+			 5 <=> Mostra #mob-den-usr
+			-5 <=> Mostra #mob-den-usr sopra menu-div
+	*/
 	function showViewMenu(){
-		if ($('#menu-status').val() == 0) { 
-			$('#main-div').hide();
-			$('#mobile-menu-page').show(); 
-			$('#menu-status').val(1); 
-		} else { 
-			$('#main-div').show(); 
-			$('#mobile-menu-page').hide(); 
-			$('#menu-status').val(0);
+		if ($('#menu-status').val() == 1) { 
+			hide('main-div', -1);
+		}
+		else if ($('#menu-status').val() == -1) { 
+			show('main-div', 1);
+		}
+		else if ($('#menu-status').val() == 2) { 
+			hide('mob-del-msg-new', -2);
+		}
+		else if ($('#menu-status').val() == -2) { 
+			show('mob-msg-new', 2); 
+		}
+		else if ($('#menu-status').val() == 3) { 
+			hide('mob-del-msg', -3);
+		}
+		else if ($('#menu-status').val() == -3) { 
+			show('mob-del-msg', 3);
+		}
+		else if ($('#menu-status').val() == 4) { 
+			hide('mob-del-msg-no-sel', -4);
+		}
+		else if ($('#menu-status').val() == -4) { 
+			show('mob-del-msg-no-sel', 4);
+		}
+		else if ($('#menu-status').val() == 5) { 
+			hide('mob-den-usr', -5);
+		}
+		else if ($('#menu-status').val() == -5) { 
+			show('mob-den-usr', 5);
 		}
 	}
+	
+	/* Nasconde il tag e mostra il menu */
+	function hide(tag, newStatus){
+		$('#' + tag + '').hide();
+		$('#mobile-menu-page').show(); 
+		$('#menu-status').val(newStatus); 
+	}
+	/* Mostra il tag e nasconde il menu */
+	function show(tag, newStatus){
+		$('#' + tag + '').show();
+		$('#mobile-menu-page').hide(); 
+		$('#menu-status').val(newStatus); 
+	}
+	
+	/* Mostra la pagina di nuovo messaggio e nasconde il main div */
+	function showNewMsg(urlBack) {
+		$('#main-div').hide();
+		$('#mob-msg-new').show(); 
+		$('#overlay-msg-url-back').val(urlBack);
+		$('#menu-status').val(2); 
+	}
+	
+	/* Mostra la pagina di nuovo messaggio e nasconde il main div */
+	function showDelMsg() {
+		$('#mob-del-msg').show();
+		$('#main-div').hide();
+		$('#menu-status').val(3); 
+	}
+	
+	/* Mostra la pagina di nuovo messaggio e nasconde il main div */
+	function showDelNoItemMsg() {	
+		$('#mob-del-msg-no-sel').show();
+		$('#main-div').hide();
+		$('#menu-status').val(4); 
+	}
+	
+	/* Mostra la pagina di nuovo messaggio e nasconde il main div */
+	function showDenUsr() {	
+		$('#mob-den-usr').show();
+		$('#main-div').hide();
+		$('#menu-status').val(5); 
+	}
+		
+	
+	/* Mostra la pagina di login e nasconde il main div 
+	 * N.B. il #mobile-login-signin essendo alternativo
+	 * al #mobile-menu-page non richiede un nuovo stato
+	 */
 	function showViewLogin(){
-		if ($('#menu-status').val() == 0) { 
+		if ($('#menu-status').val() == 1) { 
 			$('#main-div').hide();
 			$('#mobile-login-signin').show(); 
-			$('#menu-status').val(1); 
-		} else { 
+			$('#menu-status').val(-1); 
+		}
+		else if ($('#menu-status').val() == -1) { 
 			$('#main-div').show(); 
 			$('#mobile-login-signin').hide(); 
-			$('#menu-status').val(0);
+			$('#menu-status').val(1);
 		}
 	}
 </script>
@@ -51,7 +133,7 @@
 					<img onclick="showViewLogin();" src="/viantes/pvt/img/m/menu.png" >
 				<?php } ?>
 			</div>
-			<input type="hidden" id="menu-status"  name="menu-status" value="0" >
+			<input type="hidden" id="menu-status"  name="menu-status" value="1" >
 		</div>
 	</div>
 	
