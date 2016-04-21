@@ -49,17 +49,18 @@ $y1 = $lato + $y0;
 //echo $x1; exit;
 
 //------------  Riscalo l'immagine ---------------------
-$img = imagecreatefromjpeg($fullFileName);
+//immagine originale
+$resurceImgOrig = imagecreatefromjpeg($fullFileName);
 
-// Create a new temporary image.
-$tmpimg = imagecreatetruecolor( $widthIn, $heightIn );
+//creao la nuova immagine 
+$tmpimg = imagecreatetruecolor($width, $height);
+//copio, in proporzione, l'orignale su quella scalata
+imagecopyresampled ($tmpimg , $resurceImgOrig , 0 , 0,  0, 0, $width, $height, $widthIn, $heightIn);
 
-// Copy and resize old image into new image.
-imagecopyresampled( $tmpimg, $img, 0, 0, 0, 0, $width, $height, $widthIn, $heightIn );
-
-// Save temporary image into a file.
+//nome temporaneo dell'immagine
 $croppedFileName = UPLOAD_PATH.SLASH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
-imagejpeg( $tmpimg, $croppedFileName, 100);
+imagejpeg($tmpimg, $croppedFileName, 100);
+
 if (isUnix()) {
 	chmod($croppedFileName, 0777); 
 }
@@ -69,7 +70,7 @@ $fileName = REL_UP_PATH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
 
 // release the memory
 imagedestroy($tmpimg);
-imagedestroy($img);
+imagedestroy($resurceImgOrig);
 //------------------------------------------------------
 ?>
 

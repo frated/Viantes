@@ -29,7 +29,7 @@ require_once $X_root."pvt/pages/geo/cityMap.html";
 //====================================================
 ?>
 
-<form action="/viantes/pvt/pages/review/create/createCityRev.php" method="post" >
+<form action="/viantes/pvt/pages/review/create/createCityRev.php" enctype="multipart/form-data" method="post" >
 	
 	<input type="hidden" name="langCode"       value="<?php echo $langCode ?>"/>
 	<input type="hidden" name="beanSessionKey" value="<?php echo $beanSessionKey?>" />

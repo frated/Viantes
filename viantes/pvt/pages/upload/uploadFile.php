@@ -2,6 +2,7 @@
 require_once $X_root."pvt/pages/review/cityReviewBean.php";
 require_once $X_root."pvt/pages/review/countryReviewBean.php";
 require_once $X_root."pvt/pages/review/reviewBean.php";
+require_once $X_root."pvt/pages/upload/createImgRescaledUtil.php";
 
 //URL di ritorno
 $backUrl = isset($_POST['backUrl']) ? $_POST['backUrl']."?1=1" : "";
@@ -136,6 +137,10 @@ if (move_uploaded_file($tmpFileName, $fullFileName)) {
 		
 		list($_width, $_height, $type, $attr) = getimagesize($fullFileName);
 
+		//------- Create new and rescale ---------
+		createAndRescaleForReview($fullFileName);
+		//----------------------------------------
+		
 		$widthArray = $bean->getImgWidthArray();
 		array_push($widthArray, $_width);
 		$bean->setImgWidthArray($widthArray);

@@ -56,6 +56,9 @@ define('IMG_128_128',' width="128" height="128" '); // immagine profilo
 define('IMG_25_25',  ' width="25"  height="25" ' );
 define('IMG_36_36',  ' width="36"  height="36" ' );
 
+//Dimensione standard della larghezza delle immagini di una review 
+define('IMG_WDH_STD_RVW',  ' width="320" ');
+
 /* Tipologie di imamgini del profilo */
 define('OVL_LS_MODE_LOGIN', '1');
 define('OVL_LS_MODE_SININ', '2');
@@ -84,5 +87,6 @@ define('ORD_BY_MDE_DSC', " DESC");
 define('ORD_BY_MDE_ASC', " ASC");
 
 /* Resized Images */
-define('RSZD_FOR_IND', ".rszd.hm.jpg"); //resized 4 index page
+define('RSZD_FOR_IND',     ".rszd.hm.jpg");     //resized 4 index page
+define('RSZD_FOR_RVW',     ".rszd.rvw.jpg");    //resized 4 review
 ?>

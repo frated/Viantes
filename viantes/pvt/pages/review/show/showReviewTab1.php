@@ -1,17 +1,16 @@
 <div class="mrg-bot-40" >
 	<?php 
-	$fileName = $reviewDO->getCoverFileName();
+	//immagine riscalata
+	$fileName = $reviewDO->getCoverFileName().RSZD_FOR_RVW;
 	$widthIn  = $reviewDO->getCoverWidth();
 	$heightIn = $reviewDO->getCoverHeight();
-	//scale in ratio
-	$height = ratioImagDimensionFixWidth($widthIn, $heightIn, 320);
 	?>
 	
 	<div class="showRevRow" style="margin-top: 10px">
 		<h1><?php echo $X_langArray['CREATE_REVIEW_FIELD_COVER']?></h1>
 		<div class="showRevCover">
 			<a onclick="window.open('/viantes/pub/pages/media/viewer.php?revId=<?php echo X_code($reviewDO->getId())?>&revTp=<?php echo $reviewType ?>&revAttachId=-1','_blank')" href="#">
-				<img width="320" height="<?php echo $height; ?>" src="<?php echo $fileName ?>">
+				<img width="320" src="<?php echo $fileName ?>">
 			</a>
 		</div>
 	</div>

@@ -41,7 +41,7 @@ if ( $bean != null && count($bean->getImgFileNameArray()) > 0 ) {
 							 src="/viantes/pvt/img/review/close_16.png"         
 							 class="deleteAttachReview"
 							 onclick="deleteImg(\''.$beanSessionKey.'\', \''.$i.'\', \'IMG\', 2)"/>
-						<img width="100%" src="'.$filePath[$i].$fileNameArray[$i].'"/>
+						<img width="100%" src="'.$filePath[$i].$fileNameArray[$i].RSZD_FOR_RVW.'"/>
 					</span>
 				  </div>
 				  <div class="commentImgDiv">

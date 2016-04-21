@@ -22,14 +22,13 @@ list($widthIn, $heightIn) = getimagesize($fullFileName);
 
 //il cropper che e' un rettangolo 686x250 N.B. non cambiare questo rapporto senza cambiare il rapporto del DIV 
 //che conterra l'immagine (686x266) nella pagina myProfile.php
-$base = 270; //600; 
-$altezza = 112; //233;  
+$base = 374; //748; 
+$altezza = 145; //290;  
 
 //fattore di scala e' 1 per immagini 686x266
 $scale = 1;
 
-//$width = 686; $height = 514; //dimensioni del div contanitore del cropper (immagine esterna)
-$width = 287; $height = 331; //dimensioni del div contanitore del cropper (immagine esterna)
+$width = 374; $height = 280; //dimensioni del div contanitore del cropper (immagine esterna)
 
 //se entrambe le dimensioni sono inferiori alla dimensione voluta (640x640)
 if ($widthIn < $width && $heightIn < $height) {
@@ -66,17 +65,18 @@ $x1 = $base + $x0;
 $y1 = $altezza + $y0;
 
 //------------  Riscalo l'immagine ---------------------
-$img = imagecreatefromjpeg($fullFileName);
+//immagine originale
+$resurceImgOrig = imagecreatefromjpeg($fullFileName);
 
-// Create a new temporary image.
-$tmpimg = imagecreatetruecolor( $widthIn, $heightIn );
+//creao la nuova immagine 
+$tmpimg = imagecreatetruecolor($width, $height);
+//copio, in proporzione, l'orignale su quella scalata
+imagecopyresampled ($tmpimg , $resurceImgOrig , 0 , 0,  0, 0, $width, $height, $widthIn, $heightIn);
 
-// Copy and resize old image into new image.
-imagecopyresampled( $tmpimg, $img, 0, 0, 0, 0, $width, $height, $widthIn, $heightIn );
-
-// Save temporary image into a file.
+//nome temporaneo dell'immagine
 $croppedFileName = UPLOAD_PATH.SLASH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
-imagejpeg( $tmpimg, $croppedFileName, 100);
+imagejpeg($tmpimg, $croppedFileName, 100);
+
 if (isUnix()) {
 	chmod($croppedFileName, 0777); 
 }
@@ -86,7 +86,7 @@ $fileName = REL_UP_PATH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
 
 // release the memory
 imagedestroy($tmpimg);
-imagedestroy($img);
+imagedestroy($resurceImgOrig);
 //------------------------------------------------------
 ?>
 

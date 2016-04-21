@@ -241,12 +241,8 @@ function doImgTagAsyncGet(destUrl, id, revTp){
 		type: "GET",
 		url: destUrl,
 		data: dataString,
-		/* contentType: "blob",*/
 		contentType: "html",
 		success: function(response){
-			/* ########## GESTIONE ALTERNATIVA CON BLOB 
-			$('#realArtImg_'+id).attr('src', "data:image/jpeg;base64," + response);
-			######## FINE GESTIONE ALTERNATIVA CON BLOB  */
 			var itemArray = response.split('@#@');
 			var srcImgAttribute = itemArray[0];
 			var comment = itemArray[1];

@@ -77,10 +77,11 @@ if (move_uploaded_file($tmpFileName, $fullFileName)) {
 
 	//pulisco il nome del file
 	$fileName = str_replace("#", "", str_replace(" ", "", $fileName));
-    	rename($fullFileName, $filePath.basename($fileName));
+    rename($fullFileName, $filePath.basename($fileName));
+	
 	$fullFileName = $filePath.basename($fileName);
 	chmod($fullFileName, 0777); 
-
+	
 	//get userId
 	$userDO = unserialize($_SESSION["USER_LOGGED"]);
 	

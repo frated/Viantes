@@ -27,7 +27,6 @@ $altezza = 290; //233;
 //fattore di scala e' 1 per immagini 686x266
 $scale = 1;
 
-//$width = 686; $height = 514; //dimensioni del div contanitore del cropper (immagine esterna)
 $width = 748; $height = 560; //dimensioni del div contanitore del cropper (immagine esterna)
 
 //se entrambe le dimensioni sono inferiori alla dimensione voluta (640x640)
@@ -64,18 +63,20 @@ $y0 = ($height - $altezza)/2;
 $x1 = $base + $x0;
 $y1 = $altezza + $y0;
 
+
 //------------  Riscalo l'immagine ---------------------
-$img = imagecreatefromjpeg($fullFileName);
+//immagine originale
+$resurceImgOrig = imagecreatefromjpeg($fullFileName);
 
-// Create a new temporary image.
-$tmpimg = imagecreatetruecolor( $widthIn, $heightIn );
+//creao la nuova immagine 
+$tmpimg = imagecreatetruecolor($width, $height);
+//copio, in proporzione, l'orignale su quella scalata
+imagecopyresampled ($tmpimg , $resurceImgOrig , 0 , 0,  0, 0, $width, $height, $widthIn, $heightIn);
 
-// Copy and resize old image into new image.
-imagecopyresampled( $tmpimg, $img, 0, 0, 0, 0, $width, $height, $widthIn, $heightIn );
-
-// Save temporary image into a file.
+//nome temporaneo dell'immagine
 $croppedFileName = UPLOAD_PATH.SLASH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
-imagejpeg( $tmpimg, $croppedFileName, 100);
+imagejpeg($tmpimg, $croppedFileName, 100);
+
 if (isUnix()) {
 	chmod($croppedFileName, 0777); 
 }
@@ -85,8 +86,10 @@ $fileName = REL_UP_PATH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
 
 // release the memory
 imagedestroy($tmpimg);
-imagedestroy($img);
+imagedestroy($resurceImgOrig);
 //------------------------------------------------------
+
+
 ?>
 
 <!DOCTYPE html>

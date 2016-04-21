@@ -19,27 +19,13 @@ else if ( $revTp == CountryReview )
 	$reviewDAO = New CountryReviewDAO();
 
 $attachDO = $reviewDAO->getAttachDOById($id);
-$fullFileName = $attachDO->getFilePath().$attachDO->getFileName();
+
+//aggiungo l'estensione resized for review 
+$fullFileName = $attachDO->getFilePath().$attachDO->getFileName().RSZD_FOR_RVW;
+
 $comment = $attachDO->getComment() != '' ? 
 				$attachDO->getComment() : 
 				$X_langArray['SHOW_REVIEW_IMG_NO_COMMENT'];
 
 echo $fullFileName ."@#@". $comment;
-
-//Save or update an arry in session for a viewver new features
-/**
-if( isset($_SESSION['showRevImgResult']) ) {
-	$showRevImgResult = $_SESSION['showRevImgResult'];
-} else {
-	$showRevImgResult = array();
-}
-$showRevImgResult[count($showRevImgResult)] = $fullFileName ."@#@". $comment;
-
-$_SESSION['showRevImgResult'] = $showRevImgResult;
-* */
-	
-/* GESTIONE CON BLBO 
-$dataFile = $reviewDAO->getAttachById($id);
-echo base64_encode($dataFile);
-************************/
 ?>

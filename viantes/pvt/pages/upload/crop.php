@@ -21,7 +21,7 @@ $x1 = $_POST['x1'];
 $y1 = $_POST['y1'];
 $coverType = $_POST['coverType'];
 
-$fullFileName     = UPLOAD_PATH.SLASH.$directoryName.SLASH.$fn;
+$fullFileName     = UPLOAD_PATH.SLASH.$directoryName.SLASH.'tmpCropped'; //$fn;
 $croppedFileName  = UPLOAD_PATH.SLASH.$directoryName.SLASH.TMP_CROPPED_FILE_NAME;
 $relativeFileName = REL_UP_PATH.$directoryName.SLASH.$fn;
 
@@ -31,19 +31,19 @@ $relativeFileName = REL_UP_PATH.$directoryName.SLASH.$fn;
 //*****************CROP IMAGE START **********************
 $im = imagecreatefromjpeg($fullFileName);
 
-//CASO 1 -- installando un componente di php
-//$to_crop_array = array('x' => $x0*$scala , 'y' => $y0*$scala, 'width' => ($x1-$x0)*$scala, 'height'=> ($y1-$y0)*$scala );
-//$thumb_im = imagecrop($im, $to_crop_array);
-
-//CASO 2 - Senza installare nulla
 list($widthIn, $heightIn) = getimagesize($fullFileName);
-$thumb_im = imagecreatetruecolor($widthIn, $heightIn);
-imagecopyresampled ($thumb_im , $im , 0 , 0,  $x0*$scala, $y0*$scala, $widthIn, $heightIn, ($x1-$x0)*$scala, ($y1-$y0)*$scala);
+
+$newWidth  = $x1 - $x0;
+$newHeight = $y1 - $y0;
+
+$thumb_im = imagecreatetruecolor($newWidth, $newHeight);
+
+imagecopy($thumb_im, $im, 0, 0, $x0, $y0, $newWidth, $newHeight);
 
 imagejpeg($thumb_im, UPLOAD_PATH.SLASH.$directoryName.SLASH."finalCroppedFile.jpeg", 100);
 //*****************CROP IMAGE END **********************
 
-unlink($fullFileName);
+//unlink($fullFileName);
 unlink($croppedFileName);
 chmod(UPLOAD_PATH.SLASH.$directoryName.SLASH."finalCroppedFile.jpeg", 0777); 
 rename(UPLOAD_PATH.SLASH.$directoryName.SLASH."finalCroppedFile.jpeg", UPLOAD_PATH.SLASH.$directoryName.SLASH.$fn);
