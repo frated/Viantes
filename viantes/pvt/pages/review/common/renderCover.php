@@ -10,7 +10,7 @@ echo '<div class="reviewCoverImgBox"
 				 src="/viantes/pvt/img/review/close_16.png"         
 				 class="deleteAttachReview" 
 				 onclick="$(\'#tabactive\').val(1); delFromSess(\''.$beanSessionKey.'\', \'CVR\', 0)" />
-			<img width="100%" src="'.$fileName.'"/>
+			<img width="320" src="'.$fileName.RSZD_FOR_RVW.'"/>
 		</span>
 	</div>';
 ?>
