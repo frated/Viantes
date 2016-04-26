@@ -10,6 +10,8 @@
 			-4 <=> Mostra #mob-del-msg-no-sel sopra menu-div
 			 5 <=> Mostra #mob-den-usr
 			-5 <=> Mostra #mob-den-usr sopra menu-div
+			 6 <=> Mostra #
+			-6 <=> Mostra # sopra menu-div
 	*/
 	function showViewMenu(){
 		if ($('#menu-status').val() == 1) { 
@@ -96,6 +98,18 @@
 			$('#main-div').hide();
 			$('#mobile-login-signin').show(); 
 			$('#menu-status').val(-1); 
+			
+			var srcPage = $('#ovrly-initial-src-page').val();
+			var destPageLg = $('#ovrly-initial-login-dst-page').val();
+			var destPageSg = $('#ovrly-initial-sign-dst-page').val();
+			
+			$('#overlay-srcPage-lg').val(srcPage);
+			$('#overlay-srcPage-sg').val(srcPage);
+			$('#overlay-srcPage-rc').val(srcPage);
+			
+			$('#overlay-destPage-lg').val(destPageLg);
+			$('#overlay-destPage-sg').val(destPageSg);
+			$('#overlay-destPage-rc').val(destPageSg);
 		}
 		else if ($('#menu-status').val() == -1) { 
 			$('#main-div').show(); 

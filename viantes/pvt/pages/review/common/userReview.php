@@ -38,7 +38,7 @@ if (count($reviewDOArray) == 0) { ?>
 		foreach ($reviewDOArray as $key => $reviewDO) { ?>
 			<div id="userReviewMainDiv" class="userReviewMainDiv">
 				<a href="/viantes/pub/pages/review/showReview.php?revId=<?php echo X_code($reviewDO->getId()) ?>&reviewType=1">
-					<img class="userReviewP1"  <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getCoverFileName() ?>" />
+					<img class="userReviewP1" height="36" style="max-width: 72px;" src="<?php echo $reviewDO->getCoverFileName().RSZD_FOR_IND ?>" />
 					<p class="userReviewP2"><?php echo $reviewDO->getDtIns() ?></p>
 					<p class="userReviewP3"><?php 
 						echo strlen($reviewDO->getSiteName()) > 30 ?
@@ -83,14 +83,14 @@ if (count($reviewDOArray) == 0) { ?>
 		<div class="userReviewHeaderDiv">
 			<b><p class="userReviewHeaderP1">  </p></b>
 			<b><p class="userReviewHeaderP2"><?php echo $X_langArray['MY_REV_DT_INS']?></p></b>
-			<b><p class="userReviewHeaderP3"><?php echo $X_langArray['MY_REV_SITE']?></p></b>
+			<b><p class="userReviewHeaderP3"><?php echo $X_langArray['MY_REV_CITY']?></p></b>
 			<b><p class="userReviewHeaderP4"><?php echo $X_langArray['MY_REV_DESCR']?></p></b>
 		</div>	
 		<?php 
 		foreach ($reviewDOArray as $key => $reviewDO) { ?>
 			<div id="userReviewMainDiv" class="userReviewMainDiv">
 				<a href="/viantes/pub/pages/review/showReview.php?revId=<?php echo X_code($reviewDO->getId()) ?>&reviewType=2">
-					<img class="userReviewP1"  <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getCoverFileName() ?>" />
+					<img class="userReviewP1" height="36" style="max-width: 72px;" src="<?php echo $reviewDO->getCoverFileName().RSZD_FOR_IND ?>" />
 					<p class="userReviewP2"><?php echo $reviewDO->getDtIns() ?></p>
 					<p class="userReviewP3"><?php echo $reviewDO->getCityName() ?></p>
 					<p class="userReviewP4"><?php 
@@ -131,18 +131,18 @@ if (count($reviewDOArray) == 0) { ?>
 		<div class="userReviewHeaderDiv">
 			<b><p class="userReviewHeaderP1">  </p></b>
 			<b><p class="userReviewHeaderP2"><?php echo $X_langArray['MY_REV_DT_INS']?></p></b>
-			<b><p class="userReviewHeaderP3"><?php echo $X_langArray['MY_REV_SITE']?></p></b>
+			<b><p class="userReviewHeaderP3"><?php echo $X_langArray['MY_REV_COUNTRY']?></p></b>
 			<b><p class="userReviewHeaderP4"><?php echo $X_langArray['MY_REV_DESCR']?></p></b>
 		</div>	
 		<?php 
 		foreach ($reviewDOArray as $key => $reviewDO) { ?>
 			<div id="userReviewMainDiv" class="userReviewMainDiv">
 				<a href="/viantes/pub/pages/review/showReview.php?revId=<?php echo X_code($reviewDO->getId()) ?>&reviewType=3">
-					<img class="userReviewP1"  <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getCoverFileName() ?>" />
+					<img class="userReviewP1" height="36" style="max-width: 72px;" src="<?php echo $reviewDO->getCoverFileName().RSZD_FOR_IND ?>" />
 					<p class="userReviewP2"><?php echo $reviewDO->getDtIns() ?></p>
 					<p class="userReviewP3"><?php echo $reviewDO->getCountry() ?></p>
 					<p class="userReviewP4"><?php 
-						$lunghOriginale = strlen ( str_replace('<br />',' ', str_replace('<br>',' ', $reviewDO->getDescr() )) ); 
+						$lunghOriginale = strlen ( str_replace('<br />',' ', str_replace('<br>',' ', $reviewDO->getDescr().RSZD_FOR_IND )) ); 
 						$msg = str_replace('<br />',' ', str_replace('<br>',' ', substr($reviewDO->getDescr(), 0, 40))); 
 						echo $msg;
 						if ( $lunghOriginale > 40 ) echo "..." ?>

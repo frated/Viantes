@@ -80,6 +80,22 @@ function getURI(){
 	return ((!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . ($mobDetect->isMobile() ? '/m' : '');
 }
 
+/* 
+ * Wrappa il metodo isMobile() della Mobile_Detect
+ */
+function isMobile(){
+	global $mobDetect;
+	return $mobDetect->isMobile();
+}
+
+/* 
+ * Wrappa il metodo isTablet() della Mobile_Detect 
+ */
+function isTablet(){
+	global $mobDetect;
+	return $mobDetect->isTablet();
+}
+
 /*
  * Verifica se la sessione dell'utente e' ancora valida
  */

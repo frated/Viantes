@@ -4,6 +4,8 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 $langCode = $settingDO->getLangCode();
 
 //===================== GEO ===========================
+$X_GEO_placeId = '';
+
 //setto il nome del sito (prima quello inserito dell'utente, poi quello di Google)
 $X_GEO_city = null; 
 if ( isset($_GET['city']) && $_GET['city'] != '') {

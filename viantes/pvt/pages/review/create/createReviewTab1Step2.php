@@ -7,6 +7,8 @@ $categoryReviewDAO = new CategoryReviewDAO();
 $reviewCategoryArray = $categoryReviewDAO->retrieveCategoriesByLangCode($langCode);
 
 //===================== GEO ===========================
+$X_GEO_placeId = '';
+
 $X_GEO_site     = $_GET['site']; 
 $X_GEO_locality = $_GET['locality'];
 

@@ -90,6 +90,8 @@ else {
 	header('Location: '.getURI().'/viantes/pub/pages/error.php');
 	exit;
 }
+
+$X_GEO_placeId = $reviewDO->getPlaceId();
 //====================================================
 
 $activeTabIdx = 1;

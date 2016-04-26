@@ -2,7 +2,8 @@
 <?php if ($X_GEO_loadMap) { ?> 
 	<script type="text/javascript">
 		$( window ).load(function() {
-			loadMap('<?php echo str_replace("'", "\'", $X_GEO_site)?>', '<?php echo str_replace("'", "\'", $X_GEO_locality)?>');
+			//SOLO se placeId e' definito => se non riesco a caricare la mappa provo per placeId
+			loadMap('<?php echo str_replace("'", "\'", $X_GEO_site)?>', '<?php echo str_replace("'", "\'", $X_GEO_locality)?>', '<?php echo $X_GEO_placeId?>');
 		});
 	</script>
 <?php } ?>
@@ -43,14 +44,13 @@
 	/**
 	 * Carica la mappa all'indirizzo in input e con lo zoom specificato
 	 */
-	function loadMap(site, locality){
+	function loadMap(site, locality, placeId){
 		var geocoder = new google.maps.Geocoder();
 		
 		//Cerco l'indirizzo
 		var address = site + ' ' + locality;
 		
 		geocoder.geocode( { address: address }, function(results, status) {
-			alert(status);
 			//Se lo trovo
 			if (status == google.maps.GeocoderStatus.OK) {
 			
@@ -75,62 +75,137 @@
 					radius: '500',
 					query: site
 				};
-				//Cerco il POI
-				service.textSearch(request, function callback(serviceResults, status) {
-					//Se trovo il POI
-					if (status == google.maps.places.PlacesServiceStatus.OK) {
-					
-						//Salvo l'id, il nome del sito e l'indirizzo
-						var placeId = serviceResults[0].place_id;
-						$('#placeId').val(placeId);
-						$('#siteName').val(serviceResults[0].name);
-						$('#frmtdAdrs').val(serviceResults[0].formatted_address);
-						
-						//N.B. questo e' un tarocco che mi serve solo nella pagaina di verifica
-						//mi setta a video i campi <p id="frmtdAdrsP"> <p id="frmtdAdrsP">
-						$('#siteNameP').text(serviceResults[0].name);
-						$('#frmtdAdrsP').text(serviceResults[0].formatted_address);
-						
-						//Ho bisogno dei dettagli
-						var service = new google.maps.places.PlacesService(map);
-						service.getDetails({ placeId: placeId}, function(place, status) {
-							if (status === google.maps.places.PlacesServiceStatus.OK) {
-								//Creo un marker
-								var marker = new google.maps.Marker({
-									map: map,
-									position: place.geometry.location
-								});
-								
-								//Changes the center of the map to the given LatLng
-								map.panTo(place.geometry.location);
-								
-								var addressComponents = place.address_components;
-								
-								//Ciclo l'attributo address_components (che e' un array)
-								$.each(addressComponents, function (i, address_component) {
-
-									if (address_component.types[0] == "country")
-										$('#country').val(address_component.long_name);
-									
-								});
-								
-								//console.log(place.address_components);
-							}
+				
+				//Load POI
+				loadPOI(request, service, map);
+				return;
+			}
+			
+			//Se non riesco a caricare la mappa, verifico se e' definito il "placeId"
+			if (placeId != '') {
+				loadMapByPlaceId(site, placeId);
+			} else {
+				resetGeoFields();
+				renderError('<?php echo $X_GEO_ERR_MSG?>');
+				console.log("Impossibile caricare l'indirizzo " + address);
+			}
+		});
+	}
+	
+	/**
+	 * Trova e carica il POI del sito. Aggiunge l'icona (rossa standard) di segnaposto sul sito
+	 */
+	function loadPOI(request, service, map){
+		//Cerco il POI
+		service.textSearch(request, function callback(serviceResults, status) {
+			//Se trovo il POI
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+			
+				//Salvo l'id, il nome del sito e l'indirizzo
+				var placeId = serviceResults[0].place_id;
+				$('#placeId').val(placeId);
+				$('#siteName').val(serviceResults[0].name);
+				$('#frmtdAdrs').val(serviceResults[0].formatted_address);
+				
+				//N.B. questo e' un tarocco che mi serve solo nella pagaina di verifica
+				//mi setta a video i campi <p id="frmtdAdrsP"> <p id="frmtdAdrsP">
+				$('#siteNameP').text(serviceResults[0].name);
+				$('#frmtdAdrsP').text(serviceResults[0].formatted_address);
+				
+				//Ho bisogno dei dettagli
+				var service = new google.maps.places.PlacesService(map);
+				service.getDetails({ placeId: placeId}, function(place, status) {
+					if (status === google.maps.places.PlacesServiceStatus.OK) {
+						//Creo un marker
+						var marker = new google.maps.Marker({
+							map: map,
+							position: place.geometry.location
 						});
-					} 
-					else {
-						//alert("<?php echo $X_GEO_ERR_MSG?>");
-						showFkMap();
-						resetGeoFields();
-						renderError('<?php echo $X_GEO_ERR_MSG?>');
+						
+						//Changes the center of the map to the given LatLng
+						map.panTo(place.geometry.location);
+						
+						var addressComponents = place.address_components;
+						
+						//Ciclo l'attributo address_components (che e' un array)
+						$.each(addressComponents, function (i, address_component) {
+
+							if (address_component.types[0] == "country")
+								$('#country').val(address_component.long_name);
+							
+						});
+						
+						return true;
+					} else {
+						console.log("Impossibile ottenere i dettagli");
 					}
 				});
 				
 			} else {
-				//alert("<?php echo $X_GEO_ERR_MSG?>");
 				showFkMap();
 				resetGeoFields();
 				renderError('<?php echo $X_GEO_ERR_MSG?>');
+				console.log("Impossibile caricare il POI");
+			}
+		});
+	}
+
+	/**
+	 * Carica la mappa dal placeId in input
+	 */
+	function loadMapByPlaceId(site, placeId){
+		//Creo e mostro la mappa 
+		var map = createMap(0, 0);
+		shoMap();
+		
+		$('#loadMap').hide();
+		
+		// Istanzio la classe PlacesService
+		var service = new google.maps.places.PlacesService(map);
+		
+		//Preparo la richiesta
+		var request = {
+			location: map.getCenter(),
+			radius: '500',
+			query: site
+		};
+		
+		//Load POI
+		loadPOIByPlaceId(request, service, map, 'ChIJ5SZMmreMGGARcz8QSTiJyo8');
+	}
+	
+	/**
+	 * Trova e carica il POI del sito. Aggiunge l'icona (rossa standard) di segnaposto sul sito
+	 */
+	function loadPOIByPlaceId(request, service, map, placeId){
+		//Cerco il POI
+		service.textSearch(request, function callback(serviceResults, status) {
+			//Se trovo il POI
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+			
+				//Ho bisogno dei dettagli
+				var service = new google.maps.places.PlacesService(map);
+				service.getDetails({ placeId: placeId}, function(place, status) {
+					if (status === google.maps.places.PlacesServiceStatus.OK) {
+						//Creo un marker
+						var marker = new google.maps.Marker({
+							map: map,
+							position: place.geometry.location
+						});
+						
+						//Changes the center of the map to the given LatLng
+						map.panTo(place.geometry.location);
+						
+					} else {
+						console.log("Impossibile ottenere i dettagli");
+					}
+				});
+				
+			} else {
+				showFkMap();
+				resetGeoFields();
+				renderError('<?php echo $X_GEO_ERR_MSG?>');
+				console.log("Impossibile caricare il POI");
 			}
 		});
 	}
@@ -163,11 +238,13 @@
 	function shoMap(){
 		$("#map").show();
 		$("#fkMap").hide();
+		$("#loadMap").hide();
 	}
 	/** Mostra l'immagine fake e nasconde il resto */
 	function showFkMap(){
 		$("#fkMap").show();
 		$("#map").hide();
+		$("#loadMap").hide();
 	}
 	
 	/** Azzera i campi della geolocalizzazione */

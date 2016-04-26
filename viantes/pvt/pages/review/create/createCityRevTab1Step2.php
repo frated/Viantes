@@ -4,6 +4,8 @@ $settingDO = $settingDAO->getSetting($userDO->getId());
 $langCode = $settingDO->getLangCode();
 
 //===================== GEO ===========================
+$X_GEO_placeId = '';
+
 $X_GEO_city = $_GET['city'];
 
 $X_GEO_loadMap = true;

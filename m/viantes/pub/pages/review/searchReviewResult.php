@@ -93,6 +93,8 @@ $X_see_cnt  = isset($reviewDO) ? $reviewDO->getCntSee()  : 0;
 $X_post_cnt = isset($reviewDO) ? $reviewDO->getCntPost() : 0;
 
 //===================== GEO ===========================
+$X_GEO_placeId = $reviewDO->getPlaceId();
+
 //Vince su du tutti, se true non ci sono mappe
 $X_GEO_disableMAP = false;
 //Se true mostra la mappa se false no (nota la mappa viene sempre caricata e' solo nascosta o meno)

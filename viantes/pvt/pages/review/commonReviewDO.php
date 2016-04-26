@@ -25,6 +25,9 @@ class commonReviewDO {
 
 	/* Campo comune ma NON relazionato (vedi commento sotto) */		
 	private $_country;
+	
+	/* Campo comune ma NON relazionato (vedi commento sotto) */	
+	private $_placeId;
 
 	/* Oggetti Relazionati della tabella REVIEW_/CITY_REV_/COUNTRY_REV_ STAR */
 	private $_cntStar;
@@ -144,6 +147,20 @@ class commonReviewDO {
 
 	public function setCountry($country){
 		$this->_country = $country;
+	}
+	
+	
+	/**********************************************/
+	/* Questo metodo ad oggi e' usato solo nella ReviewDO
+	 * Tuttavia il placeId e' comune ed in futuro, se dovesse 
+	 * servire ad un City/CountryReviewDO e' gia' predisposto
+	/**********************************************/
+	public function getPlaceId(){
+		return $this->_placeId;
+	}
+
+	public function setPlaceId($placeId){
+		$this->_placeId = $placeId;
 	}
 	
 	/**********************************************/

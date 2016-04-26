@@ -1,0 +1,34 @@
+<!--
+ * Inclusa nelle pagine:
+ * /viantes/pub/pages/review/searchReviewResult
+ * /viantes/pub/pages/review/showReview 
+ * definiscono entrambe due variabili $reviewDO e $reviewType usate sotto
+ * 
+ * I dati della pagina vengono riempiti dalla funzione javascript renderSSP(revId, revTp)
+ *-->
+<div id="overlaySSPList" class="overlay hidden">
+	<div class="main-ovladd-int-ie7 main-overlay main-ovrl-add-interest" >
+		
+		<!-- header -->
+		<div id="sspTopDiv" class="overlay-addInterest-top">	
+			<div class="overlay-ssp-top-div">
+				<!--p class="dspl-inln-blk" style="margin: 3px;">Ha messo una stella</p-->
+				<img width="12" src="/viantes/pvt/img/common/close.png" class="flt-r mrg-top-3 crs-pnt" onclick="$('#overlaySSPList').hide();">
+			</div>
+		</div>
+		
+		<!-- content -->
+		<div id="sspContentDiv" class="sspContentDiv">
+		
+		</div>
+		
+		<!-- empty content -->
+		<div id="sspEmptyContentDiv" class="sspContentDiv hidden">
+			<div style="margin: 16px 12px">
+				<?php echo $X_langArray['GEN_NO_RESULT']?>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>

@@ -85,7 +85,6 @@
 		<b><p class="dspl-inln-blk">
 			<?php echo $X_langArray['SEARCH_REVIEW_RESULT_AUTHOR'] ?>
 		</p></b>
-		
 		<?php 
 		if ($X_logged){  
 			$userDO = unserialize($_SESSION["USER_LOGGED"]); ?>
@@ -93,11 +92,14 @@
 				<?php echo $reviewDO->getUsrName() ?>
 				<img <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getUserCoverFileName() ?>" />
 			</a>
-		
 		<?php 
-		} else {  
-			?>
-			<a class="dspl-inln-blk" href="#" onclick="$('#ovrly-initial-login-dst-page').val('<?php echo $dest?>'); showOvrlyLgSg();" >
+		} else {
+			if ( isMobile() || isTablet() ) {
+				$event = "showViewLogin();";
+			} else {
+				$event = "$('#ovrly-initial-login-dst-page').val('". $dest ."'); showOvrlyLgSg();";	
+			} ?>
+			<a class="dspl-inln-blk" href="#" onclick="<?php echo $event?>" >
 				<?php echo $reviewDO->getUsrName() ?>
 				<img <?php echo IMG_36_36 ?> src="<?php echo $reviewDO->getUserCoverFileName() ?>" />
 			</a>

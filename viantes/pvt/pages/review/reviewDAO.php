@@ -130,10 +130,11 @@ class ReviewDAO extends CommonReviewDAO {
 		
 		$sql = sprintf("SELECT R.ID, R.USRID, R.SITEID, R.CATREVID, R.LANGCODE, R.DESCR, R.HOWTOARRIVE, R.WARNING, 
 							   R.WHERETOEAT, R.COOKING, R.WHERETOSTAY, R.MYTH, R.DTINS, R.VOTE, R.COVERFILENAME, 
-							   R.XDIM, R.YDIM, U.NAME, U.COVERFILENAME, S.SITENAME, S.LOCALITY, C.COUNTRY, 
+							   R.XDIM, R.YDIM, U.NAME, U.COVERFILENAME, S.SITENAME, S.LOCALITY, C.COUNTRY, G.PLACEID,
 							   SUM(ST.STAR) AS STAR, SUM(ST.SEE) AS SEE, SUM( CASE WHEN (POST = '' OR POST IS NULL ) THEN 0 ELSE 1 END ) AS POST
 						FROM REVIEW R 
 							JOIN SITE S ON R.SITEID = S.ID
+							JOIN GEO_SITE G ON G.ID = S.GEOSITEID
 							JOIN USER U ON U.ID = R.USRID
 							LEFT JOIN REVIEW_STAR ST ON ST.REVID = R.ID,
 							COUNTRY C
@@ -146,7 +147,7 @@ class ReviewDAO extends CommonReviewDAO {
 			$stmt->execute();
 			$stmt->bind_result($id, $usrId, $siteId, $catRevId, $langCode, $descr, $howToArrive, $warning, 
 							   $whereToEat, $cooking, $whereToStay, $myth, $dtIns, $vote, $coverFileName, $xdim, $ydim,
-							   $userName, $userCoverFileName, $siteName, $localityName, $country, $star, $see, $post);
+							   $userName, $userCoverFileName, $siteName, $localityName, $country, $placeId, $star, $see, $post);
 			if($stmt->fetch()) {
 				$descr = str_replace("\r\n",'<br>', $descr);
 				//Costruttore
@@ -159,6 +160,8 @@ class ReviewDAO extends CommonReviewDAO {
 				$reviewDO->setSiteName($siteName);
 				$reviewDO->setLocality($localityName);
 				$reviewDO->setCountry($country);
+				$reviewDO->setPlaceId($placeId);
+				
 				$reviewDO->setCntStar(isset($star)?$star:0);
 				$reviewDO->setCntSee(isset($see)?$see:0);
 				$reviewDO->setCntPost(isset($post)?$post:0);
@@ -239,11 +242,12 @@ class ReviewDAO extends CommonReviewDAO {
 		
 		$sql = "SELECT R.ID, R.USRID, R.SITEID, R.CATREVID, R.LANGCODE, R.DESCR, R.HOWTOARRIVE, R.WARNING,
 					   R.WHERETOEAT, R.COOKING, R.WHERETOSTAY, R.MYTH, R.DTINS, R.VOTE, R.COVERFILENAME,
-					   R.XDIM, R.YDIM, U.NAME, U.COVERFILENAME, S.SITENAME, S.LOCALITY, C.COUNTRY, 
+					   R.XDIM, R.YDIM, U.NAME, U.COVERFILENAME, S.SITENAME, S.LOCALITY, C.COUNTRY, G.PLACEID,
 					   SUM(ST.STAR) AS STAR, SUM(ST.SEE) AS SEE, SUM( CASE WHEN (POST = '' OR POST IS NULL ) THEN 0 ELSE 1 END ) AS POST
 				FROM REVIEW R
 					JOIN USER U ON U.ID = R.USRID
 					JOIN SITE S ON S.ID = R.SITEID
+					JOIN GEO_SITE G ON G.ID = S.GEOSITEID
 					LEFT JOIN REVIEW_STAR ST ON ST.REVID = R.ID,
 					COUNTRY C
 				WHERE " .( $siteId != '' ? (" S.ID =".$siteId) : "UPPER( S.SITENAME ) LIKE UPPER( '%" .$keyword. "%' )" ). "
@@ -258,7 +262,8 @@ class ReviewDAO extends CommonReviewDAO {
 			$stmt->execute();
 			$stmt->bind_result($id, $usrId, $siteId, $catRevId, $langCode, $descr, $howToArrive, $warning, 
 							   $whereToEat, $cooking, $whereToStay, $myth, $dtIns, $vote, $coverFileName, 
-							   $xdim, $ydim, $userName, $userCoverFileName, $siteName, $localityName, $country, $star, $see, $post);
+							   $xdim, $ydim, $userName, $userCoverFileName, $siteName, $localityName, $country, 
+							   $placeId, $star, $see, $post);
 			while($stmt->fetch()) {
 				$descr = str_replace("\r\n",'<br>', $descr);
 				//Costruttore
@@ -270,6 +275,8 @@ class ReviewDAO extends CommonReviewDAO {
 				$reviewDO->setSiteName($siteName);
 				$reviewDO->setLocality($localityName);
 				$reviewDO->setCountry($country);
+				$reviewDO->setPlaceId($placeId);
+				
 				$reviewDO->setCntStar(isset($star)?$star:0);
 				$reviewDO->setCntSee(isset($see)?$see:0);
 				$reviewDO->setCntPost(isset($post)?$post:0);
@@ -299,11 +306,12 @@ class ReviewDAO extends CommonReviewDAO {
 		
 		$sql = "SELECT R.ID, R.USRID, R.SITEID, R.CATREVID, R.LANGCODE, R.DESCR, R.HOWTOARRIVE, R.WARNING, 
 					   R.WHERETOEAT, R.COOKING, R.WHERETOSTAY, R.MYTH, R.DTINS, R.VOTE, R.COVERFILENAME, 
-					   R.XDIM, R.YDIM, U.NAME, U.COVERFILENAME, S.SITENAME, S.LOCALITY, C.COUNTRY, 
+					   R.XDIM, R.YDIM, U.NAME, U.COVERFILENAME, S.SITENAME, S.LOCALITY, C.COUNTRY, G.PLACEID,
 					   SUM(ST.STAR) AS STAR, SUM(ST.SEE) AS SEE, SUM( CASE WHEN (POST = '' OR POST IS NULL ) THEN 0 ELSE 1 END ) AS POST
 				FROM REVIEW R
 					JOIN USER U ON U.ID = R.USRID
 					JOIN SITE S ON S.ID = R.SITEID
+					JOIN GEO_SITE G ON G.ID = S.GEOSITEID
 					LEFT JOIN REVIEW_STAR ST ON ST.REVID = R.ID,
 					COUNTRY C
 				WHERE UPPER( S.SITENAME ) = UPPER( '" .$siteName. "' )
@@ -317,7 +325,8 @@ class ReviewDAO extends CommonReviewDAO {
 			$stmt->execute();
 			$stmt->bind_result($id, $usrId, $siteId, $catRevId, $langCode, $descr, $howToArrive, $warning, 
 							   $whereToEat, $cooking, $whereToStay, $myth, $dtIns, $vote, $coverFileName, 
-							   $xdim, $ydim, $userName, $userCoverFileName, $siteName, $localityName, $country, $star, $see, $post);
+							   $xdim, $ydim, $userName, $userCoverFileName, $siteName, $localityName, $country, 
+							   $placeId, $star, $see, $post);
 			while($stmt->fetch()) {
 				$descr = str_replace("\r\n",'<br>', $descr);
 				//Costruttore
@@ -330,6 +339,8 @@ class ReviewDAO extends CommonReviewDAO {
 				$reviewDO->setSiteName($siteName);
 				$reviewDO->setLocality($localityName);
 				$reviewDO->setCountry($country);
+				$reviewDO->setPlaceId($placeId);
+				
 				$reviewDO->setCntStar(isset($star)?$star:0);
 				$reviewDO->setCntSee(isset($see)?$see:0);
 				$reviewDO->setCntPost(isset($post)?$post:0);

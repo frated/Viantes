@@ -1089,7 +1089,7 @@ div.userReviewHeaderDiv{
 	display: inline-block;
 	position: absolute;
 }
-.userReviewHeaderP2, .userReviewP2 { margin: 0px 0px 0px 46px;  }
+.userReviewHeaderP2, .userReviewP2 { margin: 0px 0px 0px 76px;  }
 .userReviewHeaderP3, .userReviewP3 { margin: 0px 0px 0px 200px; }
 .userReviewHeaderP4, .userReviewP4 { margin: 0px 0px 0px 420px; }
 .userReviewP2, .userReviewP3, .userReviewP4 { margin-top:10px; }
@@ -1562,4 +1562,283 @@ p.bjqs-caption{
 }
 .pad-top-24 {
 	padding-top: 24px;
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+	/*Body and main div */
+	body {
+		background-color: #fff;
+	}
+	.main-div {
+		margin-top: 36px;
+		border-left: none;
+		border-right: none;
+	}
+
+	/* Menu */
+	.mobile-menu-page{
+		margin: 36px 0px 0px 24px;
+	}
+	.mobile-menu-content{
+		padding: 2px 0px 24px 0px;
+	}
+	
+	/* Header */
+	.top-header, .second-header, .second-header-font14{
+		margin-top: 12px;
+		margin-bottom: 6px;
+	}
+	.header-logo-txt{
+		width: 60px;
+	}
+	.txt-search {
+		height: 18px;
+		padding: 1px 1px 1px 19px;
+	}
+	
+	/* Review Item */
+	.reviewItemsBox {
+		margin-top: 40px;
+	}
+	.reviewItemBoxCenter p {
+		position: relative;
+		margin-top: 6px;
+	}
+	.reviewItemBoxCenterButtons {
+		position: relative;
+	}
+	.reviewItemBoxTop p {
+		margin: 5px 0px 0px 4px;
+	}
+	.reviewItemBoxCoverImg{
+		display:block;
+	}
+	
+	/* Tab */
+	.tab-links a {
+		padding:3px 6px;
+	}
+	
+	/* Login-SignUp */
+	.mobile-login-signin {
+		background-color:#fff;
+		margin: 36px 0px 0px 0px;
+		padding: 0px 4px 0px 8px;
+	}
+	.ovl-lg-sg-span_col1 {
+		display: block;
+	}
+	.overlay-lg-sg-input-col22 {
+		width: 80%;
+	}
+	.mobile-submit-div{
+		margin-top:24px;
+		padding-bottom:24px;
+	}
+	.mobile-lg-sg-submit{
+		margin-left:75%;
+	}
+	.mob-lg-sg-accedi-submit-div{
+		margin-left:45%;
+	}
+	.overlay-lg-sg-ErrorDiv {
+		float: left;
+		width: 100%;
+	}
+	.mrg-bot-16 {
+		padding-top: 16px;
+	}
+	.commonDIVLeft { 
+		width: 100%;
+		display: inline-block;
+	}
+	
+	/* Profile */
+	.bckGrndProfileCover {
+		width: 100%;
+		height: 100%;
+	}
+	.profileCover {
+		top: -75px;
+		width: 64px;
+		height: 64px;
+	}
+	.denUsrButton, .sendMsgUsr{
+		margin-bottom: 12px; 
+		display: inline-block;
+		margin-top: 0px;
+		float:none;
+	}
+	
+	/* Message */
+	.msgNewMsgLink {
+		display: block; 
+		float:right; 
+		margin-top: 6px; 
+	}
+	.ovl-msg-span_col1{
+		display: block; 
+		width: 100%;
+	}
+	.overlay-msg-ErrorDiv {
+		float: left;
+		width: 100%;
+		margin: 4px 0px 12px 2px;
+	}
+	.overlay-msg-input-col2 {
+		width: 75%;
+	}
+	.mob-del-msg, .mob-del-msg-no-sel, .mob-den-usr{
+		margin: 36px auto;
+		padding: 24px; 
+	}
+	
+	/* Load Img */
+	.mob-lod-img {
+		margin-top: 36px; 
+		padding-top: 24px; 
+	}
+}
+
+/* @media (max-width: 768px) and (orientation: landscape) { } */
+
+@media all and (max-width: 320px) {
+	/*Body and main div */
+	body {
+		background-color: #fff;
+	}
+	.main-div {
+		margin-top: 36px;
+		border-left: none;
+		border-right: none;
+	}
+	
+	/* Menu */
+	.mobile-menu-page{
+		margin: 36px 0px 0px 24px;
+	}
+	.mobile-menu-content{
+		padding: 2px 0px 24px 0px;
+	}
+	
+	/* Header */
+	.top-header, .second-header, .second-header-font14{
+		margin-top: 12px;
+		margin-bottom: 6px;
+	}
+	.header-logo-txt{
+		width: 60px;
+	}
+	.txt-search {
+		height: 18px;
+		padding: 1px 1px 1px 19px;
+	}
+	
+	/* Review Item */
+	.reviewItemsBox {
+		margin-top: 40px;
+	}
+	.reviewItemBoxCenter p {
+		position: relative;
+		margin-top: 6px;
+	}
+	.reviewItemBoxCenterButtons {
+		position: relative;
+	}
+	.reviewItemBoxTop p {
+		margin: 5px 0px 0px 4px;
+	}
+	.reviewItemBoxCoverImg{
+		display:block;
+	}
+	
+	/* Tab */
+	.tab-links a {
+		padding: 3px 6px;
+		font-size: 12px;
+	}
+	
+	/* Login-SignUp */
+	.mobile-login-signin {
+		background-color:#fff;
+		margin: 36px 0px 0px 0px;
+		padding: 0px 4px 0px 8px;
+	}
+	.ovl-lg-sg-span_col1 {
+		display: block;
+	}
+	.overlay-lg-sg-input-col22 {
+		width: 80%;
+	}
+	.mobile-submit-div{
+		margin-top:24px;
+		padding-bottom:24px;
+	}
+	.mobile-lg-sg-submit{
+		margin-left:75%;
+	}
+	.mob-lg-sg-accedi-submit-div{
+		margin-left:33%;
+	}
+	.overlay-lg-sg-ErrorDiv {
+		float: left;
+		width: 100%;
+	}
+	.mrg-bot-16 {
+		padding-top: 16px;
+	}
+	.commonDIVLeft { 
+		width: 100%;
+		display: inline-block;
+	}
+	
+	/* Profile */
+	.bckGrndProfileCover {
+		width: 100%;
+		height: 100%;
+	}
+	.profileCover {
+		top: -75px;
+		width: 64px;
+		height: 64px;
+	}
+	.denUsrButton, .sendMsgUsr{
+		margin-bottom: 12px; 
+		display: inline-block;
+		margin-top: 0px;
+		float:none;
+	}
+	
+	/* Message */
+	.msgNewMsgLink {
+		display: block; 
+		float:right; 
+		margin-top: 6px; 
+	}
+	.ovl-msg-span_col1{
+		display: block; 
+		margin-bottom: 6px;
+		width: 100%;
+	}
+	.overlay-msg-ErrorDiv {
+		float: left;
+		width: 100%;
+		margin: 4px 0px 10px 2px;
+	}
+	.overlay-msg-input-col2 {
+		width: 75%;
+	}
+	.mob-del-msg, .mob-del-msg-no-sel, .mob-den-usr{
+		margin-top: 36px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 24px; 
+	}
+	
+	/* Load Img */
+	.mob-lod-img {
+		margin-top: 36px; 
+		padding-top: 24px; 
+	}
 }

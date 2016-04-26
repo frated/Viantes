@@ -46,7 +46,7 @@ Logger::log("myProfile :: pattern per data rilevato :: ".$X_pattern, 3);
 	<!-- Mobile Menu -->
 	<?php include $MX_root."pvt/pages/common/menu.html"; ?>	
 	
-	<div class="main-div">
+	<div id="main-div" class="main-div">
 
 		<?php require_once $X_root."pvt/pages/common/globalTopMsg.php"; ?>
 		

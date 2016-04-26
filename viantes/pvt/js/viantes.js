@@ -390,7 +390,9 @@ function doReviewItemBox(numOfBox, mode, txt1, txt2, loggeUsrId, isMob){
 											"</p>" +
 										"</div>" +
 										"<div class=\"reviewItemBoxCenter\">" + 
-											"<img src=\"" + revCV + "\" width=\"" + reviewCoverWidt + "\" height=\"128\"" + (isMob ? " style=\"display:block; margin-bottom: 6px;\" " : "" ) + ">" + 
+											"<a href=\"viantes/pub/pages/review/showReview.php?revId=" +revId+ "&reviewType=" + reviewType + " \">" +
+												"<img src=\"" + revCV + "\" width=\"" + reviewCoverWidt + "\" height=\"128\"" + (isMob ? " style=\"display:block; margin-bottom: 6px;\" " : "" ) + ">" + 
+											"</a>" +
 											"<p>" + 
 												descr +
 												"<br><br>" + 

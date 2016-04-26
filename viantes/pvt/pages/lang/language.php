@@ -386,6 +386,8 @@ class Language {
 		$lang['MY_REV_CREATE_REV'] = 'Crea una Recensione';
 		$lang['MY_REV_DT_INS'] = 'Data di creazione';
 		$lang['MY_REV_SITE'] = 'Sito';
+		$lang['MY_REV_CITY'] = 'Citt&agrave';
+		$lang['MY_REV_COUNTRY'] = 'Nazione';
 		$lang['MY_REV_DESCR'] = 'Recensione';
 		
 		// SHOW REVIEW
@@ -1022,6 +1024,8 @@ class Language {
 		$lang['MY_REV_CREATE_REV'] = 'Create a Review';
 		$lang['MY_REV_DT_INS'] = 'Creation date';
 		$lang['MY_REV_SITE'] = 'Site';
+		$lang['MY_REV_CITY'] = 'City';
+		$lang['MY_REV_COUNTRY'] = 'Country';
 		$lang['MY_REV_DESCR'] = 'Review';
 
 		// SHOW REVIEW
