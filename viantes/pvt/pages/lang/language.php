@@ -384,7 +384,7 @@ class Language {
 		$lang['MY_REV_COUNTRY_TITLE'] = 'Nazioni recensite';
 		$lang['MY_REV_NO_COUNTRY_REV'] = 'Nessuna nazione recensita';
 		$lang['MY_REV_CREATE_REV'] = 'Crea una Recensione';
-		$lang['MY_REV_DT_INS'] = 'Data di creazione';
+		$lang['MY_REV_DT_INS'] = 'Data';
 		$lang['MY_REV_SITE'] = 'Sito';
 		$lang['MY_REV_CITY'] = 'Citt&agrave';
 		$lang['MY_REV_COUNTRY'] = 'Nazione';
@@ -1022,7 +1022,7 @@ class Language {
 		$lang['MY_REV_NO_COUNTRY_REV'] = 'There are no country reviews';
 		$lang['MY_REV_NO_REV'] = 'There are no reviews.';
 		$lang['MY_REV_CREATE_REV'] = 'Create a Review';
-		$lang['MY_REV_DT_INS'] = 'Creation date';
+		$lang['MY_REV_DT_INS'] = 'Date';
 		$lang['MY_REV_SITE'] = 'Site';
 		$lang['MY_REV_CITY'] = 'City';
 		$lang['MY_REV_COUNTRY'] = 'Country';

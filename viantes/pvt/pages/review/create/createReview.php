@@ -14,8 +14,10 @@ if ( isset($_FILES['userfile']['tmp_name']) &&  $_FILES['userfile']['tmp_name'] 
 	//e' un upload
 	if ( isset($_POST['type']) ) {
 		require_once $X_root.'pvt/pages/upload/uploadFile.php';
+		exit;
 	}
 	require_once $X_root.'pvt/pages/upload/uploadCover.php';
+	exit;
 }
 
 //istanzio i DAO

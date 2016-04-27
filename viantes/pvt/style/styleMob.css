@@ -133,6 +133,22 @@
 		margin-top: 36px; 
 		padding-top: 24px; 
 	}
+	
+	/* SSPList */
+	.mobileSSPList {
+		padding: 16px; 
+	}
+	.sspTopDiv {
+		margin-top: 36px;
+	}
+	.overlay-ssp-top-div{
+		border-bottom: none;
+	}
+	.sspContentDiv{
+		border-left: 1px dotted #e3e3e3;
+		border-right: 1px dotted #e3e3e3;
+		border-bottom: 1px dotted #e3e3e3;
+	}
 }
 
 /* @media (max-width: 768px) and (orientation: landscape) { } */
@@ -274,5 +290,21 @@
 	.mob-lod-img {
 		margin-top: 36px; 
 		padding-top: 24px; 
+	}
+	
+	/* SSPList */
+	.mobileSSPList {
+		padding: 16px; 
+	}
+	.sspTopDiv {
+		margin-top: 36px;
+	}
+	.overlay-ssp-top-div{
+		border-bottom: none;
+	}
+	.sspContentDiv{
+		border-left: 1px dotted #e3e3e3;
+		border-right: 1px dotted #e3e3e3;
+		border-bottom: 1px dotted #e3e3e3;
 	}
 }

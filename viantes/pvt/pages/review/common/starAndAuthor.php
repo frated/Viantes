@@ -56,7 +56,9 @@
 			
 			<!-- SSP link -->
 			<div id="postDivId" class="sspDiv">
-				<a href="#"	onclick="renderSSP(<?php echo "'".X_code($reviewDO->getId())."','".$reviewType."'"?>);"><?php echo $X_langArray['SEARCH_REVIEW_SEE_ALL'] ?></a>
+				<?php $isMob = ( isMobile() || isTablet() ) ? "1" : 0; ?>
+				
+				<a href="#"	onclick="renderSSP(<?php echo "'".X_code($reviewDO->getId())."','".$reviewType."','".$isMob."'"?>);"><?php echo $X_langArray['SEARCH_REVIEW_SEE_ALL'] ?></a>
 			</div>
 				
 		<!-- NO Logged User -->		

@@ -115,13 +115,6 @@ $activeTabIdx = 1;
 	<?php require_once $X_root."pvt/pages/common/meta-link-script.html"; ?>
 </head>
 
-
-<?php 
-
-//Overlay-star-post-list
-include $X_root."pvt/pages/review/common/overlayStarPostList.html";
-?>
-
 <body>
 	<!-- Mobile Header -->
 	<?php require_once $MX_root."pvt/pages/common/header.html";
@@ -138,6 +131,9 @@ include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 	//e' il not dello show del div login-singup
 	$mainDivShow = isset($_GET['showOverlayLgSg']) ? "display : none;" : "display: block;";
 	?>
+	
+	<!-- Mobile Star-post-list -->
+	<?php include $MX_root."pvt/pages/review/common/starPostList.html"; ?>
 	
 	<div id="main-div" class="main-div" style="<?php echo $mainDivShow ?>">
 	

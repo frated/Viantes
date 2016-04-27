@@ -1,48 +1,66 @@
 <script>
 	/* Mostra la pagina di menu 
-	   Stati 1 <=> Mostra #menu-div
-			-1 <=> Mostra #mobile-menu-page sopra menu-div
-			 2 <=> Mostra #menu-div
-			-2 <=> Mostra #mobile-menu-page sopra menu-div
+	   Stati 
+			 1 <=> Mostra #main-div
+			-1 <=> Mostra #mobile-menu-page sopra main-div
+			
+			 2 <=> Mostra #mob-del-msg-new
+			-2 <=> Mostra #mobile-menu-page sopra mob-del-msg-new
+			
 			 3 <=> Mostra #mob-del-msg
-			-3 <=> Mostra #mob-del-msg-no-sel sopra menu-div
+			-3 <=> Mostra #mobile-menu-page sopra mob-del-msg
+			
 			 4 <=> Mostra #mob-del-msg-no-sel
-			-4 <=> Mostra #mob-del-msg-no-sel sopra menu-div
+			-4 <=> Mostra #mobile-menu-page sopra mob-del-msg-no-sel
+			
 			 5 <=> Mostra #mob-den-usr
-			-5 <=> Mostra #mob-den-usr sopra menu-div
-			 6 <=> Mostra #
-			-6 <=> Mostra # sopra menu-div
+			-5 <=> Mostra #mobile-menu-page sopra mob-den-usr
+			
+			 6 <=> Mostra #mobileSSPList
+			-6 <=> Mostra #mobile-menu-page sopra mobileSSPList
 	*/
 	function showViewMenu(){
+		//se lo stato attuale e' 1 => devo nascondere il main-div (e passare a -1)
 		if ($('#menu-status').val() == 1) { 
 			hide('main-div', -1);
 		}
 		else if ($('#menu-status').val() == -1) { 
 			show('main-div', 1);
 		}
+		//se lo stato attuale e' 2 => devo nascondere il mob-del-msg-new (e passare a -2)
 		else if ($('#menu-status').val() == 2) { 
 			hide('mob-del-msg-new', -2);
 		}
 		else if ($('#menu-status').val() == -2) { 
 			show('mob-msg-new', 2); 
 		}
+		//se lo stato attuale e' 3 => devo nascondere il mob-del-msg (e passare a -3)
 		else if ($('#menu-status').val() == 3) { 
 			hide('mob-del-msg', -3);
 		}
 		else if ($('#menu-status').val() == -3) { 
 			show('mob-del-msg', 3);
 		}
+		//se lo stato attuale e' 4 => devo nascondere ilmob-del-msg-no-sel (e passare a -4)
 		else if ($('#menu-status').val() == 4) { 
 			hide('mob-del-msg-no-sel', -4);
 		}
 		else if ($('#menu-status').val() == -4) { 
 			show('mob-del-msg-no-sel', 4);
 		}
+		//se lo stato attuale e' 5 => devo nascondere ilmob-den-usr (e passare a -5)
 		else if ($('#menu-status').val() == 5) { 
 			hide('mob-den-usr', -5);
 		}
 		else if ($('#menu-status').val() == -5) { 
 			show('mob-den-usr', 5);
+		}
+		//se lo stato attuale e' 6 => devo nascondere il mobileSSPList (e passare a -6)
+		else if ($('#menu-status').val() == 6) {
+			hide('mobileSSPList', -6);
+		}
+		else if ($('#menu-status').val() == -6) { 
+			show('mobileSSPList', 6);
 		}
 	}
 	
@@ -87,7 +105,14 @@
 		$('#main-div').hide();
 		$('#menu-status').val(5); 
 	}
-		
+	
+	/* Mostra la pagina di nuovo messaggio e nasconde il main div */
+	function showSSPList() {
+		//show(mobileSSPList), 6;
+		$('#mobileSSPList').show();
+		$('#main-div').hide();
+		$('#menu-status').val(6); 
+	}
 	
 	/* Mostra la pagina di login e nasconde il main div 
 	 * N.B. il #mobile-login-signin essendo alternativo

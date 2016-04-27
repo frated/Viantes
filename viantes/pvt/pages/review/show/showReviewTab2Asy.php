@@ -24,7 +24,7 @@ $attachDO = $reviewDAO->getAttachDOById($id);
 $fullFileName = $attachDO->getFilePath().$attachDO->getFileName().RSZD_FOR_RVW;
 
 $comment = $attachDO->getComment() != '' ? 
-				$attachDO->getComment() : 
+				stripslashes( $attachDO->getComment() ) : 
 				$X_langArray['SHOW_REVIEW_IMG_NO_COMMENT'];
 
 echo $fullFileName ."@#@". $comment;

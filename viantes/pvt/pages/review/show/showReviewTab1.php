@@ -17,9 +17,7 @@
 	
 	<div class="showRevRow">
 		<h1><?php echo $X_langArray['SHOW_REVIEW_REVIEW']?></h1>
-		<p>
-			<?php echo $reviewDO->getDescr() ?>
-		</p>
+		<p><?php echo stripslashes($reviewDO->getDescr()) ?></p>
 	</div>
 		
 	<?php
@@ -27,7 +25,7 @@
 		<div class="showRevRow">
 			<h1><?php echo $X_langArray['SHOW_REVIEW_HOW_ARRIVE']?></h1>
 			<p>
-				<?php echo $reviewDO->getHowToArrive() ?>
+				<?php echo stripslashes( $reviewDO->getHowToArrive() ) ?>
 			</p>
 		</div>
 	<?php }
@@ -52,7 +50,7 @@
 		<div class="showRevRow">
 			<h1><?php echo $X_langArray['SHOW_REVIEW_WARNING']?></h1>
 			<p>
-				<?php echo $reviewDO->getWarning() ?>
+				<?php echo stripslashes( $reviewDO->getWarning() ) ?>
 			</p>
 		</div>
 	<?php } 
@@ -60,7 +58,7 @@
 		<div class="showRevRow">
 			<h1><?php echo $X_langArray['SHOW_REVIEW_WHERE_EAT']?></h1>
 			<p>
-				<?php echo $reviewDO->getWhereToEat() ?>
+				<?php echo stripslashes( $reviewDO->getWhereToEat() ) ?>
 			</p>
 		</div>
 	<?php } 
@@ -68,7 +66,7 @@
 		<div class="showRevRow">
 			<h1><?php echo $X_langArray['SHOW_REVIEW_COOKING']?></h1>
 			<p>
-				<?php echo $reviewDO->getCooking() ?>
+				<?php echo stripslashes( $reviewDO->getCooking() ) ?>
 			</p>
 		</div>
 	<?php }
@@ -76,14 +74,14 @@
 		<div class="showRevRow">
 			<h1><?php echo $X_langArray['SHOW_REVIEW_WHERE_STAY']?></h1>
 			<p>
-				<?php echo $reviewDO->getWhereToStay() ?>
+				<?php echo stripslashes( $reviewDO->getWhereToStay() ) ?>
 			</p>
 		</div>
 	<?php } 
 	if ($reviewDO->getMyth() != "") { ?>
 		<div class="showRevRow">
 			<h1><?php echo $X_langArray['SHOW_REVIEW_MYTH']?></h1>
-			<p><?php echo $reviewDO->getMyth() ?></p>
+			<p><?php echo stripslashes( $reviewDO->getMyth() )?></p>
 		</div>
 	<?php } ?>
 	

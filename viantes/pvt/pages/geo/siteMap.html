@@ -2,7 +2,7 @@
 <?php if ($X_GEO_loadMap) { ?> 
 	<script type="text/javascript">
 		$( window ).load(function() {
-			//SOLO se placeId e' definito => se non riesco a caricare la mappa provo per placeId
+			//carico la mappa
 			loadMap('<?php echo str_replace("'", "\'", $X_GEO_site)?>', '<?php echo str_replace("'", "\'", $X_GEO_locality)?>', '<?php echo $X_GEO_placeId?>');
 		});
 	</script>
@@ -81,13 +81,13 @@
 				return;
 			}
 			
-			//Se non riesco a caricare la mappa, verifico se e' definito il "placeId"
-			if (placeId != '') {
-				loadMapByPlaceId(site, placeId);
-			} else {
+			//Se non lo trovo, verifico se e' definito il "placeId" 
+			if (placeId == null) {
 				resetGeoFields();
 				renderError('<?php echo $X_GEO_ERR_MSG?>');
 				console.log("Impossibile caricare l'indirizzo " + address);
+			} else {
+				loadMapByPlaceId(site, placeId);
 			}
 		});
 	}
@@ -129,10 +129,8 @@
 						
 						//Ciclo l'attributo address_components (che e' un array)
 						$.each(addressComponents, function (i, address_component) {
-
 							if (address_component.types[0] == "country")
 								$('#country').val(address_component.long_name);
-							
 						});
 						
 						return true;
@@ -171,7 +169,7 @@
 		};
 		
 		//Load POI
-		loadPOIByPlaceId(request, service, map, 'ChIJ5SZMmreMGGARcz8QSTiJyo8');
+		loadPOIByPlaceId(request, service, map, placeId);
 	}
 	
 	/**

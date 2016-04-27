@@ -87,7 +87,7 @@ require_once $X_root."pvt/pages/geo/cityMap.html";
 				</span>
 				<?php $bean = unserialize($_SESSION[$beanSessionKey]);
 				$fileName = $bean->getCoverFileName();
-				echo '<img class="reviewCoverImgBoxStep2" src="'.$fileName.'"/>';?>
+				echo '<img class="reviewCoverImgBoxStep2" src="'.$fileName.RSZD_FOR_RVW.'"/>';?>
 			</label>
 		</div>
 		

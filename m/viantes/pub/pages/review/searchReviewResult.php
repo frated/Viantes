@@ -150,6 +150,9 @@ include $X_root."pvt/pages/review/common/overlayStarPostList.html";
 	$mainDivShow = isset($_GET['showOverlayLgSg']) ? "display : none;" : "display: block;";
 	?>
 	
+	<!-- Mobile Star-post-list -->
+	<?php include $MX_root."pvt/pages/review/common/starPostList.html"; ?>
+	
 	<div id="main-div" class="main-div" style="<?php echo $mainDivShow ?>">	
 		
 		<?php include $X_root."pvt/pages/common/globalTopMsg.php"; ?>

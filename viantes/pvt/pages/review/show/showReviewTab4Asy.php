@@ -22,7 +22,7 @@ else if ( $revTp == CountryReview )
 $attachDO = $reviewDAO->getAttachDOById($id);
 $fullFileName = $attachDO->getFilePath().$attachDO->getFileName();
 $comment = $attachDO->getComment() != '' ? 
-				$attachDO->getComment() : 
+				stripslashes( $attachDO->getComment() ) : 
 				$X_langArray['SHOW_REVIEW_DOC_NO_COMMENT'];
 
 //get formatted file name
@@ -30,20 +30,4 @@ $fn = str_replace(" ", "_", $attachDO->getFileName());
 $fnFormatted = strlen($fn) < 25 ? $fn : substr($fn, 0, 12).'...'.substr($fn, -6);
 						
 echo $fullFileName ."@#@". $fnFormatted ."@#@". $comment;
-
-//Save or update an arry in session for a viewver new features
-/* Now is not implemented
-if( isset($_SESSION['showRevDocResult']) ) {
-	$showRevDocResult = $_SESSION['showRevDocResult'];
-} else {
-	$showRevDocResult = array();
-}
-array_push($showRevDocResult, $fullFileName ."@#@". $comment);
-
-$_SESSION['showRevDocResult'] = $showRevDocResult;
-
-/* GESTIONE CON BLBO 
-$dataFile = $reviewDAO->getAttachById($id);
-echo base64_encode($dataFile);
-************************/
 ?>

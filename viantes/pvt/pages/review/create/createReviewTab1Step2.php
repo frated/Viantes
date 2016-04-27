@@ -31,7 +31,6 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 	<input type="hidden" name="langCode"       value="<?php echo $langCode ?>"/>
 	<input type="hidden" name="beanSessionKey" value="<?php echo $beanSessionKey?>" />
 	
-	<?php echo $X_GEO_site. "  <br>  ".$X_GEO_locality?>
 	<div>	
 		<!-- SITE NAME -->
 		<div class="commonRowDiv">
@@ -118,7 +117,7 @@ require_once $X_root."pvt/pages/geo/siteMap.html";
 				</span>
 				<?php $bean = unserialize($_SESSION[$beanSessionKey]);
 				$fileName = $bean->getCoverFileName();
-				echo '<img class="reviewCoverImgBoxStep2" src="'.$fileName.'"/>';?>
+				echo '<img class="reviewCoverImgBoxStep2" src="'.$fileName.RSZD_FOR_RVW.'"/>';?>
 			</label>
 		</div>
 		

@@ -21,7 +21,7 @@ else if ( $revTp == CountryReview )
 $attachDO = $reviewDAO->getAttachDOById($id);
 $fullFileName = $attachDO->getFilePath().$attachDO->getFileName();
 $comment = $attachDO->getComment() != '' ? 
-				$attachDO->getComment() : 
+				stripslashes( $attachDO->getComment() ) : 
 				$X_langArray['SHOW_REVIEW_MOV_NO_COMMENT'];
 
 echo $fullFileName ."@#@". $comment ."@#@". $attachDO->getXDim() ."@#@". $attachDO->getYDim();

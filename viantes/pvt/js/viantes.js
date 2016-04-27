@@ -876,7 +876,7 @@ function cangePostVal(addVal){
 /**
  * Renderizza la popup che mostra tutti gli str/see/post
  */
-function renderSSP(revId, revTp){
+function renderSSP(revId, revTp, isMob){
 	dataString = "revId=" + revId + "&revTp=" + revTp;
 	$.ajax({
 		type: "GET",
@@ -952,7 +952,10 @@ function renderSSP(revId, revTp){
 			}			
 		
 			//mostro
-			$('#overlaySSPList').show();
+			if (isMob == '1') 
+				showSSPList();
+			else
+				$('#overlaySSPList').show();
 		},
 		error: function(){
 			//no action
